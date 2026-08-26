@@ -1,10 +1,34 @@
 # Holidaze — Accommodation Booking Platform
 
-This README is currently a placeholder and will be updated with full documentation, setup guides, and project links upon completion.
+Holidaze is an accommodation booking platform built with React an TypeScript. Visitors can browse and search venues, customers can make bookings, and venue managers can manage their own venues.
+
+## API code structure
+
+Runtime API code is separated:
+
+- `src/lib/constants/api.ts`: base URL, environment values, and endpoint paths.
+- `src/types/api.ts`: shared request, response, venue, booking, and profile types.
+- `src/lib/services/apiClient.ts`: fetch wrapper, headers, JSON handling, and typed API errors.
+- `src/lib/services/authService.ts`: register and login requests.
+- `src/lib/services/venueService.ts`: venue list, search, detail, and manager CRUD.
+- `src/lib/services/bookingService.ts`: booking list, detail, create, update, and delete.
+- `src/lib/services/profileService.ts`: profile, profile bookings, profile venues, and profile updates.
+- `src/context/AuthContext.tsx`: the planned home for the current profile, access token, login, and logout state.
+
+Pages and components should call resource services instead of constructing URLs or fetch headers themselves.
+
+## Useful commands:
+
+```bash
+npm run dev
+npm run typecheck
+npm run lint
+npm run build
+```
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 Holidaze/
