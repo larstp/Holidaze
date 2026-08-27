@@ -1,11 +1,58 @@
-import { CalendarDays, Heart, MapPin, Search, UserRound } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import styles from './home.module.css';
+import { CalendarDays, MapPin, Search } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import styles from './Home.module.css';
+
+const heroImages = [
+  '/images/alexandre-chambon-aapSemzfsOk-unsplash.jpg',
+  '/images/anete-lusina-GOZxrAlNIt4-unsplash.jpg',
+  '/images/david-vives-ELf8M_YWRTY-unsplash.jpg',
+  '/images/drif-riadh-YpkuRn54y4w-unsplash.jpg',
+  '/images/ethan-robertson-SYx3UCHZJlo-unsplash.jpg',
+  '/images/geojango-maps-CWbbJW_7Fsw-unsplash.jpg',
+  '/images/hugh-whyte-SBOHLtENzEY-unsplash.jpg',
+  '/images/ishan-seefromthesky-qE1Y8GQKhEk-unsplash.jpg',
+  '/images/julian-timmerman-Fn27DlI8bZ8-unsplash.jpg',
+  '/images/karsten-winegeart-fd1cQ3mmBTE-unsplash.jpg',
+  '/images/la-so-vk4vjTNVrTg-unsplash.jpg',
+  '/images/lance-asper-mNDVSSmMt0Y-unsplash.jpg',
+  '/images/robson-hatsukami-morgan-r8hw4Zs38zo-unsplash.jpg',
+  '/images/tron-le-JsuBKjHGDMM-unsplash.jpg',
+  '/images/upgraded-points-KVym2PAn1gA-unsplash.jpg',
+];
+
+const HERO_ROTATION_MS = 30000;
 
 function Home() {
+  const [activeImage, setActiveImage] = useState(() =>
+    Math.floor(Math.random() * heroImages.length)
+  );
+
+  useEffect(() => {
+    heroImages.forEach((imageSource) => {
+      const image = new Image();
+      image.src = imageSource;
+    });
+
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (motionQuery.matches) return;
+
+    let timeoutId = window.setTimeout(function rotateHeroImage() {
+      setActiveImage((currentImage) => (currentImage + 1) % heroImages.length);
+      timeoutId = window.setTimeout(rotateHeroImage, HERO_ROTATION_MS);
+    }, HERO_ROTATION_MS);
+
+    return () => window.clearTimeout(timeoutId);
+  }, []);
+
   return (
     <main className={styles.home}>
       <section className={styles.hero}>
+        <div
+          key={heroImages[activeImage]}
+          className={styles.heroImage}
+          style={{ backgroundImage: `url('${heroImages[activeImage]}')` }}
+          aria-hidden="true"
+        />
         <div className={styles.heroContent}>
           <p className={styles.eyebrow}>
             <span aria-hidden="true" /> 2,000+ handpicked stays worldwide
@@ -16,8 +63,9 @@ function Home() {
             stay <em>awaits.</em>
           </h1>
           <p className={styles.intro}>
-            Hotels, lodges, cabins, and villas - curated for travellers who
-            <br className={styles.desktopOnly} /> care about the details.
+            Find your way to the good kind of daze with our curated selection
+            <br className={styles.desktopOnly} /> of hotels, lodges, apartments,
+            and experiences.
           </p>
 
           <form className={styles.searchPanel} action="/search" method="get">
@@ -76,25 +124,6 @@ function Home() {
           </div>
         </div>
       </section>
-
-      <nav className={styles.mobileNavigation} aria-label="Mobile navigation">
-        <Link to="/search">
-          <Search aria-hidden="true" />
-          <span>Explore</span>
-        </Link>
-        <Link to="/search">
-          <CalendarDays aria-hidden="true" />
-          <span>Stays</span>
-        </Link>
-        <Link to="/dashboard">
-          <Heart aria-hidden="true" />
-          <span>Saved</span>
-        </Link>
-        <Link to="/dashboard">
-          <UserRound aria-hidden="true" />
-          <span>Profile</span>
-        </Link>
-      </nav>
     </main>
   );
 }

@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Header from './components/Header/Header';
+import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home/Home';
 
 type PageProps = {
@@ -18,6 +19,7 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<PagePlaceholder title="Search" />} />

@@ -9,3 +9,7 @@ Outcome: Woff2 it is!
 26 Aug
 Reason: unsure of how to properly/cleanly split up the different API services
 Outcome: suggested a pure per-service split
+
+27 Aug
+Reason: Needed help understanding new-image-on-refresh setup. Could not get it to work.
+Outcome: Set window.matchMedia('(prefers-reduced-motion: reduce)'); and added two consts for timer and image gallery. I also always get confused when there are brackets within brackets within brackets, so i got help fixing that here.

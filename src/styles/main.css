@@ -3,7 +3,7 @@
   --secondary: #a7bfa8;
   --surface: #f8f5f2;
   --surface-muted: #cbd4c2;
-  --text: #3f4e4f;
+  --text: #161616;
   --text-muted: #62706b;
   --text-h: #3f4e4f;
   --bg: #f8f5f2;
@@ -20,7 +20,7 @@
   --heading: 'Satoshi', ui-sans-serif, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
-  font: 18px/145% var(--sans);
+  font: 16px/145% var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light dark;
   color: var(--text);
@@ -30,8 +30,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
+  @media (min-width: 701px) {
+    font-size: 18px;
   }
 }
 
@@ -88,11 +88,8 @@
 }
 
 #root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
+  width: 100%;
   text-align: center;
-  border-inline: 1px solid var(--border);
   min-height: 100svh;
   display: flex;
   flex-direction: column;
@@ -101,6 +98,15 @@
 
 body {
   margin: 0;
+  scrollbar-gutter: stable;
+}
+
+html {
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 .logo {
@@ -122,23 +128,17 @@ h2 {
 }
 
 h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
+  font-size: 36px;
+  letter-spacing: -1.08px;
+  margin: 20px 0;
 }
 h2 {
-  font-size: 24px;
+  font-size: 20px;
   line-height: 118%;
-  letter-spacing: -0.24px;
+  letter-spacing: -0.2px;
   margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
 }
+
 p {
   margin: 0;
 }
@@ -156,4 +156,17 @@ code {
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);
+}
+
+@media (min-width: 701px) {
+  h1 {
+    font-size: 56px;
+    letter-spacing: -1.68px;
+    margin: 32px 0;
+  }
+
+  h2 {
+    font-size: 24px;
+    letter-spacing: -0.24px;
+  }
 }

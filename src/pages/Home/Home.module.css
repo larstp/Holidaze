@@ -5,16 +5,33 @@
 }
 
 .hero {
+  position: relative;
+  isolation: isolate;
   min-height: calc(100svh - 5rem);
-  background:
-    linear-gradient(
-      90deg,
-      rgba(0, 91, 86, 0.86) 0%,
-      rgba(10, 70, 67, 0.48) 55%,
-      rgba(16, 45, 42, 0.2) 100%
-    ),
-    url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2400&q=85')
-      center / cover;
+  overflow: hidden;
+  background: #0f4f4c;
+}
+
+.heroImage {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  animation: heroImageEnter 1.2s ease-in-out;
+}
+
+.hero::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 91, 86, 0.86) 0%,
+    rgba(10, 70, 67, 0.48) 55%,
+    rgba(16, 45, 42, 0.2) 100%
+  );
+  content: '';
 }
 
 .heroContent {
@@ -52,6 +69,7 @@ h1 {
   font-weight: 800;
   line-height: 0.98;
   letter-spacing: -0.04em;
+  text-align: left;
 }
 
 h1 em {
@@ -64,6 +82,7 @@ h1 em {
   color: rgba(255, 255, 255, 0.82);
   font-size: 1rem;
   line-height: 1.7;
+  text-align: left;
 }
 
 .searchPanel {
@@ -86,10 +105,11 @@ h1 em {
   min-width: 0;
   padding: 0.2rem 0.8rem;
   border-right: 1px solid #e1e9e4;
-  font-size: 0.55rem;
+  font-size: 0.7rem;
   font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  text-align: left;
 }
 
 .fieldValue {
@@ -181,10 +201,6 @@ input::placeholder {
   font-size: 0.6rem;
 }
 
-.mobileNavigation {
-  display: none;
-}
-
 @media (max-width: 700px) {
   .home,
   .hero {
@@ -192,10 +208,14 @@ input::placeholder {
   }
 
   .hero {
-    background:
-      linear-gradient(90deg, rgba(0, 91, 86, 0.7), rgba(16, 45, 42, 0.28)),
-      url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85')
-        center / cover;
+  }
+
+  .hero::before {
+    background: linear-gradient(
+      90deg,
+      rgba(0, 91, 86, 0.7),
+      rgba(16, 45, 42, 0.28)
+    );
   }
 
   .heroContent {
@@ -259,36 +279,20 @@ input::placeholder {
   .stats {
     display: none;
   }
+}
 
-  .mobileNavigation {
-    position: fixed;
-    z-index: 5;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    padding: 0.7rem 0.4rem 0.8rem;
-    background: #fff;
+@media (prefers-reduced-motion: reduce) {
+  .heroImage {
+    animation: none;
+  }
+}
+
+@keyframes heroImageEnter {
+  from {
+    opacity: 0;
   }
 
-  .mobileNavigation a {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 0.2rem;
-    color: #96b2a5;
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  .mobileNavigation a:first-child {
-    color: #2f765c;
-  }
-
-  .mobileNavigation svg {
-    width: 1.5rem;
-    height: 1.5rem;
+  to {
+    opacity: 1;
   }
 }
