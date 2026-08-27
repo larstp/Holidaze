@@ -17,6 +17,20 @@ Runtime API code is separated:
 
 Pages and components should call resource services instead of constructing URLs or fetch headers themselves.
 
+## Icons
+
+The project uses [`lucide-react`](https://lucide.dev/) for interface icons such as search, menu, user, calendar, edit, delete, and navigation controls. Custom Holidaze logos and brand artwork remain in `public/icons` as SVG assets.
+
+Example:
+
+```tsx
+import { Search } from 'lucide-react';
+
+<Search size={20} aria-hidden="true" />;
+```
+
+Icon-only buttons must have an accessible name, using an `aria-label` and/or a visible tooltip. Use text alongside an icon when the action may not be familiar to users.
+
 ## Useful commands:
 
 ```bash

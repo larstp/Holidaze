@@ -1,4 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import Header from './components/Header/Header';
+import Home from './pages/Home/Home';
 
 type PageProps = {
   title: string;
@@ -15,8 +17,9 @@ function PagePlaceholder({ title }: PageProps) {
 function App() {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
-        <Route path="/" element={<PagePlaceholder title="Home" />} />
+        <Route path="/" element={<Home />} />
         <Route path="/search" element={<PagePlaceholder title="Search" />} />
         <Route
           path="/venues/:id"
