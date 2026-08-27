@@ -1,10 +1,48 @@
 # Holidaze — Accommodation Booking Platform
 
-This README is currently a placeholder and will be updated with full documentation, setup guides, and project links upon completion.
+Holidaze is an accommodation booking platform built with React an TypeScript. Visitors can browse and search venues, customers can make bookings, and venue managers can manage their own venues.
+
+## API code structure
+
+Runtime API code is separated:
+
+- `src/lib/constants/api.ts`: base URL, environment values, and endpoint paths.
+- `src/types/api.ts`: shared request, response, venue, booking, and profile types.
+- `src/lib/services/apiClient.ts`: fetch wrapper, headers, JSON handling, and typed API errors.
+- `src/lib/services/authService.ts`: register and login requests.
+- `src/lib/services/venueService.ts`: venue list, search, detail, and manager CRUD.
+- `src/lib/services/bookingService.ts`: booking list, detail, create, update, and delete.
+- `src/lib/services/profileService.ts`: profile, profile bookings, profile venues, and profile updates.
+- `src/context/AuthContext.tsx`: the planned home for the current profile, access token, login, and logout state.
+
+Pages and components should call resource services instead of constructing URLs or fetch headers themselves.
+
+## Icons
+
+The project uses [`lucide-react`](https://lucide.dev/) for interface icons such as search, menu, user, calendar, edit, delete, and navigation controls. Custom Holidaze logos and brand artwork remain in `public/icons` as SVG assets.
+
+Example:
+
+```tsx
+import { Search } from 'lucide-react';
+
+<Search size={20} aria-hidden="true" />;
+```
+
+Icon-only buttons must have an accessible name, using an `aria-label` and/or a visible tooltip. Use text alongside an icon when the action may not be familiar to users.
+
+## Useful commands:
+
+```bash
+npm run dev
+npm run typecheck
+npm run lint
+npm run build
+```
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 Holidaze/

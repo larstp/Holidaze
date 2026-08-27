@@ -1,0 +1,257 @@
+.header {
+  position: relative;
+  z-index: 10;
+  color: var(--text);
+  background: var(--surface);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  max-width: 1126px;
+  min-height: 3.15rem;
+  margin: 0 auto;
+  padding: 0 1.75rem;
+}
+
+.logoLink {
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.logoGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.logo {
+  display: block;
+  width: auto;
+  height: 2.15rem;
+}
+
+.logoDark {
+  display: none;
+}
+
+:global(:root[data-theme='dark']) .logoLight {
+  display: none;
+}
+
+:global(:root[data-theme='dark']) .logoDark {
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme='light'])) .logoLight {
+    display: none;
+  }
+
+  :global(:root:not([data-theme='light'])) .logoDark {
+    display: block;
+  }
+}
+
+.logoLink img {
+  height: 2.15rem;
+}
+
+.wordmark {
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 1.25rem;
+}
+
+.link,
+.exploreLink,
+.listLink,
+.loginLink,
+.registerLink {
+  color: var(--text);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.exploreLink {
+  padding: 0.36rem 0.72rem;
+  border-radius: 0.35rem;
+  color: var(--primary);
+  background: var(--accent-bg);
+}
+
+.link:hover,
+.link:focus-visible,
+.listLink:hover,
+.listLink:focus-visible,
+.loginLink:hover,
+.loginLink:focus-visible {
+  color: var(--primary);
+}
+
+.listLink {
+  margin-left: auto;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.themeButton,
+.registerLink {
+  border-radius: 0.35rem;
+}
+
+.themeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid var(--border);
+  color: var(--text);
+  background: var(--surface-muted);
+  cursor: pointer;
+}
+
+.themeButton svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.loginLink {
+  padding: 0.45rem 0.85rem;
+  border: 1px solid var(--primary);
+  border-radius: 0.35rem;
+  color: var(--primary);
+}
+
+.registerLink:hover,
+.registerLink:focus-visible {
+  background: #245e4a;
+}
+
+.registerLink {
+  padding: 0.48rem 0.9rem;
+  color: #fff;
+  background: #2f765c;
+}
+
+.menuButton {
+  display: none;
+  padding: 0.5rem;
+  border: 0;
+  color: var(--text);
+  background: transparent;
+  cursor: pointer;
+}
+
+.mobileThemeButton {
+  display: none;
+}
+
+.menuButton svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+@media (max-width: 700px) {
+  .inner {
+    min-height: 4.5rem;
+    padding: 0 1.25rem;
+  }
+
+  .logoLink img {
+    height: 2.35rem;
+  }
+
+  .menuButton {
+    display: inline-flex;
+  }
+
+  .mobileThemeButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-left: auto;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 0.35rem;
+    color: var(--text);
+    background: var(--surface-muted);
+    cursor: pointer;
+  }
+
+  .mobileThemeButton svg {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+
+  .navigation {
+    position: absolute;
+    z-index: 2;
+    top: 4.5rem;
+    right: 1.25rem;
+    left: 1.25rem;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+
+  .navigationOpen {
+    display: flex;
+  }
+
+  .link,
+  .exploreLink,
+  .listLink,
+  .loginLink,
+  .registerLink {
+    padding: 0.85rem 0;
+  }
+
+  .exploreLink {
+    padding: 0.85rem;
+  }
+
+  .listLink {
+    margin-left: 0;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    border-top: 1px solid var(--border);
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+  }
+
+  .registerLink {
+    text-align: center;
+  }
+
+  .actions .themeButton {
+    display: none;
+  }
+}
