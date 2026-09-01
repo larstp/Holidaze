@@ -1,0 +1,26 @@
+.layout {
+  width: 100%;
+  min-height: 100svh;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100svh;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+body {
+  margin: 0;
+  scrollbar-gutter: stable;
+}
+
+html {
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}

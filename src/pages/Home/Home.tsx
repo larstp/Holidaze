@@ -60,7 +60,7 @@ function Home() {
           <h1>
             Your next great
             <br />
-            stay <em>awaits.</em>
+            adventure <em>awaits.</em>
           </h1>
           <p className={styles.intro}>
             Find your way to the good kind of daze with our curated selection
