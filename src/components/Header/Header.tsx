@@ -1,24 +1,20 @@
-import { Menu, Moon, X } from 'lucide-react';
+import { Menu, Moon, Sun, X } from 'lucide-react';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './Header.module.css';
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const selectedTheme = document.documentElement.dataset.theme;
-    return (
-      selectedTheme === 'dark' ||
-      (!selectedTheme &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)
-    );
-  });
+  const [isDarkMode, setIsDarkMode] = useState(
+    () => document.documentElement.dataset.theme === 'dark'
+  );
 
   const closeMenu = () => setIsMenuOpen(false);
 
   const toggleTheme = () => {
     const nextTheme = isDarkMode ? 'light' : 'dark';
     document.documentElement.dataset.theme = nextTheme;
+    localStorage.setItem('holidaze-theme', nextTheme);
     setIsDarkMode(!isDarkMode);
   };
 
@@ -73,7 +69,11 @@ function Header() {
               title={isDarkMode ? 'Use light mode' : 'Use dark mode'}
               onClick={toggleTheme}
             >
-              <Moon aria-hidden="true" />
+              {isDarkMode ? (
+                <Sun aria-hidden="true" />
+              ) : (
+                <Moon aria-hidden="true" />
+              )}
             </button>
             <NavLink
               className={styles.loginLink}
@@ -99,7 +99,11 @@ function Header() {
           title={isDarkMode ? 'Use light mode' : 'Use dark mode'}
           onClick={toggleTheme}
         >
-          <Moon aria-hidden="true" />
+          {isDarkMode ? (
+            <Sun aria-hidden="true" />
+          ) : (
+            <Moon aria-hidden="true" />
+          )}
         </button>
 
         <button

@@ -88,13 +88,19 @@ h1 em {
 .searchPanel {
   display: flex;
   align-items: stretch;
+  box-sizing: border-box;
   width: min(38rem, 100%);
-  margin-top: 2rem;
+  margin: 2rem auto 0;
   padding: 0.55rem;
   border-radius: 1.25rem;
   color: var(--text);
   background: #fff;
   box-shadow: 0 1rem 2rem rgba(0, 33, 30, 0.2);
+}
+
+:global(:root[data-theme='dark']) .searchPanel {
+  color: #fff;
+  background: #222;
 }
 
 .searchField {
@@ -110,6 +116,14 @@ h1 em {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-align: left;
+}
+
+.searchField:last-of-type {
+  border-right: 0;
+}
+
+:global(:root[data-theme='dark']) .searchField {
+  border-color: #313131;
 }
 
 .fieldValue {
@@ -143,6 +157,13 @@ select {
 
 input::placeholder {
   color: var(--text-muted);
+}
+
+:global(:root[data-theme='dark']) .searchPanel .fieldValue,
+:global(:root[data-theme='dark']) .searchPanel input,
+:global(:root[data-theme='dark']) .searchPanel select,
+:global(:root[data-theme='dark']) .searchPanel input::placeholder {
+  color: #fff;
 }
 
 .searchButton {
@@ -246,7 +267,7 @@ input::placeholder {
     display: grid;
     gap: 0;
     width: 100%;
-    margin-top: 2.5rem;
+    margin: 2.5rem auto 0;
     padding: 0.5rem;
     border-radius: 1.4rem;
   }
@@ -257,6 +278,10 @@ input::placeholder {
     border-right: 0;
     border-bottom: 1px solid #e1e9e4;
     font-size: 0.7rem;
+  }
+
+  .searchField:last-of-type {
+    border-bottom: 0;
   }
 
   .fieldValue {
