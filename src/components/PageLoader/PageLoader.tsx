@@ -4,11 +4,13 @@ type PageLoaderProps = {
   label?: string;
 };
 
-function PageLoader({ label = 'Loading page' }: PageLoaderProps) {
+function PageLoader({
+  label = 'Finding your next destination',
+}: PageLoaderProps) {
   return (
     <div className={styles.overlay} role="status" aria-live="polite">
-      <div className={styles.loader} aria-hidden="true" />
       <span className={styles.label}>{label}</span>
+      <div className={styles.loader} aria-hidden="true" />
     </div>
   );
 }

@@ -12,9 +12,8 @@
 
 .loader {
   display: inline-grid;
-  padding: 5px;
-  background: var(--surface-muted);
-  filter: blur(4px) contrast(12);
+  padding: 0;
+  background: transparent;
 }
 
 .loader::before {

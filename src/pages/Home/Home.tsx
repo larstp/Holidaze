@@ -61,19 +61,19 @@ const featuredReviews = [
 const getToday = () => new Date().toISOString().split('T')[0];
 
 function Home() {
-  const { venues, isLoading, error, refetch } = useVenues();
+  const { venues, venueCount, isLoading, error, refetch } = useVenues();
   const featuredVenues = useMemo(() => selectRandomVenues(venues, 4), [venues]);
   const popularDestinations = getPopularDestinations(venues, 5);
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
   return (
     <main className={styles.home}>
-      {isLoading && <PageLoader label="Loading stays" />}
+      {isLoading && <PageLoader />}
       <section className={styles.hero}>
         <ImageCarousel images={heroImages} />
         <div className={styles.heroContent}>
           <p className={styles.eyebrow}>
-            <span aria-hidden="true" /> 2,000+ handpicked stays worldwide
+            <span aria-hidden="true" /> Explore stays around the world
           </p>
           <h1>
             Your next great
@@ -153,7 +153,7 @@ function Home() {
               <span>Happy travellers</span>
             </div>
             <div>
-              <strong>2,400</strong>
+              <strong>{venueCount.toLocaleString()}</strong>
               <span>Curated properties</span>
             </div>
             <div>
@@ -234,12 +234,13 @@ function Home() {
                       `${destination.city}, ${destination.country}`
                     }
                   />
+                  <span className={styles.destinationCount}>
+                    {destination.count}{' '}
+                    {destination.count === 1 ? 'stay' : 'stays'}
+                  </span>
                   <span className={styles.destinationOverlay}>
                     <strong>{destination.city}</strong>
-                    <small>
-                      {destination.count}{' '}
-                      {destination.count === 1 ? 'stay' : 'stays'}
-                    </small>
+                    <span>Explore stays -&gt;</span>
                   </span>
                 </Link>
               ))}

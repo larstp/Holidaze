@@ -64,7 +64,17 @@ export type Profile = ProfileSummary & {
 
 export type ApiResponse<T> = {
   data: T;
-  meta: Record<string, unknown>;
+  meta: ApiMeta;
+};
+
+export type ApiMeta = {
+  totalCount?: number;
+  currentPage?: number;
+  pageCount?: number;
+  isFirstPage?: boolean;
+  isLastPage?: boolean;
+  previousPage?: number | null;
+  nextPage?: number | null;
 };
 
 export type ApiErrorResponse = {
