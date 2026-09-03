@@ -21,7 +21,7 @@ import {
   getPopularDestinations,
   selectRandomVenues,
 } from '../../lib/helpers/venueHelpers';
-import styles from './home.module.css';
+import styles from './Home.module.css';
 
 const heroImages = [
   '/images/alexandre-chambon-aapSemzfsOk-unsplash.jpg',
