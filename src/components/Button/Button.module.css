@@ -1,0 +1,66 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.primary {
+  padding: 0.75rem 1rem;
+  color: #fff;
+  background: #2d6a4f;
+}
+
+.primary:hover:not(:disabled) {
+  background: #245e4a;
+}
+
+.secondary {
+  padding: 0.75rem 1rem;
+  border-color: var(--primary);
+  color: var(--primary);
+  background: transparent;
+}
+
+.secondary:hover:not(:disabled) {
+  color: var(--surface);
+  background: var(--primary);
+}
+
+.small {
+  padding: 9px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  text-decoration: none;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.icon svg {
+  width: 1.1em;
+  height: 1.1em;
+}

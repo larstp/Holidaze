@@ -9,11 +9,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1rem;
   max-width: 1126px;
-  min-height: 3.15rem;
+  min-height: 4.5rem;
   margin: 0 auto;
-  padding: 0 1.75rem;
+  padding: 0 1.25rem;
 }
 
 .logoLink {
@@ -30,7 +30,7 @@
 .logo {
   display: block;
   width: auto;
-  height: 2.15rem;
+  height: 2.35rem;
 }
 
 .logoDark {
@@ -67,26 +67,43 @@
 }
 
 .navigation {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  gap: 1.25rem;
+  position: absolute;
+  z-index: 2;
+  box-sizing: border-box;
+  top: 4.5rem;
+  right: 0;
+  display: none;
+  width: min(50vw, 22rem);
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-bottom-left-radius: 14px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  transform-origin: top right;
 }
 
 .link,
 .exploreLink,
-.listLink,
-.loginLink,
-.registerLink {
+.listLink {
   color: var(--text);
   font-size: 0.72rem;
   font-weight: 600;
   text-decoration: none;
+  padding: 0.85rem 0;
+  text-align: center;
+}
+
+.loginLink {
+  color: var(--primary);
+  text-decoration: none;
 }
 
 .exploreLink {
-  padding: 0.36rem 0.72rem;
-  border-radius: 0.35rem;
+  padding: 0.85rem;
+  border-radius: 8px;
   color: var(--primary);
   background: var(--accent-bg);
 }
@@ -95,23 +112,31 @@
 .link:focus-visible,
 .listLink:hover,
 .listLink:focus-visible,
-.loginLink:hover,
 .loginLink:focus-visible {
   color: var(--primary);
 }
 
+.exploreLink:hover,
+.exploreLink:focus-visible {
+  color: var(--surface);
+  background: var(--primary);
+}
+
 .listLink {
-  margin-left: auto;
+  margin-left: 0;
 }
 
 .actions {
   display: flex;
-  align-items: center;
-  gap: 0.45rem;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  border-top: 1px solid var(--border);
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
 }
 
-.themeButton,
-.registerLink {
+.themeButton {
   border-radius: 0.35rem;
 }
 
@@ -127,31 +152,21 @@
   cursor: pointer;
 }
 
+.themeButton:hover,
+.themeButton:focus-visible,
+.mobileThemeButton:hover,
+.mobileThemeButton:focus-visible {
+  color: var(--surface);
+  background: var(--primary);
+} /* AAAARGH */
+
 .themeButton svg {
   width: 0.9rem;
   height: 0.9rem;
 }
 
-.loginLink {
-  padding: 0.45rem 0.85rem;
-  border: 1px solid var(--primary);
-  border-radius: 0.35rem;
-  color: var(--primary);
-}
-
-.registerLink:hover,
-.registerLink:focus-visible {
-  background: #245e4a;
-}
-
-.registerLink {
-  padding: 0.48rem 0.9rem;
-  color: #fff;
-  background: #2f765c;
-}
-
 .menuButton {
-  display: none;
+  display: inline-flex;
   padding: 0.5rem;
   border: 0;
   color: var(--text);
@@ -160,7 +175,18 @@
 }
 
 .mobileThemeButton {
-  display: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-left: auto;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 0.35rem;
+  color: var(--text);
+  background: var(--surface-muted);
+  cursor: pointer;
 }
 
 .menuButton svg {
@@ -168,90 +194,94 @@
   height: 1.5rem;
 }
 
-@media (max-width: 700px) {
+.navigationOpen {
+  display: flex;
+  animation: navigationSlideDown 220ms ease-out both;
+}
+
+.actions .themeButton {
+  display: none;
+}
+
+.mobileThemeButton svg,
+.themeButton svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+@media (min-width: 701px) {
   .inner {
-    min-height: 4.5rem;
-    padding: 0 1.25rem;
+    gap: 1.5rem;
+    min-height: 3.15rem;
+    padding: 0 1.75rem;
   }
 
   .logoLink img {
-    height: 2.35rem;
-  }
-
-  .menuButton {
-    display: inline-flex;
-  }
-
-  .mobileThemeButton {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.75rem;
-    height: 1.75rem;
-    margin-left: auto;
-    padding: 0;
-    border: 1px solid var(--border);
-    border-radius: 0.35rem;
-    color: var(--text);
-    background: var(--surface-muted);
-    cursor: pointer;
-  }
-
-  .mobileThemeButton svg {
-    width: 0.9rem;
-    height: 0.9rem;
+    height: 2.15rem;
   }
 
   .navigation {
-    position: absolute;
-    z-index: 2;
-    top: 4.5rem;
-    right: 1.25rem;
-    left: 1.25rem;
-    display: none;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    padding: 1rem;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    box-shadow: var(--shadow);
-  }
-
-  .navigationOpen {
+    position: static;
     display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    transform-origin: initial;
   }
 
   .link,
   .exploreLink,
-  .listLink,
-  .loginLink,
-  .registerLink {
-    padding: 0.85rem 0;
+  .listLink {
+    padding: 0;
   }
 
   .exploreLink {
-    padding: 0.85rem;
+    padding: 0.36rem 0.72rem;
   }
 
   .listLink {
-    margin-left: 0;
+    margin-left: auto;
   }
 
   .actions {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    border-top: 1px solid var(--border);
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.45rem;
+    border-top: 0;
+    margin-top: 0;
+    padding-top: 0;
   }
 
-  .registerLink {
-    text-align: center;
+  .menuButton,
+  .mobileThemeButton {
+    display: none;
   }
 
   .actions .themeButton {
-    display: none;
+    display: inline-flex;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navigationOpen {
+    animation: none;
+  }
+}
+
+@keyframes navigationSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-0.75rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

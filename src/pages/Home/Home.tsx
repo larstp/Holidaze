@@ -1,5 +1,6 @@
-import { CalendarDays, MapPin, Search } from 'lucide-react';
+import { ChevronDown, MapPin, Search } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import Button from '../../components/Button/Button';
 import styles from './Home.module.css';
 
 const heroImages = [
@@ -22,7 +23,11 @@ const heroImages = [
 
 const HERO_ROTATION_MS = 30000;
 
+const getToday = () => new Date().toISOString().split('T')[0];
+
 function Home() {
+  const [checkIn, setCheckIn] = useState('');
+  const [checkOut, setCheckOut] = useState('');
   const [activeImage, setActiveImage] = useState(() =>
     Math.floor(Math.random() * heroImages.length)
   );
@@ -79,31 +84,54 @@ function Home() {
             <label className={styles.searchField}>
               <span>Check-in</span>
               <span className={styles.fieldValue}>
-                <input name="dateFrom" type="date" aria-label="Check-in date" />
-                <CalendarDays size={15} aria-hidden="true" />
+                <input
+                  name="dateFrom"
+                  type="date"
+                  aria-label="Check-in date"
+                  min={getToday()}
+                  value={checkIn}
+                  onChange={(event) => {
+                    setCheckIn(event.target.value);
+                    if (checkOut && event.target.value > checkOut) {
+                      setCheckOut('');
+                    }
+                  }}
+                />
               </span>
             </label>
             <label className={styles.searchField}>
               <span>Check-out</span>
               <span className={styles.fieldValue}>
-                <input name="dateTo" type="date" aria-label="Check-out date" />
-                <CalendarDays size={15} aria-hidden="true" />
+                <input
+                  name="dateTo"
+                  type="date"
+                  aria-label="Check-out date"
+                  min={checkIn || getToday()}
+                  value={checkOut}
+                  onChange={(event) => setCheckOut(event.target.value)}
+                />
               </span>
             </label>
             <label className={styles.searchField}>
               <span>Guests</span>
-              <select name="guests" defaultValue="2">
-                <option value="1">1 guest</option>
-                <option value="2">2 guests</option>
-                <option value="3">3 guests</option>
-                <option value="4">4 guests</option>
-                <option value="5">5 guests</option>
-              </select>
+              <span className={styles.selectWrapper}>
+                <select name="guests" defaultValue="2">
+                  <option value="1">1 guest</option>
+                  <option value="2">2 guests</option>
+                  <option value="3">3 guests</option>
+                  <option value="4">4 guests</option>
+                  <option value="5">5 guests</option>
+                </select>
+                <ChevronDown aria-hidden="true" />
+              </span>
             </label>
-            <button className={styles.searchButton} type="submit">
-              <Search size={18} aria-hidden="true" />
+            <Button
+              className={styles.searchButton}
+              type="submit"
+              icon={<Search size={18} aria-hidden="true" />}
+            >
               Search
-            </button>
+            </Button>
           </form>
 
           <div className={styles.stats} aria-label="Holidaze highlights">

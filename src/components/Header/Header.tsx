@@ -1,6 +1,7 @@
 import { Menu, Moon, Sun, X } from 'lucide-react';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import buttonStyles from '../Button/Button.module.css';
 import styles from './Header.module.css';
 
 function Header() {
@@ -76,14 +77,14 @@ function Header() {
               )}
             </button>
             <NavLink
-              className={styles.loginLink}
+              className={`${buttonStyles.button} ${buttonStyles.secondary} ${buttonStyles.small} ${styles.loginLink}`}
               to="/login"
               onClick={closeMenu}
             >
               Sign in
             </NavLink>
             <NavLink
-              className={styles.registerLink}
+              className={`${buttonStyles.button} ${buttonStyles.primary} ${buttonStyles.small} ${styles.registerLink}`}
               to="/register"
               onClick={closeMenu}
             >
