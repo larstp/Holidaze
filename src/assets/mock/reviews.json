@@ -1,0 +1,297 @@
+[
+  {
+    "id": 1,
+    "rating": 5,
+    "author": "Elena Rostova",
+    "subtitle": "Verified Guest",
+    "comment": "Such a nice place to spend my vacation. The aesthetic was on point, check-in was seamless, and the location made getting around super convenient. Would absolutely return!"
+  },
+  {
+    "id": 2,
+    "rating": 5,
+    "author": "Amara & Tobias",
+    "subtitle": "Booked via Holidaze",
+    "comment": "Found our dream stay through Holidaze in under 10 minutes. The experience was seamless from booking to check-out — nothing came close."
+  },
+  {
+    "id": 3,
+    "rating": 4,
+    "author": "Marcus Chen",
+    "subtitle": "Solo Traveler",
+    "comment": "Clean, modern space with plenty of natural light. It had everything I needed for a relaxing few days away. The host was very responsive to messages as well."
+  },
+  {
+    "id": 4,
+    "rating": 5,
+    "author": "Sarah & David",
+    "subtitle": "Family Vacation",
+    "comment": "The space was even better in person than in the photos. Super clean, cozy atmosphere, and located in a peaceful neighborhood close to great local spots."
+  },
+  {
+    "id": 5,
+    "rating": 5,
+    "author": "Marcus H.",
+    "subtitle": "Booked via Holidaze",
+    "comment": "The property selection on Holidaze is incredible. We stayed somewhere our friends had never heard of but couldn't stop talking about it for months afterward."
+  },
+  {
+    "id": 6,
+    "rating": 4,
+    "author": "Jordan Taylor",
+    "subtitle": "Weekend Getaway",
+    "comment": "Overall a fantastic stay. Really well-designed interiors and a very comfortable bed. Perfect spot if you are looking to kick back and unwind."
+  },
+  {
+    "id": 7,
+    "rating": 5,
+    "author": "Amara Okafor",
+    "subtitle": "Remote Work Stay",
+    "comment": "Beautifully styled property with a super peaceful vibe. Great Wi-Fi, comfortable seating, and a lovely atmosphere throughout. Highly recommend!"
+  },
+  {
+    "id": 8,
+    "rating": 5,
+    "author": "Elena R.",
+    "subtitle": "Booked via Holidaze",
+    "comment": "Holidaze made finding a group getaway completely stress-free. Clear details, great photos, and zero hidden fees at checkout."
+  },
+  {
+    "id": 9,
+    "rating": 5,
+    "author": "Lucas Vance",
+    "subtitle": "Couple's Trip",
+    "comment": "An absolute gem. Spotlessly clean, beautifully furnished, and incredibly cozy. Check-in was a breeze and everything exceeded our expectations."
+  },
+  {
+    "id": 10,
+    "rating": 4,
+    "author": "Chloe Bennett",
+    "subtitle": "Verified Guest",
+    "comment": "Great atmosphere and a wonderful host! The amenities were top-notch and we felt right at home the entire time. Will definitely be back."
+  },
+  {
+    "id": 11,
+    "rating": 5,
+    "author": "David K.",
+    "subtitle": "Booked via Holidaze",
+    "comment": "I've used dozens of travel sites, but the curated listings on Holidaze are unmatched. Super quick response from the host as well."
+  },
+  {
+    "id": 12,
+    "rating": 5,
+    "author": "Priya Patel",
+    "subtitle": "Solo Traveler",
+    "comment": "Felt super safe, comfortable, and well-cared for. The attention to detail in the design made all the difference for a peaceful week."
+  },
+  {
+    "id": 13,
+    "rating": 4,
+    "author": "Liam O'Connor",
+    "subtitle": "Weekend Getaway",
+    "comment": "Very comfortable stay in a prime location. Quiet at night, walkable to everything during the day. Exactly what we were looking for."
+  },
+  {
+    "id": 14,
+    "rating": 5,
+    "author": "Sophia Rossi",
+    "subtitle": "Booked via Holidaze",
+    "comment": "Booking through Holidaze was effortless. The platform filtered exactly what we needed, and the property was even better than pictured."
+  },
+  {
+    "id": 15,
+    "rating": 5,
+    "author": "Tariq Mansour",
+    "subtitle": "Verified Guest",
+    "comment": "10/10 stay! The host thought of every little detail to make the stay memorable. Super clean, modern, and ultra-comfortable beds."
+  },
+  {
+    "id": 16,
+    "rating": 4,
+    "author": "Hannah & Ben",
+    "subtitle": "Couple's Trip",
+    "comment": "Charming place with high-end touches everywhere. The check-in instructions were crystal clear and communication was quick throughout."
+  },
+  {
+    "id": 17,
+    "rating": 5,
+    "author": "Oliver Lindqvist",
+    "subtitle": "Remote Work Stay",
+    "comment": "Super fast internet, fantastic setup, and very quiet environment. Perfect for focusing during the day and relaxing in the evening."
+  },
+  {
+    "id": 18,
+    "rating": 5,
+    "author": "Maya Lin",
+    "subtitle": "Booked via Holidaze",
+    "comment": "Holidaze has officially replaced every other booking app for me. Instant confirmation, transparent pricing, and high-quality spaces every time."
+  },
+  {
+    "id": 19,
+    "rating": 4,
+    "author": "Carlos Gomez",
+    "subtitle": "Family Vacation",
+    "comment": "Spacious, immaculately clean, and close to all local attractions. It had plenty of space for all of us without feeling cramped."
+  },
+  {
+    "id": 20,
+    "rating": 5,
+    "author": "Zoe & Sam",
+    "subtitle": "Verified Guest",
+    "comment": "From the moment we arrived, we knew we chose the right place. Cozy vibes, spotless rooms, and an all-around 5-star experience."
+  },
+
+  {
+    "id": 21,
+    "rating": 5,
+    "author": "Isabelle Laurent",
+    "subtitle": "Verified Guest",
+    "comment": "An incredible stay! Everything was fresh, clean, and beautifully maintained. You can tell real thought went into designing the space."
+  },
+  {
+    "id": 22,
+    "rating": 5,
+    "author": "Julian & Mia",
+    "subtitle": "Booked via Holidaze",
+    "comment": "Holidaze made finding our vacation spot so effortless. The photos were spot-on accurate and the whole process was completely smooth."
+  },
+  {
+    "id": 23,
+    "rating": 4,
+    "author": "Kevin Novak",
+    "subtitle": "Solo Traveler",
+    "comment": "Really peaceful place to unwind. Great lighting, comfortable furniture, and easy check-in instructions. Would stay again without hesitation."
+  },
+  {
+    "id": 24,
+    "rating": 5,
+    "author": "Aisha & Jamal",
+    "subtitle": "Weekend Getaway",
+    "comment": "The perfect weekend spot! Very quiet, spotless throughout, and close enough to explore local spots on foot. Loved every minute."
+  },
+  {
+    "id": 25,
+    "rating": 5,
+    "author": "Rachel Green",
+    "subtitle": "Booked via Holidaze",
+    "comment": "I love how transparent Holidaze is with pricing. No surprise fees at checkout and the quality of properties listed is top tier."
+  },
+  {
+    "id": 26,
+    "rating": 4,
+    "author": "Mateo Silva",
+    "subtitle": "Remote Work Stay",
+    "comment": "Strong Wi-Fi, comfortable workspace, and plenty of coffee shops nearby. Ideal setup if you need to stay productive while away."
+  },
+  {
+    "id": 27,
+    "rating": 5,
+    "author": "Nora & Ethan",
+    "subtitle": "Couple's Trip",
+    "comment": "Such a cozy and romantic atmosphere! Everything was immaculate and the host went out of their way to make sure we were comfortable."
+  },
+  {
+    "id": 28,
+    "rating": 5,
+    "author": "Simon Berg",
+    "subtitle": "Booked via Holidaze",
+    "comment": "Found an absolute gem on Holidaze that wasn't on any other platform. Check-in was seamless and support was super responsive."
+  },
+  {
+    "id": 29,
+    "rating": 4,
+    "author": "Fiona Gallagher",
+    "subtitle": "Verified Guest",
+    "comment": "Great stay overall. The kitchen was fully equipped, the bed was very comfy, and check-out was super quick and easy."
+  },
+  {
+    "id": 30,
+    "rating": 5,
+    "author": "Dmitri & Anna",
+    "subtitle": "Family Vacation",
+    "comment": "Wonderful space for a family trip. Very spacious, extremely clean, and located in a safe, peaceful neighborhood."
+  },
+  {
+    "id": 31,
+    "rating": 5,
+    "author": "Clara Meyer",
+    "subtitle": "Booked via Holidaze",
+    "comment": "Holidaze is easily my favorite booking site now. Super clean UI, quick booking flow, and fantastic property options."
+  },
+  {
+    "id": 32,
+    "rating": 4,
+    "author": "Devon Miller",
+    "subtitle": "Solo Traveler",
+    "comment": "Stylish interior with high-quality amenities. Communication with the host was friendly and instant. A solid 5-star vibe."
+  },
+  {
+    "id": 33,
+    "rating": 5,
+    "author": "Yuki & Kenji",
+    "subtitle": "Verified Guest",
+    "comment": "Exceeded our expectations in every way. Quiet nights, pristine rooms, and a super easy arrival process. Highly recommended!"
+  },
+  {
+    "id": 34,
+    "rating": 5,
+    "author": "Sienna Brooks",
+    "subtitle": "Weekend Getaway",
+    "comment": "The aesthetic of this property is gorgeous. Plenty of natural light, super clean, and centrally located for exploring."
+  },
+  {
+    "id": 35,
+    "rating": 5,
+    "author": "Arthur Pendelton",
+    "subtitle": "Booked via Holidaze",
+    "comment": "Stress-free booking from start to finish. Holidaze curated great options that matched my budget without any hassle."
+  },
+  {
+    "id": 36,
+    "rating": 4,
+    "author": "Leila Mahmoud",
+    "subtitle": "Remote Work Stay",
+    "comment": "Comfortable, quiet, and very well maintained. Fast Wi-Fi and a pleasant setup for working remotely during the day."
+  },
+  {
+    "id": 37,
+    "rating": 5,
+    "author": "Gabriel & Lucia",
+    "subtitle": "Couple's Trip",
+    "comment": "A truly lovely space. Spotless clean, peaceful vibe, and comfortable furniture. We didn't want to leave!"
+  },
+  {
+    "id": 38,
+    "rating": 5,
+    "author": "Naomi Osaka",
+    "subtitle": "Booked via Holidaze",
+    "comment": "Third time using Holidaze and it never disappoints. Consistent quality, clear details, and great host interactions every time."
+  },
+  {
+    "id": 39,
+    "rating": 4,
+    "author": "Viktor Kozlov",
+    "subtitle": "Verified Guest",
+    "comment": "Solid place for a short break. Clean rooms, easy keyless entry, and close to convenience stores and transport."
+  },
+  {
+    "id": 40,
+    "rating": 5,
+    "author": "Hannah & Tom",
+    "subtitle": "Family Vacation",
+    "comment": "Perfect home base for our family getaway. Lots of room, super comfortable setup, and lovely surrounding area."
+  },
+  {
+    "id": 41,
+    "rating": 5,
+    "author": "Amara & Tobias",
+    "subtitle": "Honeymoon Vacation",
+    "comment": "Found our dream honeymoon villa through Holidaze in under 10 minutes. The experience was seamless from booking to check-out — nothing came close."
+  },
+  {
+    "id": 42,
+    "rating": 5,
+    "author": "Marcus H.",
+    "subtitle": "Backpacking",
+    "comment": "The lodge selection is incredible. We stayed somewhere our friends had never heard of but couldn't stop talking about it for months afterward."
+  }
+]

@@ -1,7 +1,27 @@
-import { ChevronDown, MapPin, Search } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import {
+  Car,
+  ChevronDown,
+  Coffee,
+  MapPin,
+  PawPrint,
+  ShieldCheck,
+  Search,
+  Star,
+  Zap,
+  Wifi,
+} from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Button from '../../components/Button/Button';
-import styles from './Home.module.css';
+import ImageCarousel from '../../components/ImageCarousel/ImageCarousel';
+import PageLoader from '../../components/PageLoader/PageLoader';
+import VenueCard from '../../components/VenueCard/VenueCard';
+import { useVenues } from '../../hooks/useVenues';
+import {
+  getPopularDestinations,
+  selectRandomVenues,
+} from '../../lib/helpers/venueHelpers';
+import styles from './home.module.css';
 
 const heroImages = [
   '/images/alexandre-chambon-aapSemzfsOk-unsplash.jpg',
@@ -21,43 +41,36 @@ const heroImages = [
   '/images/upgraded-points-KVym2PAn1gA-unsplash.jpg',
 ];
 
-const HERO_ROTATION_MS = 30000;
+const featuredReviews = [
+  {
+    rating: 5,
+    author: 'Amara & Tobias',
+    subtitle: 'Honeymoon Vacation',
+    comment:
+      'Found our dream honeymoon villa through Holidaze in under 10 minutes. The experience was seamless from booking to check-out - nothing came close.',
+  },
+  {
+    rating: 5,
+    author: 'Marcus H.',
+    subtitle: 'Backpacking',
+    comment:
+      "The lodge selection is incredible. We stayed somewhere our friends had never heard of but couldn't stop talking about it for months afterward.",
+  },
+];
 
 const getToday = () => new Date().toISOString().split('T')[0];
 
 function Home() {
+  const { venues, isLoading, error, refetch } = useVenues();
+  const featuredVenues = useMemo(() => selectRandomVenues(venues, 4), [venues]);
+  const popularDestinations = getPopularDestinations(venues, 5);
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
-  const [activeImage, setActiveImage] = useState(() =>
-    Math.floor(Math.random() * heroImages.length)
-  );
-
-  useEffect(() => {
-    heroImages.forEach((imageSource) => {
-      const image = new Image();
-      image.src = imageSource;
-    });
-
-    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (motionQuery.matches) return;
-
-    let timeoutId = window.setTimeout(function rotateHeroImage() {
-      setActiveImage((currentImage) => (currentImage + 1) % heroImages.length);
-      timeoutId = window.setTimeout(rotateHeroImage, HERO_ROTATION_MS);
-    }, HERO_ROTATION_MS);
-
-    return () => window.clearTimeout(timeoutId);
-  }, []);
-
   return (
     <main className={styles.home}>
+      {isLoading && <PageLoader label="Loading stays" />}
       <section className={styles.hero}>
-        <div
-          key={heroImages[activeImage]}
-          className={styles.heroImage}
-          style={{ backgroundImage: `url('${heroImages[activeImage]}')` }}
-          aria-hidden="true"
-        />
+        <ImageCarousel images={heroImages} />
         <div className={styles.heroContent}>
           <p className={styles.eyebrow}>
             <span aria-hidden="true" /> 2,000+ handpicked stays worldwide
@@ -65,7 +78,7 @@ function Home() {
           <h1>
             Your next great
             <br />
-            adventure <em>awaits.</em>
+            adventure <em className={styles.highlight}>awaits.</em>
           </h1>
           <p className={styles.intro}>
             Find your way to the good kind of daze with our curated selection
@@ -78,7 +91,7 @@ function Home() {
               <span>Where</span>
               <span className={styles.fieldValue}>
                 <MapPin size={16} aria-hidden="true" />
-                <input name="q" placeholder="Search destinations" />
+                <input name="q" placeholder="Destinations" />
               </span>
             </label>
             <label className={styles.searchField}>
@@ -149,6 +162,202 @@ function Home() {
               </strong>
               <span>Average rating</span>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className={styles.sectionContent}>
+          <p className={styles.sectionEyebrow}>Explore</p>
+          <h2>Browse by amenity</h2>
+          <p className={styles.sectionIntro}>
+            Find the details that make your stay feel just right.
+          </p>
+          <div className={styles.amenityGrid}>
+            {(
+              [
+                ['wifi', 'Wi-Fi included', Wifi],
+                ['parking', 'Parking', Car],
+                ['breakfast', 'Breakfast', Coffee],
+                ['pets', 'Pet friendly', PawPrint],
+              ] as const
+            ).map(([amenity, label, Icon]) => {
+              const count = venues.filter(
+                (venue) => venue.meta[amenity]
+              ).length;
+
+              return (
+                <a
+                  className={styles.amenityCard}
+                  href={`/search?amenity=${amenity}`}
+                  key={amenity}
+                >
+                  <span className={styles.amenityIcon}>
+                    <Icon size={18} aria-hidden="true" />
+                  </span>
+                  <strong>{label}</strong>
+                  <span>{count} stays</span>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className={styles.sectionContent}>
+          <p className={styles.sectionEyebrow}>Explore</p>
+          <h2>Popular destinations</h2>
+          <p className={styles.sectionIntro}>
+            Explore stays in the world's most sought-after locations.
+          </p>
+          {!isLoading && popularDestinations.length === 0 && (
+            <p className={styles.status}>
+              Destinations will appear as venues are added.
+            </p>
+          )}
+          {!isLoading && popularDestinations.length > 0 && (
+            <div className={styles.destinationGrid}>
+              {popularDestinations.map((destination) => (
+                <Link
+                  className={styles.destinationCard}
+                  key={`${destination.city}-${destination.country}`}
+                  to={`/search?city=${encodeURIComponent(destination.city)}&country=${encodeURIComponent(destination.country)}`}
+                >
+                  <img
+                    src={
+                      destination.image?.url ??
+                      '/images/photo-1507525428034-b723cf961d3e.jpg'
+                    }
+                    alt={
+                      destination.image?.alt ??
+                      `${destination.city}, ${destination.country}`
+                    }
+                  />
+                  <span className={styles.destinationOverlay}>
+                    <strong>{destination.city}</strong>
+                    <small>
+                      {destination.count}{' '}
+                      {destination.count === 1 ? 'stay' : 'stays'}
+                    </small>
+                  </span>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      <section className="section">
+        <div className={styles.sectionContent}>
+          <p className={styles.sectionEyebrow}>Explore</p>
+          <h2>Featured stays</h2>
+          <p className={styles.sectionIntro}>
+            Hand-picked places for your next stay.
+          </p>
+          {isLoading && <p className={styles.status}>Loading stays...</p>}
+          {error && (
+            <div className={styles.status} role="alert">
+              <p>We could not load stays right now.</p>
+              <button type="button" onClick={refetch}>
+                Try again
+              </button>
+            </div>
+          )}
+          {!isLoading && !error && venues.length === 0 && (
+            <p className={styles.status}>No stays are available yet.</p>
+          )}
+          {!isLoading && !error && venues.length > 0 && (
+            <div className={styles.venueGrid}>
+              {featuredVenues.map((venue) => (
+                <VenueCard key={venue.id} venue={venue} />
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      <section className={styles.trustSection} aria-label="Why choose Holidaze">
+        <div className={styles.trustContent}>
+          <div className={styles.trustItem}>
+            <span className={styles.trustIcon}>
+              <ShieldCheck size={18} aria-hidden="true" />
+            </span>
+            <div>
+              <h3>Verified properties</h3>
+              <p>Every listing is carefully reviewed before going live.</p>
+            </div>
+          </div>
+          <div className={styles.trustItem}>
+            <span className={styles.trustIcon}>
+              <Star size={18} aria-hidden="true" />
+            </span>
+            <div>
+              <h3>Honest ratings</h3>
+              <p>Clear venue ratings help you choose with confidence.</p>
+            </div>
+          </div>
+          <div className={styles.trustItem}>
+            <span className={styles.trustIcon}>
+              <Zap size={18} aria-hidden="true" />
+            </span>
+            <div>
+              <h3>Instant booking</h3>
+              <p>Confirm your stay in seconds, without waiting for approval.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section" aria-labelledby="reviews-heading">
+        <div className={styles.sectionContent}>
+          <h2 id="reviews-heading">What travellers say</h2>
+          <div className={styles.reviewGrid}>
+            {featuredReviews.map((review) => (
+              <article className={styles.reviewCard} key={review.author}>
+                <div
+                  className={styles.reviewRating}
+                  aria-label={`${review.rating} out of 5 stars`}
+                >
+                  {'★'.repeat(review.rating)}
+                </div>
+                <p className={styles.reviewComment}>
+                  &ldquo;{review.comment}&rdquo;
+                </p>
+                <div className={styles.reviewer}>
+                  <span className={styles.reviewerAvatar} aria-hidden="true">
+                    {review.author
+                      .split(/\s|&/)
+                      .filter(Boolean)
+                      .map((name) => name[0])
+                      .join('')}
+                  </span>
+                  <div>
+                    <strong>{review.author}</strong>
+                    <span>{review.subtitle}</span>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.ctaSection} aria-labelledby="cta-heading">
+        <ImageCarousel images={heroImages} />
+        <div className={styles.ctaOverlay} aria-hidden="true" />
+        <div className={styles.ctaContent}>
+          <h2 id="cta-heading">Ready to find your perfect stay?</h2>
+          <p>
+            Join travellers who book their next good kind of daze with Holidaze.
+          </p>
+          <div className={styles.ctaActions}>
+            <Link className={styles.ctaPrimary} to="/search">
+              Start exploring
+            </Link>
+            <Link className={styles.ctaSecondary} to="/become-manager">
+              List your venue
+            </Link>
           </div>
         </div>
       </section>

@@ -24,3 +24,15 @@ html {
 html::-webkit-scrollbar {
   display: none;
 }
+
+.section {
+  padding: 3rem 1.25rem;
+  color: var(--text);
+  background: var(--surface);
+}
+
+@media (min-width: 701px) {
+  .section {
+    padding: rem 2rem;
+  }
+}

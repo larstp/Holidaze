@@ -1,0 +1,126 @@
+h3 {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+h3 a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+h3 a:hover,
+h3 a:focus-visible {
+  color: var(--primary);
+}
+
+.card {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  background: var(--surface);
+}
+
+.imageLink {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 220ms ease;
+}
+
+.imageLink:hover .image,
+.imageLink:focus-visible .image {
+  transform: scale(1.04);
+}
+
+.imageBadge {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.25rem 0.4rem;
+  border-radius: 999px;
+  color: #3f4e4f;
+  background: #f8f5f2;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.content {
+  padding: 0.9rem;
+}
+
+:global(:root[data-theme='dark']) .content {
+  color: #fff;
+  background: #222;
+}
+
+.titleRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.category {
+  margin-bottom: 0.2rem;
+  color: var(--primary);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.saveButton {
+  display: inline-flex;
+  flex: 0 0 auto;
+  padding: 0.25rem;
+  border: 0;
+  color: var(--primary);
+  background: transparent;
+  cursor: pointer;
+}
+
+.saveButton svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.6rem;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.price {
+  margin-top: 0.8rem;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.price span {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 400;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image {
+    transition: none;
+  }
+}

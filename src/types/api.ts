@@ -16,8 +16,8 @@ export type Location = {
   zip: string | null;
   country: string | null;
   continent: string | null;
-  lat: number;
-  lng: number;
+  lat: number | null;
+  lng: number | null;
 };
 
 export type ProfileSummary = {
@@ -49,6 +49,9 @@ export type Venue = {
   updated: string;
   meta: VenueMeta;
   location: Location;
+  _count?: {
+    bookings: number;
+  };
 };
 
 export type Profile = ProfileSummary & {
