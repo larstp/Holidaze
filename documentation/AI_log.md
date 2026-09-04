@@ -41,3 +41,8 @@ Outcome: Found a handful of icons I can use throughout the webpage
 3 Sep
 Reason: Wanted to implement a review section, as i can see reviews on all travel websites im visiting. Cant find it in the API, and i was toying with the idea of finding a random free review API, but all of them were for e-commerce so it would have looked weird.
 Outcome: Used up ALL my tokens for this month while helping me generate a JSON with a bunch of mock reviews that i can link to to simulate reviews. Now i feel that i HAVE to use it
+
+4 Sep
+Model: Google Gemini Free
+Reason: Could not het image fallback to not throw error and didnt understand error message.
+Outcome: helped me set up the "ImageWithFallbackProps" properly (i had formatted it all wrong)

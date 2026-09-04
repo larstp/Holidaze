@@ -73,7 +73,7 @@ function Home() {
         <ImageCarousel images={heroImages} />
         <div className={styles.heroContent}>
           <p className={styles.eyebrow}>
-            <span aria-hidden="true" /> Explore stays around the world
+            <span aria-hidden="true" /> Explore amazing stays around the world
           </p>
           <h1>
             Your next great

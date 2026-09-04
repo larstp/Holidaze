@@ -1,6 +1,7 @@
 import { Heart, MapPin, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { Venue } from '@/types/api';
+import ImageWithFallback from '../ImageWithFallback/ImageWithFallback';
 import styles from './VenueCard.module.css';
 
 type VenueCardProps = {
@@ -16,9 +17,9 @@ function VenueCard({ venue }: VenueCardProps) {
   return (
     <article className={styles.card}>
       <Link className={styles.imageLink} to={`/venues/${venue.id}`}>
-        <img
+        <ImageWithFallback
           className={styles.image}
-          src={image?.url ?? '/images/photo-1507525428034-b723cf961d3e.jpg'}
+          src={image?.url}
           alt={image?.alt || venue.name}
         />
         <span className={styles.imageBadge}>
