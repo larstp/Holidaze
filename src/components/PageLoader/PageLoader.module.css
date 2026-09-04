@@ -1,0 +1,61 @@
+.overlay {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 0.75rem;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.loader {
+  display: inline-grid;
+  padding: 0;
+  background: transparent;
+}
+
+.loader::before {
+  height: 40px;
+  aspect-ratio: 3;
+  background:
+    radial-gradient(35% 146% at 50% 159%, var(--loader-colors)) 0 0,
+    radial-gradient(35% 146% at 50% -59%, var(--loader-colors)) 100% 100%;
+  background-repeat: repeat-x;
+  background-size: calc(200% / 3) 50%;
+  content: '';
+  animation: loaderWave 0.8s infinite linear;
+}
+
+.label {
+  font-size: 0.9rem;
+}
+
+@media (prefers-color-scheme: light) {
+  .overlay {
+    --loader-colors: #0000 64%, #000 66% 98%, #0000 101%;
+  }
+}
+
+:global(:root[data-theme='light']) .overlay {
+  --loader-colors: #0000 64%, #000 66% 98%, #0000 101%;
+}
+
+:global(:root[data-theme='dark']) .overlay {
+  --loader-colors: #0000 64%, #fff 66% 98%, #0000 101%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader::before {
+    animation: none;
+  }
+}
+
+@keyframes loaderWave {
+  to {
+    background-position:
+      -200% 0,
+      -100% 100%;
+  }
+}

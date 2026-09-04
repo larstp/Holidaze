@@ -4,7 +4,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  display: none;
+  display: grid;
   grid-template-columns: repeat(4, 1fr);
   padding: 0.7rem 0.4rem 0.8rem;
   color: var(--text);
@@ -31,8 +31,8 @@
   height: 1.5rem;
 }
 
-@media (max-width: 700px) {
+@media (min-width: 701px) {
   .navbar {
-    display: grid;
+    display: none;
   }
 }

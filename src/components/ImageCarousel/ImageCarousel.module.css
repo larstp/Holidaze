@@ -1,0 +1,31 @@
+.carousel {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  overflow: hidden;
+  background: #0f4f4c;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  animation: imageEnter 1.2s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image {
+    animation: none;
+  }
+}
+
+@keyframes imageEnter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

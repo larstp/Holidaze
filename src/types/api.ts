@@ -16,8 +16,8 @@ export type Location = {
   zip: string | null;
   country: string | null;
   continent: string | null;
-  lat: number;
-  lng: number;
+  lat: number | null;
+  lng: number | null;
 };
 
 export type ProfileSummary = {
@@ -49,6 +49,9 @@ export type Venue = {
   updated: string;
   meta: VenueMeta;
   location: Location;
+  _count?: {
+    bookings: number;
+  };
 };
 
 export type Profile = ProfileSummary & {
@@ -61,7 +64,17 @@ export type Profile = ProfileSummary & {
 
 export type ApiResponse<T> = {
   data: T;
-  meta: Record<string, unknown>;
+  meta: ApiMeta;
+};
+
+export type ApiMeta = {
+  totalCount?: number;
+  currentPage?: number;
+  pageCount?: number;
+  isFirstPage?: boolean;
+  isLastPage?: boolean;
+  previousPage?: number | null;
+  nextPage?: number | null;
 };
 
 export type ApiErrorResponse = {
