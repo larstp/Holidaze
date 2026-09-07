@@ -5,8 +5,11 @@ h3 {
 }
 
 h3 a {
+  display: block;
+  width: 100%;
   color: var(--text);
   text-decoration: none;
+  text-align: left;
 }
 
 h3 a:hover,
@@ -31,6 +34,7 @@ h3 a:focus-visible {
   display: block;
   aspect-ratio: 4 / 3;
   overflow: hidden;
+  text-decoration: none;
 }
 
 .image {
@@ -63,7 +67,10 @@ h3 a:focus-visible {
 
 .content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
   padding: 0.9rem;
+  text-align: left;
 }
 
 :global(:root[data-theme='dark']) .content {
@@ -139,7 +146,7 @@ h3 a:focus-visible {
 }
 
 .price {
-  margin-top: 0.8rem;
+  margin-top: auto;
   padding-top: 0.8rem;
   border-top: 1px solid var(--border);
   color: var(--text);

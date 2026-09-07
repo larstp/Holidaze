@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import styles from './Button.module.css';
 
-type ButtonVariant = 'primary' | 'secondary' | 'icon';
+type ButtonVariant = 'primary' | 'secondary' | 'light' | 'icon';
 type ButtonSize = 'default' | 'small';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {

@@ -39,25 +39,6 @@
   font: inherit;
 }
 
-.searchBar button,
-.filterButton,
-.status button,
-.filterHeader button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.35rem;
-  padding: 0.5rem 0.8rem;
-  border: 0;
-  border-radius: var(--radius-sm);
-  color: #fff;
-  background: #2d6a4f;
-  font: inherit;
-  font-size: 0.75rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-
 .layout {
   display: grid;
   gap: 1.5rem;
@@ -96,12 +77,6 @@
   font-size: 1rem;
 }
 
-.filterHeader button {
-  padding: 0.35rem 0.55rem;
-  color: var(--text);
-  background: var(--surface-muted);
-}
-
 fieldset {
   display: grid;
   gap: 0.7rem;
@@ -136,7 +111,9 @@ fieldset label {
 
 .resultCount {
   color: var(--text-muted);
-  font-size: 0.75rem;
+  font-size: 0.9rem;
+  text-align: left;
+  font-weight: 700;
 }
 
 .resultsHeader h1 {
@@ -160,6 +137,10 @@ fieldset label {
 .status {
   margin-top: 2rem;
   color: var(--text-muted);
+}
+
+.statusButton {
+  margin-top: 0.75rem;
 }
 
 @media (min-width: 701px) {

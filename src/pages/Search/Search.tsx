@@ -1,5 +1,6 @@
 import { Search as SearchIcon, SlidersHorizontal } from 'lucide-react';
 import { useState } from 'react';
+import Button from '../../components/Button/Button';
 import VenueCard from '../../components/VenueCard/VenueCard';
 import { useSearchVenues } from '../../hooks/useSearchVenues';
 import { useSearchFilters } from '../../hooks/useSearchFilters';
@@ -53,7 +54,9 @@ function Search() {
             placeholder="Where are you going?"
             aria-label="Search destinations"
           />
-          <button type="submit">Update</button>
+          <Button type="submit" variant="primary" size="small">
+            Update
+          </Button>
         </form>
       </section>
 
@@ -63,9 +66,14 @@ function Search() {
         >
           <div className={styles.filterHeader}>
             <h2>Filters</h2>
-            <button type="button" onClick={() => setIsFiltersOpen(false)}>
+            <Button
+              type="button"
+              variant="light"
+              size="small"
+              onClick={() => setIsFiltersOpen(false)}
+            >
               Close
-            </button>
+            </Button>
           </div>
           <fieldset>
             <legend>Amenities</legend>
@@ -94,26 +102,31 @@ function Search() {
                 {city || country || amenity || query || 'Explore stays'}
               </h1>
             </div>
-            <button
+            <Button
               className={styles.filterButton}
+              variant="light"
+              size="small"
+              icon={<SlidersHorizontal size={16} aria-hidden="true" />}
               type="button"
               onClick={() => setIsFiltersOpen(true)}
             >
-              <SlidersHorizontal size={16} aria-hidden="true" />
               Filters
-            </button>
+            </Button>
           </div>
 
           {isLoading && <p className={styles.status}>Loading stays...</p>}
           {error && (
             <div className={styles.status} role="alert">
               <p>We could not load these stays.</p>
-              <button
+              <Button
+                className={styles.statusButton}
+                variant="secondary"
+                size="small"
                 type="button"
                 onClick={query ? searchResult.refetch : venueResult.refetch}
               >
                 Try again
-              </button>
+              </Button>
             </div>
           )}
           {!isLoading && !error && filteredVenues.length === 0 && (
