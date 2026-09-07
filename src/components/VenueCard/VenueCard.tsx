@@ -10,6 +10,8 @@ type VenueCardProps = {
 
 function VenueCard({ venue }: VenueCardProps) {
   const image = venue.media[0];
+  const isGuestFavourite =
+    venue.rating >= 4.8 && (venue._count?.bookings ?? 0) >= 3;
   const location = [venue.location.city, venue.location.country]
     .filter(Boolean)
     .join(', ');
@@ -22,27 +24,33 @@ function VenueCard({ venue }: VenueCardProps) {
           src={image?.url}
           alt={image?.alt || venue.name}
         />
-        <span className={styles.imageBadge}>
-          <Star size={12} aria-hidden="true" />
-          {venue.rating.toFixed(1)}
-        </span>
+        {isGuestFavourite && (
+          <span className={styles.favoriteBadge}>Guest favourite</span>
+        )}
       </Link>
+      <button
+        className={styles.saveButton}
+        type="button"
+        aria-label={`Save ${venue.name}`}
+      >
+        <Heart aria-hidden="true" />
+      </button>
       <div className={styles.content}>
         <div className={styles.titleRow}>
-          <div>
-            <p className={styles.category}>Stay</p>
-            <h3>
-              <Link to={`/venues/${venue.id}`}>{venue.name}</Link>
-            </h3>
-          </div>
-          <button
-            className={styles.saveButton}
-            type="button"
-            aria-label={`Save ${venue.name}`}
-          >
-            <Heart aria-hidden="true" />
-          </button>
+          <p className={styles.category}>Stay</p>
+          <span className={styles.rating}>
+            <Star size={14} aria-hidden="true" />
+            {venue.rating.toFixed(1)}
+            {venue._count?.bookings ? (
+              <span className={styles.ratingCount}>
+                ({venue._count.bookings})
+              </span>
+            ) : null}
+          </span>
         </div>
+        <h3>
+          <Link to={`/venues/${venue.id}`}>{venue.name}</Link>
+        </h3>
         <p className={styles.location}>
           <MapPin size={14} aria-hidden="true" />
           {location || 'Location not specified'}

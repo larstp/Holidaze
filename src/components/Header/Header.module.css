@@ -103,7 +103,7 @@
 
 .exploreLink {
   padding: 0.85rem;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   color: var(--primary);
   background: var(--accent-bg);
 }
@@ -137,7 +137,7 @@
 }
 
 .themeButton {
-  border-radius: 0.35rem;
+  border-radius: var(--radius-sm);
 }
 
 .themeButton {
@@ -183,7 +183,7 @@
   margin-left: auto;
   padding: 0;
   border: 1px solid var(--border);
-  border-radius: 0.35rem;
+  border-radius: var(--radius-sm);
   color: var(--text);
   background: var(--surface-muted);
   cursor: pointer;

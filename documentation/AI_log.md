@@ -46,3 +46,26 @@ Outcome: Used up ALL my tokens for this month while helping me generate a JSON w
 Model: Google Gemini Free
 Reason: Could not het image fallback to not throw error and didnt understand error message.
 Outcome: helped me set up the "ImageWithFallbackProps" properly (i had formatted it all wrong)
+
+Sep 7
+Model: Gemini Free
+Reason: Wanted help planning out the proper way to split up a search function as I felt it always turned into a big mess file-wise.
+Outcome: ended up on this setup, which i will try to implement now:
+
+src/
+├── pages/Search/
+│ ├── Search.tsx
+│ └── Search.module.css
+├── hooks/
+│ ├── useSearchVenues.ts
+│ └── useSearchFilters.ts
+├── lib/services/
+│ └── venueService.ts
+├── lib/helpers/
+│ └── venueHelpers.ts
+└── lib/constants/
+└── api.ts
+
+Sep 7
+Reason: Wanted to implement a venue badge for "Guest favourites" etc ubt wasnt sure how it could be done with the limited API info.
+Outcome: Helped me set up "venue.rating >= 4.8 && (venue._count?.bookings ?? 0) >= 3" that spoofs a "popular" tag.

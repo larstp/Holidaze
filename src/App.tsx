@@ -3,6 +3,7 @@ import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home/Home';
+import Search from './pages/Search/Search';
 
 type PageProps = {
   title: string;
@@ -24,7 +25,7 @@ function App() {
       <div className="routeContent">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/search" element={<PagePlaceholder title="Search" />} />
+          <Route path="/search" element={<Search />} />
           <Route
             path="/venues/:id"
             element={<PagePlaceholder title="Venue details" />}

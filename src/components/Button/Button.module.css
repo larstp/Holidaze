@@ -4,7 +4,7 @@
   justify-content: center;
   gap: 0.35rem;
   border: 1px solid transparent;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   font: inherit;
   font-weight: 700;
   line-height: 1;
