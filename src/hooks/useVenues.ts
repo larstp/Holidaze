@@ -10,7 +10,10 @@ type UseVenuesResult = {
   refetch: () => void;
 };
 
-export function useVenues(query = ''): UseVenuesResult {
+export function useVenues(
+  query = '',
+  includeBookings = false
+): UseVenuesResult {
   const [venues, setVenues] = useState<Venue[]>([]);
   const [venueCount, setVenueCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -20,7 +23,10 @@ export function useVenues(query = ''): UseVenuesResult {
   useEffect(() => {
     let isCurrentRequest = true;
 
-    getVenues(query)
+    const separator = query ? '&' : '?';
+    const bookingsQuery = includeBookings ? `${separator}_bookings=true` : '';
+
+    getVenues(`${query}${bookingsQuery}`)
       .then((response) => {
         if (isCurrentRequest) {
           setVenues(response?.data ?? []);
@@ -47,7 +53,7 @@ export function useVenues(query = ''): UseVenuesResult {
     return () => {
       isCurrentRequest = false;
     };
-  }, [query, reloadKey]);
+  }, [query, includeBookings, reloadKey]);
 
   const refetch = () => {
     setIsLoading(true);

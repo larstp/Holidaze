@@ -1,6 +1,7 @@
 import { Search as SearchIcon, SlidersHorizontal } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Button from '../../components/Button/Button';
+import PageLoader from '../../components/PageLoader/PageLoader';
 import VenueCard from '../../components/VenueCard/VenueCard';
 import { useSearchVenues } from '../../hooks/useSearchVenues';
 import { useSearchFilters } from '../../hooks/useSearchFilters';
@@ -20,22 +21,52 @@ function Search() {
     amenity,
     city,
     country,
+    dateFrom,
+    dateTo,
     query,
     setQuery,
     submitQuery,
     toggleAmenity,
+    updateDateRange,
   } = useSearchFilters();
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  const filtersRef = useRef<HTMLElement>(null);
   const searchResult = useSearchVenues(query);
-  const venueResult = useVenues();
+  const venueResult = useVenues('', true);
   const sourceVenues = query ? searchResult.venues : venueResult.venues;
   const isLoading = query ? searchResult.isLoading : venueResult.isLoading;
   const error = query ? searchResult.error : venueResult.error;
+  const today = new Date().toISOString().split('T')[0];
+  const dateRangeError = dateFrom && dateTo && dateTo < dateFrom;
   const filteredVenues = filterVenues(sourceVenues, {
     amenity,
     city,
     country,
+    dateFrom,
+    dateTo,
   });
+
+  useEffect(() => {
+    if (!isFiltersOpen) return;
+
+    const closeOnOutsideClick = (event: PointerEvent) => {
+      if (!filtersRef.current?.contains(event.target as Node)) {
+        setIsFiltersOpen(false);
+      }
+    };
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsFiltersOpen(false);
+    };
+
+    document.addEventListener('pointerdown', closeOnOutsideClick);
+    document.addEventListener('keydown', closeOnEscape);
+
+    return () => {
+      document.removeEventListener('pointerdown', closeOnOutsideClick);
+      document.removeEventListener('keydown', closeOnEscape);
+    };
+  }, [isFiltersOpen]);
 
   return (
     <main className={styles.page}>
@@ -61,7 +92,16 @@ function Search() {
       </section>
 
       <div className={styles.layout}>
+        {isFiltersOpen && (
+          <button
+            className={styles.filterBackdrop}
+            type="button"
+            aria-label="Close filters"
+            onClick={() => setIsFiltersOpen(false)}
+          />
+        )}
         <aside
+          ref={filtersRef}
           className={`${styles.filters} ${isFiltersOpen ? styles.filtersOpen : ''}`}
         >
           <div className={styles.filterHeader}>
@@ -75,6 +115,38 @@ function Search() {
               Close
             </Button>
           </div>
+          <fieldset>
+            <legend>Dates</legend>
+            <div className={styles.dateFilters}>
+              <label className={styles.dateField}>
+                Check-in
+                <input
+                  type="date"
+                  value={dateFrom}
+                  min={today}
+                  onChange={(event) =>
+                    updateDateRange(event.target.value, dateTo)
+                  }
+                />
+              </label>
+              <label className={styles.dateField}>
+                Check-out
+                <input
+                  type="date"
+                  value={dateTo}
+                  min={dateFrom || today}
+                  onChange={(event) =>
+                    updateDateRange(dateFrom, event.target.value)
+                  }
+                />
+              </label>
+            </div>
+            {dateRangeError && (
+              <p className={styles.dateError} role="alert">
+                Check-out must be after check-in.
+              </p>
+            )}
+          </fieldset>
           <fieldset>
             <legend>Amenities</legend>
             {amenityOptions.map(([value, label]) => (
@@ -114,7 +186,7 @@ function Search() {
             </Button>
           </div>
 
-          {isLoading && <p className={styles.status}>Loading stays...</p>}
+          {isLoading && <PageLoader label="Finding your next destination" />}
           {error && (
             <div className={styles.status} role="alert">
               <p>We could not load these stays.</p>

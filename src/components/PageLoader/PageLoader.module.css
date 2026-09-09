@@ -1,13 +1,19 @@
-.overlay {
-  position: fixed;
-  z-index: 20;
-  inset: 0;
+.loaderContainer {
   display: grid;
   place-content: center;
   justify-items: center;
   gap: 0.75rem;
+  min-height: 10rem;
+  padding: 2rem 1rem;
   color: var(--text);
   background: var(--bg);
+}
+
+.fullScreen {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  min-height: 100svh;
 }
 
 .loader {
@@ -33,16 +39,16 @@
 }
 
 @media (prefers-color-scheme: light) {
-  .overlay {
+  .loaderContainer {
     --loader-colors: #0000 64%, #000 66% 98%, #0000 101%;
   }
 }
 
-:global(:root[data-theme='light']) .overlay {
+:global(:root[data-theme='light']) .loaderContainer {
   --loader-colors: #0000 64%, #000 66% 98%, #0000 101%;
 }
 
-:global(:root[data-theme='dark']) .overlay {
+:global(:root[data-theme='dark']) .loaderContainer {
   --loader-colors: #0000 64%, #fff 66% 98%, #0000 101%;
 }
 

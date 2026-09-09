@@ -20,7 +20,7 @@ export function useSearchVenues(query: string): UseSearchVenuesResult {
 
     let isCurrentRequest = true;
 
-    searchVenues(query)
+    searchVenues(query, true)
       .then((response) => {
         if (isCurrentRequest) setVenues(response?.data ?? []);
       })

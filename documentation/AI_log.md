@@ -69,3 +69,11 @@ src/
 Sep 7
 Reason: Wanted to implement a venue badge for "Guest favourites" etc ubt wasnt sure how it could be done with the limited API info.
 Outcome: Helped me set up "venue.rating >= 4.8 && (venue._count?.bookings ?? 0) >= 3" that spoofs a "popular" tag.
+
+9 Sep
+Reason: Could not get the search query to properly use availability filtering and not have a bunch of overlap
+Outcome: helped me set up a messy booking.dateFrom < selectedDateTo AND booking.dateTo > selectedDateFrom. will clean up later. also got help setting up the hasCompleteDateRange const
+
+9 Sep
+Reason: a LOT of troubleshooting the page loader animation
+Outcome: managed to insert it inline

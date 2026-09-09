@@ -68,7 +68,6 @@ function Home() {
   const [checkOut, setCheckOut] = useState('');
   return (
     <main className={styles.home}>
-      {isLoading && <PageLoader />}
       <section className={styles.hero}>
         <ImageCarousel images={heroImages} />
         <div className={styles.heroContent}>
@@ -166,6 +165,8 @@ function Home() {
         </div>
       </section>
 
+      {isLoading && <PageLoader />}
+
       <section className="section">
         <div className={styles.sectionContent}>
           <p className={styles.sectionEyebrow}>Explore</p>
@@ -256,7 +257,6 @@ function Home() {
           <p className={styles.sectionIntro}>
             Hand-picked places for your next stay.
           </p>
-          {isLoading && <p className={styles.status}>Loading stays...</p>}
           {error && (
             <div className={styles.status} role="alert">
               <p>We could not load stays right now.</p>

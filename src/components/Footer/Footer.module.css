@@ -16,11 +16,12 @@
   margin-top: 0.85rem;
   color: rgba(255, 255, 255, 0.62);
   font-size: 0.75rem;
+  text-align: left;
 }
 
 .brand {
-  display: inline-flex;
-  align-items: center;
+  display: flex;
+  align-items: flex-start;
   gap: 0.45rem;
   color: #fff;
   text-decoration: none;
@@ -80,6 +81,8 @@
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   color: rgba(255, 255, 255, 0.45);
   font-size: 0.65rem;
+  align-items: center;
+  margin: 0 auto;
 }
 
 .bottomBar div {

@@ -8,6 +8,8 @@ export function useSearchFilters() {
   const amenity = searchParams.get('amenity');
   const city = searchParams.get('city');
   const country = searchParams.get('country');
+  const dateFrom = searchParams.get('dateFrom') ?? '';
+  const dateTo = searchParams.get('dateTo') ?? '';
 
   const submitQuery = () => {
     const nextParams = new URLSearchParams(searchParams);
@@ -31,13 +33,28 @@ export function useSearchFilters() {
     setSearchParams(nextParams);
   };
 
+  const updateDateRange = (nextDateFrom: string, nextDateTo: string) => {
+    const nextParams = new URLSearchParams(searchParams);
+
+    if (nextDateFrom) nextParams.set('dateFrom', nextDateFrom);
+    else nextParams.delete('dateFrom');
+
+    if (nextDateTo) nextParams.set('dateTo', nextDateTo);
+    else nextParams.delete('dateTo');
+
+    setSearchParams(nextParams);
+  };
+
   return {
     amenity,
     city,
     country,
+    dateFrom,
+    dateTo,
     query,
     setQuery,
     submitQuery,
     toggleAmenity,
+    updateDateRange,
   };
 }

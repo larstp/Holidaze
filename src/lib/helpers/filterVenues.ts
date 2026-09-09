@@ -4,6 +4,8 @@ export type VenueFilters = {
   amenity: string | null;
   city: string | null;
   country: string | null;
+  dateFrom?: string;
+  dateTo?: string;
 };
 
 export function filterVenues(venues: Venue[], filters: VenueFilters): Venue[] {
@@ -17,7 +19,17 @@ export function filterVenues(venues: Venue[], filters: VenueFilters): Venue[] {
     const matchesCountry = filters.country
       ? venue.location.country?.toLowerCase() === filters.country.toLowerCase()
       : true;
+    const hasCompleteDateRange = Boolean(filters.dateFrom && filters.dateTo);
+    const matchesAvailability = hasCompleteDateRange
+      ? !(venue.bookings ?? []).some(
+          (booking) =>
+            booking.dateFrom < filters.dateTo! &&
+            booking.dateTo > filters.dateFrom!
+        )
+      : true;
 
-    return matchesAmenity && matchesCity && matchesCountry;
+    return (
+      matchesAmenity && matchesCity && matchesCountry && matchesAvailability
+    );
   });
 }
