@@ -1,7 +1,8 @@
+import { forwardRef } from 'react';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import styles from './Button.module.css';
 
-type ButtonVariant = 'primary' | 'secondary' | 'icon';
+type ButtonVariant = 'primary' | 'secondary' | 'light' | 'icon';
 type ButtonSize = 'default' | 'small';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -10,14 +11,17 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   icon?: ReactNode;
 };
 
-function Button({
-  children,
-  className = '',
-  icon,
-  size = 'default',
-  variant = 'primary',
-  ...buttonProps
-}: ButtonProps) {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  {
+    children,
+    className = '',
+    icon,
+    size = 'default',
+    variant = 'primary',
+    ...buttonProps
+  }: ButtonProps,
+  ref
+) {
   const buttonClassName = [
     styles.button,
     styles[variant],
@@ -28,11 +32,13 @@ function Button({
     .join(' ');
 
   return (
-    <button className={buttonClassName} {...buttonProps}>
+    <button ref={ref} className={buttonClassName} {...buttonProps}>
       {icon && <span className={styles.icon}>{icon}</span>}
       {children}
     </button>
   );
-}
+});
+
+Button.displayName = 'Button';
 
 export default Button;

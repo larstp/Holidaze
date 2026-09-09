@@ -10,9 +10,20 @@ export function getVenues(query = '') {
   return apiRequest<Venue[]>(`${API_ENDPOINTS.venues}${query}`);
 }
 
-export function searchVenues(query: string) {
+export function searchVenues(
+  query: string,
+  includeBookings = false,
+  page = 1,
+  limit = 15
+) {
+  const params = new URLSearchParams({
+    q: query,
+    page: String(page),
+    limit: String(limit),
+  });
+  if (includeBookings) params.set('_bookings', 'true');
   return apiRequest<Venue[]>(
-    `${API_ENDPOINTS.venueSearch}?q=${encodeURIComponent(query)}`
+    `${API_ENDPOINTS.venueSearch}?${params.toString()}`
   );
 }
 

@@ -83,7 +83,7 @@ h1 {
   width: 100%;
   margin: 2.5rem auto 0;
   padding: 0.5rem;
-  border-radius: 1.4rem;
+  border-radius: var(--radius-lg);
   color: var(--text);
   background: #fff;
   box-shadow: 0 1rem 2rem rgba(0, 33, 30, 0.2);
@@ -195,7 +195,7 @@ input::placeholder {
   margin-top: 0.5rem;
   padding: 0.95rem;
   border: 0;
-  border-radius: 14px;
+  border-radius: var(--radius-lg);
   color: #fff;
   background: #2d6a4f;
   font: inherit;
@@ -255,7 +255,7 @@ input::placeholder {
   box-sizing: border-box;
   padding: 1rem;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   color: var(--text);
   background: var(--surface-muted);
   text-decoration: none;
@@ -270,6 +270,14 @@ input::placeholder {
   transform: translateY(-2px);
 }
 
+.amenityCard:focus-visible,
+.destinationCard:focus-visible,
+.ctaPrimary:focus-visible,
+.ctaSecondary:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
 .amenityCard strong {
   font-size: 0.9rem;
 }
@@ -281,7 +289,7 @@ input::placeholder {
   width: 2rem;
   height: 2rem;
   margin-bottom: 0.25rem;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   color: var(--primary);
   background: var(--surface);
 }
@@ -310,7 +318,7 @@ input::placeholder {
   display: block;
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   color: #fff;
   text-decoration: none;
 }
@@ -362,24 +370,9 @@ input::placeholder {
   top: 0.7rem;
   right: 0.7rem;
   padding: 0.25rem 0.45rem;
-  border-radius: 999px;
-  background: hsl(0 0% 0% / var(--glass-frost, 0));
-  -webkit-backdrop-filter: var(--filter-id, url(#glass-filter))
-    saturate(var(--glass-saturation, 1));
-  backdrop-filter: var(--filter-id, url(#glass-filter))
-    saturate(var(--glass-saturation, 1));
-  box-shadow:
-    inset 0 0 2px 1px #ffffff59,
-    inset 0 0 10px 4px #ffffff26,
-    inset 0 4px 16px #11111a0d,
-    inset 0 8px 24px #11111a0d,
-    inset 0 6px 56px #11111a0d;
-  box-shadow:
-    inset 0 0 2px 1px lab(100% 0 0 / 0.35),
-    inset 0 0 10px 4px lab(100% 0 0 / 0.15),
-    inset 0 4px 16px lab(5.32203% 1.61424 -5.88284 / 0.0509804),
-    inset 0 8px 24px lab(5.32203% 1.61424 -5.88284 / 0.0509804),
-    inset 0 6px 56px lab(5.32203% 1.61424 -5.88284 / 0.0509804);
+  border-radius: var(--radius-pill);
+  background: #f8f5f2;
+  color: #3f4e4f;
   font-size: 0.65rem;
   font-weight: 700;
   white-space: nowrap;
@@ -400,7 +393,7 @@ input::placeholder {
   margin-top: 0.75rem;
   padding: 0.6rem 0.9rem;
   border: 1px solid var(--primary);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   color: var(--primary);
   background: transparent;
   font: inherit;
@@ -452,7 +445,7 @@ input::placeholder {
 .ctaSecondary {
   padding: 0.65rem 1rem;
   border: 1px solid #fff;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   font-size: 0.75rem;
   font-weight: 700;
   text-decoration: none;
@@ -503,7 +496,7 @@ input::placeholder {
   justify-content: center;
   width: 2.25rem;
   height: 2.25rem;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   color: #fff;
   background: #2d6a4f;
 }
@@ -532,7 +525,7 @@ input::placeholder {
 .reviewCard {
   padding: 1.5rem;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   background: var(--surface);
 }
 
@@ -577,7 +570,7 @@ input::placeholder {
   justify-content: center;
   width: 2rem;
   height: 2rem;
-  border-radius: 50%;
+  border-radius: var(--radius-circle);
   color: #fff;
   background: #2d6a4f;
   font-size: 0.65rem;
@@ -648,7 +641,7 @@ input::placeholder {
     width: min(38rem, 100%);
     margin: 2rem 0 0;
     padding: 0.55rem;
-    border-radius: 1.25rem;
+    border-radius: var(--radius-lg);
   }
 
   .searchField {
@@ -679,7 +672,7 @@ input::placeholder {
     margin-top: 0;
     align-self: center;
     padding: 0.75rem 1rem;
-    border-radius: 14px;
+    border-radius: var(--radius-lg);
     font-size: 0.75rem;
   }
 

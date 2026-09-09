@@ -4,7 +4,7 @@
   justify-content: center;
   gap: 0.35rem;
   border: 1px solid transparent;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   font: inherit;
   font-weight: 700;
   line-height: 1;
@@ -45,6 +45,20 @@
 .secondary:hover:not(:disabled) {
   color: var(--surface);
   background: var(--primary);
+}
+
+.light {
+  padding: 0.55rem 1rem;
+  border-color: var(--border);
+  color: var(--text);
+  background: #fff;
+}
+
+.light:hover:not(:disabled),
+.light:focus-visible {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--surface-muted);
 }
 
 .small {

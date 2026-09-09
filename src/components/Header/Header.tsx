@@ -1,16 +1,29 @@
 import { Menu, Moon, Sun, X } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import buttonStyles from '../Button/Button.module.css';
 import styles from './Header.module.css';
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(
     () => document.documentElement.dataset.theme === 'dark'
   );
 
   const closeMenu = () => setIsMenuOpen(false);
+
+  const toggleMenu = () => {
+    if (!isMenuOpen) setIsMenuVisible(true);
+    setIsMenuOpen((isOpen) => !isOpen);
+  };
+
+  useEffect(() => {
+    if (isMenuOpen) return;
+
+    const timeoutId = window.setTimeout(() => setIsMenuVisible(false), 220);
+    return () => window.clearTimeout(timeoutId);
+  }, [isMenuOpen]);
 
   const toggleTheme = () => {
     const nextTheme = isDarkMode ? 'light' : 'dark';
@@ -42,7 +55,7 @@ function Header() {
 
         <nav
           id="primary-navigation"
-          className={`${styles.navigation} ${isMenuOpen ? styles.navigationOpen : ''}`}
+          className={`${styles.navigation} ${isMenuOpen ? styles.navigationOpen : ''} ${isMenuVisible && !isMenuOpen ? styles.navigationClosing : ''}`}
           aria-label="Primary navigation"
         >
           <NavLink
@@ -115,7 +128,7 @@ function Header() {
           aria-label={
             isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'
           }
-          onClick={() => setIsMenuOpen((isOpen) => !isOpen)}
+          onClick={toggleMenu}
         >
           {isMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
         </button>

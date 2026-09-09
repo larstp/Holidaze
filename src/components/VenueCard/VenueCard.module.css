@@ -5,8 +5,11 @@ h3 {
 }
 
 h3 a {
+  display: block;
+  width: 100%;
   color: var(--text);
   text-decoration: none;
+  text-align: left;
 }
 
 h3 a:hover,
@@ -15,11 +18,12 @@ h3 a:focus-visible {
 }
 
 .card {
+  position: relative;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   color: var(--text);
   background: var(--surface);
 }
@@ -30,6 +34,7 @@ h3 a:focus-visible {
   display: block;
   aspect-ratio: 4 / 3;
   overflow: hidden;
+  text-decoration: none;
 }
 
 .image {
@@ -45,15 +50,15 @@ h3 a:focus-visible {
   transform: scale(1.04);
 }
 
-.imageBadge {
+.favoriteBadge {
   position: absolute;
   top: 0.6rem;
-  right: 0.6rem;
+  left: 0.6rem;
   display: inline-flex;
   align-items: center;
   gap: 0.2rem;
   padding: 0.25rem 0.4rem;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   color: #3f4e4f;
   background: #f8f5f2;
   font-size: 0.7rem;
@@ -62,7 +67,10 @@ h3 a:focus-visible {
 
 .content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
   padding: 0.9rem;
+  text-align: left;
 }
 
 :global(:root[data-theme='dark']) .content {
@@ -77,6 +85,24 @@ h3 a:focus-visible {
   gap: 0.5rem;
 }
 
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  color: var(--text);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.rating svg {
+  color: var(--text);
+}
+
+.ratingCount {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
 .category {
   margin-bottom: 0.2rem;
   color: var(--primary);
@@ -87,12 +113,21 @@ h3 a:focus-visible {
 }
 
 .saveButton {
+  position: absolute;
+  z-index: 2;
+  top: 0.6rem;
+  right: 0.6rem;
   display: inline-flex;
   flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
   padding: 0.25rem;
   border: 0;
+  border-radius: var(--radius-circle);
   color: var(--primary);
-  background: transparent;
+  background: rgba(248, 245, 242, 0.9);
   cursor: pointer;
 }
 
@@ -111,10 +146,13 @@ h3 a:focus-visible {
 }
 
 .price {
-  margin-top: 0.8rem;
+  margin-top: auto;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--border);
   color: var(--text);
   font-size: 0.9rem;
-  font-weight: 700;
+  font-weight: 900;
+  text-align: left;
 }
 
 .price span {
@@ -126,5 +164,11 @@ h3 a:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .image {
     transition: none;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 900px) {
+  .favoriteBadge {
+    display: none;
   }
 }
