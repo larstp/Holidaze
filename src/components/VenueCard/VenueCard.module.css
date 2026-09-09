@@ -166,3 +166,9 @@ h3 a:focus-visible {
     transition: none;
   }
 }
+
+@media (min-width: 701px) and (max-width: 900px) {
+  .favoriteBadge {
+    display: none;
+  }
+}

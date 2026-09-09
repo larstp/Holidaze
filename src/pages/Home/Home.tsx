@@ -241,7 +241,7 @@ function Home() {
                   </span>
                   <span className={styles.destinationOverlay}>
                     <strong>{destination.city}</strong>
-                    <span>Explore stays -&gt;</span>
+                    <span>Explore stays &gt;</span>
                   </span>
                 </Link>
               ))}
