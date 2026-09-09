@@ -202,7 +202,7 @@ function Search() {
             </div>
           )}
           {!isLoading && !error && filteredVenues.length === 0 && (
-            <p className={styles.status}>No stays match these filters.</p>
+            <p className={styles.status}>No venues match these filters.</p>
           )}
           {!isLoading && !error && filteredVenues.length > 0 && (
             <div className={styles.grid}>
