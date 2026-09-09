@@ -79,6 +79,7 @@
   gap: 0;
   padding: 1rem;
   border: 1px solid var(--border);
+  border-top: 0;
   border-bottom-left-radius: 14px;
   background: var(--surface);
   box-shadow: var(--shadow);
@@ -199,6 +200,11 @@
   animation: navigationSlideDown 220ms ease-out both;
 }
 
+.navigationClosing {
+  display: flex;
+  animation: navigationSlideUp 220ms ease-in both;
+}
+
 .actions .themeButton {
   display: none;
 }
@@ -269,7 +275,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .navigationOpen {
+  .navigationOpen,
+  .navigationClosing {
     animation: none;
   }
 }
@@ -283,5 +290,17 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes navigationSlideUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-0.75rem);
   }
 }

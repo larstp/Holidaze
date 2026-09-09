@@ -4,13 +4,21 @@ import type { Venue } from '@/types/api';
 
 type UseSearchVenuesResult = {
   venues: Venue[];
+  pageCount: number;
+  currentPage: number;
   isLoading: boolean;
   error: Error | null;
   refetch: () => void;
 };
 
-export function useSearchVenues(query: string): UseSearchVenuesResult {
+export function useSearchVenues(
+  query: string,
+  page = 1,
+  limit = 15
+): UseSearchVenuesResult {
   const [venues, setVenues] = useState<Venue[]>([]);
+  const [pageCount, setPageCount] = useState(1);
+  const [currentPage, setCurrentPage] = useState(page);
   const [isLoading, setIsLoading] = useState(Boolean(query));
   const [error, setError] = useState<Error | null>(null);
   const [reloadKey, setReloadKey] = useState(0);
@@ -20,9 +28,13 @@ export function useSearchVenues(query: string): UseSearchVenuesResult {
 
     let isCurrentRequest = true;
 
-    searchVenues(query, true)
+    searchVenues(query, true, page, limit)
       .then((response) => {
-        if (isCurrentRequest) setVenues(response?.data ?? []);
+        if (isCurrentRequest) {
+          setVenues(response?.data ?? []);
+          setPageCount(response?.meta.pageCount ?? 1);
+          setCurrentPage(response?.meta.currentPage ?? page);
+        }
       })
       .catch((requestError: unknown) => {
         if (isCurrentRequest) {
@@ -40,10 +52,12 @@ export function useSearchVenues(query: string): UseSearchVenuesResult {
     return () => {
       isCurrentRequest = false;
     };
-  }, [query, reloadKey]);
+  }, [query, page, limit, reloadKey]);
 
   return {
     venues,
+    pageCount,
+    currentPage,
     isLoading,
     error,
     refetch: () => {

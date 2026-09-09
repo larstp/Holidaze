@@ -33,7 +33,7 @@ export function getPopularDestinations(
 
     if (!city || !country) return;
 
-    const key = `${city.toLocaleLowerCase()}|${country.toLocaleLowerCase()}`;
+    const key = country.toLocaleLowerCase();
     const current = destinations.get(key);
 
     if (current) {
@@ -50,6 +50,7 @@ export function getPopularDestinations(
   });
 
   return [...destinations.values()]
+    .filter((destination) => destination.count >= 2)
     .sort((first, second) => second.count - first.count)
     .slice(0, limit);
 }

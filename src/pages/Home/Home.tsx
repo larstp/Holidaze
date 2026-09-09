@@ -16,7 +16,7 @@ import Button from '../../components/Button/Button';
 import ImageCarousel from '../../components/ImageCarousel/ImageCarousel';
 import PageLoader from '../../components/PageLoader/PageLoader';
 import VenueCard from '../../components/VenueCard/VenueCard';
-import { useVenues } from '../../hooks/useVenues';
+import { useAllVenues } from '../../hooks/useAllVenues';
 import {
   getPopularDestinations,
   selectRandomVenues,
@@ -61,7 +61,7 @@ const featuredReviews = [
 const getToday = () => new Date().toISOString().split('T')[0];
 
 function Home() {
-  const { venues, venueCount, isLoading, error, refetch } = useVenues();
+  const { venues, isLoading, error, refetch } = useAllVenues();
   const featuredVenues = useMemo(() => selectRandomVenues(venues, 4), [venues]);
   const popularDestinations = getPopularDestinations(venues, 5);
   const [checkIn, setCheckIn] = useState('');
@@ -152,7 +152,7 @@ function Home() {
               <span>Happy travellers</span>
             </div>
             <div>
-              <strong>{venueCount.toLocaleString()}</strong>
+              <strong>{venues.length.toLocaleString()}</strong>
               <span>Curated properties</span>
             </div>
             <div>
@@ -222,8 +222,8 @@ function Home() {
               {popularDestinations.map((destination) => (
                 <Link
                   className={styles.destinationCard}
-                  key={`${destination.city}-${destination.country}`}
-                  to={`/search?city=${encodeURIComponent(destination.city)}&country=${encodeURIComponent(destination.country)}`}
+                  key={destination.country}
+                  to={`/search?country=${encodeURIComponent(destination.country)}`}
                 >
                   <img
                     src={
@@ -240,7 +240,7 @@ function Home() {
                     {destination.count === 1 ? 'stay' : 'stays'}
                   </span>
                   <span className={styles.destinationOverlay}>
-                    <strong>{destination.city}</strong>
+                    <strong>{destination.country}</strong>
                     <span>Explore stays &gt;</span>
                   </span>
                 </Link>

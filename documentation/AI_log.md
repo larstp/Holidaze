@@ -48,7 +48,7 @@ Reason: Could not het image fallback to not throw error and didnt understand err
 Outcome: helped me set up the "ImageWithFallbackProps" properly (i had formatted it all wrong)
 
 Sep 7
-Model: Gemini Free
+Model: Google Gemini Free
 Reason: Wanted help planning out the proper way to split up a search function as I felt it always turned into a big mess file-wise.
 Outcome: ended up on this setup, which i will try to implement now:
 
@@ -67,13 +67,22 @@ src/
 └── api.ts
 
 Sep 7
+Model: Google Gemini Free
 Reason: Wanted to implement a venue badge for "Guest favourites" etc ubt wasnt sure how it could be done with the limited API info.
 Outcome: Helped me set up "venue.rating >= 4.8 && (venue._count?.bookings ?? 0) >= 3" that spoofs a "popular" tag.
 
 9 Sep
+Model: Google Gemini Free
 Reason: Could not get the search query to properly use availability filtering and not have a bunch of overlap
 Outcome: helped me set up a messy booking.dateFrom < selectedDateTo AND booking.dateTo > selectedDateFrom. will clean up later. also got help setting up the hasCompleteDateRange const
 
 9 Sep
+Model: Google Gemini Free
 Reason: a LOT of troubleshooting the page loader animation
 Outcome: managed to insert it inline
+
+9 Sep
+Model: Google Gemini Free
+Note: MAJOR HELP
+Reason: I had a TONNE of problems regarding the search filtering and importing the venues properly to the search and home page. It was only importing the first 15 venues, and whenever i searched for locations that i KNEW there were hundreds of it still only showed me like 4 max.
+Outcome: I realized i only imported the first API page which probably came when i inserted the pagination rule, but at this point i hade written so much around it that i struggled moving things around and changing it so that it would import ALL of it. I sat up the useAllVenues.ts hook and got help converting and moving where needed so that the new hook could be used

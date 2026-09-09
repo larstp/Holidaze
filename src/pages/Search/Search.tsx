@@ -1,11 +1,11 @@
 import { Search as SearchIcon, SlidersHorizontal } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Button from '../../components/Button/Button';
 import PageLoader from '../../components/PageLoader/PageLoader';
 import VenueCard from '../../components/VenueCard/VenueCard';
 import { useSearchVenues } from '../../hooks/useSearchVenues';
+import { useAllVenues } from '../../hooks/useAllVenues';
 import { useSearchFilters } from '../../hooks/useSearchFilters';
-import { useVenues } from '../../hooks/useVenues';
 import { filterVenues } from '../../lib/helpers/filterVenues';
 import styles from './Search.module.css';
 
@@ -23,21 +23,24 @@ function Search() {
     country,
     dateFrom,
     dateTo,
+    page,
     query,
     setQuery,
     submitQuery,
     toggleAmenity,
     updateDateRange,
+    setPage,
   } = useSearchFilters();
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  const [isFiltersVisible, setIsFiltersVisible] = useState(false);
   const filtersRef = useRef<HTMLElement>(null);
-  const searchResult = useSearchVenues(query);
-  const venueResult = useVenues('', true);
-  const sourceVenues = query ? searchResult.venues : venueResult.venues;
-  const isLoading = query ? searchResult.isLoading : venueResult.isLoading;
-  const error = query ? searchResult.error : venueResult.error;
-  const today = new Date().toISOString().split('T')[0];
-  const dateRangeError = dateFrom && dateTo && dateTo < dateFrom;
+  const filterTriggerRef = useRef<HTMLButtonElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const searchResult = useSearchVenues(query, page);
+  const allVenueResult = useAllVenues(true);
+  const sourceVenues = query ? searchResult.venues : allVenueResult.venues;
+  const isLoading = query ? searchResult.isLoading : allVenueResult.isLoading;
+  const error = query ? searchResult.error : allVenueResult.error;
   const filteredVenues = filterVenues(sourceVenues, {
     amenity,
     city,
@@ -45,13 +48,39 @@ function Search() {
     dateFrom,
     dateTo,
   });
+  const pageCount = query
+    ? searchResult.pageCount
+    : Math.max(1, Math.ceil(filteredVenues.length / 15));
+  const currentPage = query ? searchResult.currentPage : page;
+  const today = new Date().toISOString().split('T')[0];
+  const dateRangeError = dateFrom && dateTo && dateTo < dateFrom;
+
+  const closeFilters = () => setIsFiltersOpen(false);
+  const openFilters = () => {
+    setIsFiltersVisible(true);
+    setIsFiltersOpen(true);
+  };
+  const displayedVenues = useMemo(
+    () =>
+      query ? filteredVenues : filteredVenues.slice((page - 1) * 15, page * 15),
+    [filteredVenues, page, query]
+  );
+
+  useEffect(() => {
+    if (isFiltersOpen) return;
+
+    const timeoutId = window.setTimeout(() => setIsFiltersVisible(false), 220);
+    return () => window.clearTimeout(timeoutId);
+  }, [isFiltersOpen]);
 
   useEffect(() => {
     if (!isFiltersOpen) return;
 
+    closeButtonRef.current?.focus();
+
     const closeOnOutsideClick = (event: PointerEvent) => {
       if (!filtersRef.current?.contains(event.target as Node)) {
-        setIsFiltersOpen(false);
+        closeFilters();
       }
     };
 
@@ -67,6 +96,23 @@ function Search() {
       document.removeEventListener('keydown', closeOnEscape);
     };
   }, [isFiltersOpen]);
+
+  useEffect(() => {
+    if (!isFiltersOpen) filterTriggerRef.current?.focus();
+  }, [isFiltersOpen]);
+
+  useEffect(() => {
+    if (currentPage > 1) {
+      const reducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      ).matches;
+
+      window.scrollTo({
+        top: 0,
+        behavior: reducedMotion ? 'auto' : 'smooth',
+      });
+    }
+  }, [currentPage]);
 
   return (
     <main className={styles.page}>
@@ -92,25 +138,29 @@ function Search() {
       </section>
 
       <div className={styles.layout}>
-        {isFiltersOpen && (
+        {isFiltersVisible && (
           <button
             className={styles.filterBackdrop}
             type="button"
             aria-label="Close filters"
-            onClick={() => setIsFiltersOpen(false)}
+            onClick={closeFilters}
           />
         )}
         <aside
           ref={filtersRef}
-          className={`${styles.filters} ${isFiltersOpen ? styles.filtersOpen : ''}`}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="filters-heading"
+          className={`${styles.filters} ${isFiltersOpen ? styles.filtersOpen : ''} ${isFiltersVisible && !isFiltersOpen ? styles.filtersClosing : ''}`}
         >
           <div className={styles.filterHeader}>
-            <h2>Filters</h2>
+            <h2 id="filters-heading">Filters</h2>
             <Button
+              ref={closeButtonRef}
               type="button"
               variant="light"
               size="small"
-              onClick={() => setIsFiltersOpen(false)}
+              onClick={closeFilters}
             >
               Close
             </Button>
@@ -175,12 +225,13 @@ function Search() {
               </h1>
             </div>
             <Button
+              ref={filterTriggerRef}
               className={styles.filterButton}
               variant="light"
               size="small"
               icon={<SlidersHorizontal size={16} aria-hidden="true" />}
               type="button"
-              onClick={() => setIsFiltersOpen(true)}
+              onClick={openFilters}
             >
               Filters
             </Button>
@@ -195,7 +246,7 @@ function Search() {
                 variant="secondary"
                 size="small"
                 type="button"
-                onClick={query ? searchResult.refetch : venueResult.refetch}
+                onClick={query ? searchResult.refetch : allVenueResult.refetch}
               >
                 Try again
               </Button>
@@ -204,12 +255,38 @@ function Search() {
           {!isLoading && !error && filteredVenues.length === 0 && (
             <p className={styles.status}>No venues match these filters.</p>
           )}
-          {!isLoading && !error && filteredVenues.length > 0 && (
+          {!isLoading && !error && displayedVenues.length > 0 && (
             <div className={styles.grid}>
-              {filteredVenues.map((venue) => (
+              {displayedVenues.map((venue) => (
                 <VenueCard key={venue.id} venue={venue} />
               ))}
             </div>
+          )}
+          {!isLoading && !error && pageCount > 1 && (
+            <nav
+              className={styles.pagination}
+              aria-label="Search results pages"
+            >
+              <Button
+                variant="light"
+                size="small"
+                disabled={currentPage <= 1}
+                onClick={() => setPage(currentPage - 1)}
+              >
+                Previous
+              </Button>
+              <span>
+                Page {currentPage} of {pageCount}
+              </span>
+              <Button
+                variant="light"
+                size="small"
+                disabled={currentPage >= pageCount}
+                onClick={() => setPage(currentPage + 1)}
+              >
+                Next
+              </Button>
+            </nav>
           )}
         </section>
       </div>
