@@ -5,12 +5,16 @@ type ImageWithFallbackProps = {
   src?: string;
   alt: string;
   className?: string;
+  loading?: 'eager' | 'lazy';
+  fetchPriority?: 'high' | 'low' | 'auto';
 };
 
 function ImageWithFallback({
   src,
   alt,
   className = '',
+  loading = 'eager',
+  fetchPriority = 'auto',
 }: ImageWithFallbackProps) {
   const [hasError, setHasError] = useState(!src);
 
@@ -35,6 +39,9 @@ function ImageWithFallback({
       className={className}
       src={src}
       alt={alt}
+      loading={loading}
+      fetchPriority={fetchPriority}
+      decoding="async"
       onError={() => setHasError(true)}
     />
   );

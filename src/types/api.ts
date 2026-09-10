@@ -49,6 +49,7 @@ export type Venue = {
   updated: string;
   meta: VenueMeta;
   location: Location;
+  owner?: ProfileSummary;
   bookings?: Booking[];
   _count?: {
     bookings: number;

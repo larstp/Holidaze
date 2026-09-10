@@ -11,6 +11,9 @@ export function useSearchFilters() {
   const dateFrom = searchParams.get('dateFrom') ?? '';
   const dateTo = searchParams.get('dateTo') ?? '';
   const page = Number(searchParams.get('page') ?? '1');
+  const [draftAmenity, setDraftAmenity] = useState(amenity);
+  const [draftDateFrom, setDraftDateFrom] = useState(dateFrom);
+  const [draftDateTo, setDraftDateTo] = useState(dateTo);
 
   const resetPage = (params: URLSearchParams) => {
     params.delete('page');
@@ -28,26 +31,29 @@ export function useSearchFilters() {
   };
 
   const toggleAmenity = (value: string) => {
-    const nextParams = new URLSearchParams(searchParams);
-    resetPage(nextParams);
-
-    if (nextParams.get('amenity') === value) {
-      nextParams.delete('amenity');
-    } else {
-      nextParams.set('amenity', value);
-    }
-
-    setSearchParams(nextParams);
+    setDraftAmenity((currentAmenity) =>
+      currentAmenity === value ? null : value
+    );
   };
 
   const updateDateRange = (nextDateFrom: string, nextDateTo: string) => {
+    setDraftDateFrom(nextDateFrom);
+    setDraftDateTo(
+      nextDateFrom && nextDateTo && nextDateTo <= nextDateFrom ? '' : nextDateTo
+    );
+  };
+
+  const applyFilters = () => {
     const nextParams = new URLSearchParams(searchParams);
     resetPage(nextParams);
 
-    if (nextDateFrom) nextParams.set('dateFrom', nextDateFrom);
+    if (draftAmenity) nextParams.set('amenity', draftAmenity);
+    else nextParams.delete('amenity');
+
+    if (draftDateFrom) nextParams.set('dateFrom', draftDateFrom);
     else nextParams.delete('dateFrom');
 
-    if (nextDateTo) nextParams.set('dateTo', nextDateTo);
+    if (draftDateTo) nextParams.set('dateTo', draftDateTo);
     else nextParams.delete('dateTo');
 
     setSearchParams(nextParams);
@@ -59,12 +65,16 @@ export function useSearchFilters() {
     country,
     dateFrom,
     dateTo,
+    draftAmenity,
+    draftDateFrom,
+    draftDateTo,
     page,
     query,
     setQuery,
     submitQuery,
     toggleAmenity,
     updateDateRange,
+    applyFilters,
     setPage: (nextPage: number) => {
       const nextParams = new URLSearchParams(searchParams);
       if (nextPage <= 1) nextParams.delete('page');
