@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "quote": "From a cozy cabin to a cliffside villa — Holidaze has it all.",
+    "author": "Marcus H.",
+    "location": "Norway",
+    "rating": 5
+  },
+  {
+    "id": 2,
+    "quote": "Booking our anniversary stay took less than two minutes. The entire experience was seamless!",
+    "author": "Elena R.",
+    "location": "Spain",
+    "rating": 5
+  },
+  {
+    "id": 3,
+    "quote": "Found a hidden beachfront gem in Bali that wasn't listed on any other platform.",
+    "author": "Liam T.",
+    "location": "Australia",
+    "rating": 5
+  },
+  {
+    "id": 4,
+    "quote": "The host communication through Holidaze made us feel right at home before we even arrived.",
+    "author": "Sophie M.",
+    "location": "France",
+    "rating": 4
+  },
+  {
+    "id": 5,
+    "quote": "Unbelievable views and transparent pricing with no hidden checkout fees. We're hooked!",
+    "author": "Dmitri K.",
+    "location": "Canada",
+    "rating": 5
+  },
+  {
+    "id": 6,
+    "quote": "Waking up to alpine sunrises in the Swiss Alps was an unforgettable highlight of our trip.",
+    "author": "Aarav P.",
+    "location": "India",
+    "rating": 5
+  },
+  {
+    "id": 7,
+    "quote": "Holidaze makes remote working on the road effortless with reliable Wi-Fi filter options.",
+    "author": "Chloe B.",
+    "location": "United Kingdom",
+    "rating": 5
+  },
+  {
+    "id": 8,
+    "quote": "Every detail of the chalet matched the pictures perfectly. Zero surprises, just total relaxation.",
+    "author": "Kenji S.",
+    "location": "Japan",
+    "rating": 4
+  },
+  {
+    "id": 9,
+    "quote": "From urban penthouses to off-grid treehouses, this is now my go-to travel companion.",
+    "author": "Beatriz L.",
+    "location": "Brazil",
+    "rating": 5
+  },
+  {
+    "id": 10,
+    "quote": "Customer support helped us rebook within an hour when our flight was delayed. Top-tier service!",
+    "author": "Noah W.",
+    "location": "Germany",
+    "rating": 5
+  }
+]

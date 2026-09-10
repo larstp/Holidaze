@@ -23,6 +23,8 @@ function VenueCard({ venue }: VenueCardProps) {
           className={styles.image}
           src={image?.url}
           alt={image?.alt || venue.name}
+          loading="lazy"
+          fetchPriority="low"
         />
         {isGuestFavourite && (
           <span className={styles.favoriteBadge}>Guest favourite</span>

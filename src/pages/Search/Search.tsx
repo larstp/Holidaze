@@ -7,6 +7,7 @@ import { useSearchVenues } from '../../hooks/useSearchVenues';
 import { useAllVenues } from '../../hooks/useAllVenues';
 import { useSearchFilters } from '../../hooks/useSearchFilters';
 import { filterVenues } from '../../lib/helpers/filterVenues';
+import { getNextDate, getToday } from '../../lib/helpers/dateHelpers';
 import styles from './Search.module.css';
 
 const amenityOptions = [
@@ -23,12 +24,16 @@ function Search() {
     country,
     dateFrom,
     dateTo,
+    draftAmenity,
+    draftDateFrom,
+    draftDateTo,
     page,
     query,
     setQuery,
     submitQuery,
     toggleAmenity,
     updateDateRange,
+    applyFilters,
     setPage,
   } = useSearchFilters();
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
@@ -52,8 +57,9 @@ function Search() {
     ? searchResult.pageCount
     : Math.max(1, Math.ceil(filteredVenues.length / 15));
   const currentPage = query ? searchResult.currentPage : page;
-  const today = new Date().toISOString().split('T')[0];
-  const dateRangeError = dateFrom && dateTo && dateTo < dateFrom;
+  const today = getToday();
+  const dateRangeError =
+    draftDateFrom && draftDateTo && draftDateTo < draftDateFrom;
 
   const closeFilters = () => setIsFiltersOpen(false);
   const openFilters = () => {
@@ -172,10 +178,10 @@ function Search() {
                 Check-in
                 <input
                   type="date"
-                  value={dateFrom}
+                  value={draftDateFrom}
                   min={today}
                   onChange={(event) =>
-                    updateDateRange(event.target.value, dateTo)
+                    updateDateRange(event.target.value, draftDateTo)
                   }
                 />
               </label>
@@ -183,10 +189,10 @@ function Search() {
                 Check-out
                 <input
                   type="date"
-                  value={dateTo}
-                  min={dateFrom || today}
+                  value={draftDateTo}
+                  min={draftDateFrom ? getNextDate(draftDateFrom) : today}
                   onChange={(event) =>
-                    updateDateRange(dateFrom, event.target.value)
+                    updateDateRange(draftDateFrom, event.target.value)
                   }
                 />
               </label>
@@ -203,13 +209,26 @@ function Search() {
               <label key={value}>
                 <input
                   type="checkbox"
-                  checked={amenity === value}
+                  checked={draftAmenity === value}
                   onChange={() => toggleAmenity(value)}
                 />
                 {label}
               </label>
             ))}
           </fieldset>
+          <Button
+            className={styles.applyFiltersButton}
+            type="button"
+            variant="primary"
+            size="small"
+            disabled={Boolean(dateRangeError)}
+            onClick={() => {
+              applyFilters();
+              closeFilters();
+            }}
+          >
+            Update
+          </Button>
         </aside>
 
         <section className={styles.results} aria-labelledby="results-heading">

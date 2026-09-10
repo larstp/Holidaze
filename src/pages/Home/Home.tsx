@@ -234,6 +234,8 @@ function Home() {
                       destination.image?.alt ??
                       `${destination.city}, ${destination.country}`
                     }
+                    loading="lazy"
+                    decoding="async"
                   />
                   <span className={styles.destinationCount}>
                     {destination.count}{' '}

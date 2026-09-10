@@ -208,6 +208,11 @@ fieldset label {
   font-size: 0.7rem;
 }
 
+.applyFiltersButton {
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
 fieldset input[type='checkbox'] {
   flex: 0 0 auto;
   width: 1rem;

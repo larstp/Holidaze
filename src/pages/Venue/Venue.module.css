@@ -1,0 +1,505 @@
+.page {
+  color: var(--text);
+  background: var(--surface);
+}
+
+.container {
+  width: min(1126px, 100%);
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 1.25rem;
+}
+
+.backLink {
+  display: block;
+  width: fit-content;
+  margin-bottom: 1rem;
+  padding: 0;
+  border: 0;
+  color: var(--text-muted);
+  background: transparent;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.backLink:hover,
+.backLink:focus-visible {
+  color: var(--primary);
+}
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.galleryHero {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--surface-muted);
+}
+
+.galleryMainImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.galleryHero :global(span) {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.galleryThumbs {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+}
+
+.galleryThumb {
+  flex: 0 0 5.5rem;
+  height: 4rem;
+  overflow: hidden;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  background: var(--surface-muted);
+  cursor: pointer;
+}
+
+.galleryThumbActive {
+  border-color: var(--primary);
+}
+
+.galleryThumb :global(img),
+.galleryThumb :global(span) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.columns {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.category {
+  color: var(--primary);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-align: left;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.headingRow {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+}
+
+.headingRow h1 {
+  margin: 0;
+  color: var(--text-h);
+  font-size: 2rem;
+  line-height: 1.05;
+  text-align: left;
+}
+
+.headingRow .location {
+  margin-top: 0;
+  order: 2;
+}
+
+.headingRow .rating {
+  order: 3;
+}
+
+.rating,
+.reviews p {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.rating svg,
+.reviews p svg {
+  color: var(--primary);
+  fill: currentColor;
+}
+
+.rating strong,
+.reviews p strong {
+  color: var(--text);
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.65rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.hostProfile {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 1.25rem;
+}
+
+.hostAvatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 2.25rem;
+  height: 2.25rem;
+  overflow: hidden;
+  border-radius: var(--radius-circle);
+  color: #fff;
+  background: var(--primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  object-fit: cover;
+}
+
+.hostInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.hostInfo strong {
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.hostInfo span {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  text-align: left;
+}
+
+.description {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  text-align: left;
+}
+
+.offers,
+.reviews {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+
+.offers h2,
+.reviews h2 {
+  margin: 0 0 1rem;
+  color: var(--text-h);
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.reviews > p {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.reviews > p svg {
+  color: var(--primary);
+  fill: currentColor;
+}
+
+.reviews > p strong {
+  color: var(--text);
+}
+
+.reviewList {
+  margin-top: 1rem;
+}
+
+.review {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.review:last-child {
+  border-bottom: 0;
+}
+
+.reviewHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.reviewAvatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-circle);
+  color: #fff;
+  background: var(--primary);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.reviewHeader > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.reviewHeader strong {
+  color: var(--text);
+  font-size: 0.75rem;
+}
+
+.reviewHeader > div span {
+  color: var(--text-muted);
+  font-size: 0.65rem;
+}
+
+.reviewStars {
+  margin-left: auto;
+  color: #e89b24;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+
+.review > p {
+  margin-top: 0.65rem;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+.amenities {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.amenities span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.amenities svg {
+  color: var(--primary);
+}
+
+.bookingCard {
+  align-self: center;
+  height: fit-content;
+  box-sizing: border-box;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.bookingPrice {
+  color: var(--text);
+  font-size: 1.35rem;
+  font-weight: 800;
+  text-align: left;
+  padding-left: 0.4rem;
+  padding-top: 0.25rem;
+}
+
+.bookingPrice span {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+.bookingCapacity {
+  margin-top: 0.25rem;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  text-align: left;
+  padding-left: 0.4rem;
+}
+
+.bookingFields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin: 1rem 0;
+}
+
+.bookingFields label {
+  display: grid;
+  gap: 0.3rem;
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.bookingFields input,
+.bookingFields select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  background: var(--surface);
+  font: inherit;
+  font-size: 0.75rem;
+}
+
+.selectWrapper {
+  position: relative;
+  display: block;
+}
+
+.selectWrapper select {
+  appearance: none;
+  padding-right: 2rem;
+}
+
+.selectWrapper svg {
+  position: absolute;
+  top: 50%;
+  right: 0.65rem;
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--text-muted);
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.bookingCard > button {
+  width: 100%;
+}
+
+.loginToBook {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  color: #fff;
+  background: #2d6a4f;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.loginToBook:hover,
+.loginToBook:focus-visible {
+  background: #245e4a;
+}
+
+.guestsField {
+  grid-column: span 2;
+}
+
+.bookingCard small {
+  display: block;
+  margin-top: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.state {
+  display: grid;
+  place-content: center;
+  min-height: 50vh;
+  gap: 1rem;
+  padding: 2rem;
+  color: var(--text);
+  text-align: center;
+}
+
+.state h1 {
+  margin: 0;
+  color: var(--text-h);
+}
+
+@media (min-width: 701px) {
+  .container {
+    padding: 1.5rem 2rem 5rem;
+  }
+
+  .galleryHero {
+    aspect-ratio: 16 / 9;
+    min-height: 23rem;
+  }
+
+  .galleryMainImage {
+    min-height: 23rem;
+  }
+
+  .galleryThumbs {
+    overflow-x: visible;
+  }
+
+  .galleryThumb {
+    flex: 1 1 0;
+    height: 5rem;
+  }
+
+  .columns {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 20rem;
+    align-items: start;
+    gap: 2rem;
+  }
+
+  .headingRow {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: top;
+    gap: 0.6rem;
+  }
+
+  .headingRow .rating {
+    order: 0;
+  }
+
+  .headingRow .location {
+    grid-column: 1 / -1;
+  }
+
+  .bookingCard {
+    position: sticky;
+    top: 5rem;
+    align-self: start;
+  }
+}
