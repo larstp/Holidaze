@@ -85,4 +85,9 @@ Outcome: managed to insert it inline
 Model: Google Gemini Free
 Note: MAJOR HELP
 Reason: I had a TONNE of problems regarding the search filtering and importing the venues properly to the search and home page. It was only importing the first 15 venues, and whenever i searched for locations that i KNEW there were hundreds of it still only showed me like 4 max.
-Outcome: I realized i only imported the first API page which probably came when i inserted the pagination rule, but at this point i hade written so much around it that i struggled moving things around and changing it so that it would import ALL of it. I sat up the useAllVenues.ts hook and got help converting and moving where needed so that the new hook could be used
+Outcome: I realized i only imported the first API page which probably came when i inserted the pagination rule, but at this point i had written so much around it that i struggled moving things around and changing it so that it would import ALL of it. I sat up the useAllVenues.ts hook and got help converting and moving where needed so that the new hook could be used
+
+10 Sep
+Model: Google Gemini Free
+Reason: Had worked a lot on the venue page and pushed to the branch, but discovered while working on the signup page that the network had been down for hours and the branch had not in fact been properly pushed (it must have happened as the network went out). had an enormous amount of git problems merging the non-synced branch i was on with a half pushed venue branch etc. so I had major help in fixing and merging them into one big push
+Outcome: copied a bunch of files around and managed to clean up the codespace with help from the LLM, then made a clean way-too-big push

@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import { registerUser } from '../../lib/services/authService';
 import { ApiError } from '../../lib/services/apiClient';
+import { getRandomAboutQuote } from '../../lib/helpers/aboutQuotes';
 import styles from './Register.module.css';
 
 type RegisterForm = {
@@ -31,6 +32,7 @@ function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [aboutQuote] = useState(getRandomAboutQuote);
 
   const updateField = <Field extends keyof RegisterForm>(
     field: Field,
@@ -131,7 +133,7 @@ function Register() {
 
             <label>
               <span>
-                Email <small>Must end in @stud.noroff.no or @noroff.no</small>
+                Email <small>Must end in @stud.noroff.no</small>
               </span>
               <input
                 type="email"
@@ -231,9 +233,12 @@ function Register() {
         />
         <div className={styles.quote}>
           <strong>
-            “From a cozy cabin to a cliffside villa — Holidaze has it all.”
+            “{aboutQuote?.quote ?? 'Find your next great stay with Holidaze.'}”
           </strong>
-          <span>— Marcus H., Norway</span>
+          <span>
+            — {aboutQuote?.author ?? 'The Holidaze team'}
+            {aboutQuote?.location ? `, ${aboutQuote.location}` : ''}
+          </span>
         </div>
       </aside>
     </main>
