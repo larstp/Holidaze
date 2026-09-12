@@ -1,10 +1,23 @@
 :root {
   --primary: #6b9080;
+  --pure-white: #fff;
+  --dark-mode-secondary: #222;
+  --dark-green: #2d6a4f;
+  --button-hover: #245e4a;
+  --hero-bg: #0f4f4c;
+  --button-text-small: 0.75rem;
+  --button-text-large: 1rem;
+  --text-size-s: 0.75rem;
+  --text-size-m: 0.9rem;
+  --text-size-l: 1rem;
+  --text-size-xl: 1.5rem;
+  --line-height-body: 1.5;
+  --line-height-heading: 1.15;
   --secondary: #a7bfa8;
   --surface: #f8f5f2;
   --surface-muted: #cbd4c2;
   --text: #161616;
-  --text-muted: #62706b;
+  --text-muted: #4f5a56;
   --text-h: #3f4e4f;
   --bg: #f8f5f2;
   --border: #cbd4c2;
@@ -25,7 +38,7 @@
   --heading: 'Satoshi', ui-sans-serif, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
-  font: 16px/145% var(--sans);
+  font: 16px/var(--line-height-body) var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light;
   color: var(--text);
@@ -86,6 +99,7 @@ h1,
 h2 {
   font-family: var(--heading);
   font-weight: 500;
+  line-height: var(--line-height-heading);
   color: var(--text-h);
 }
 
@@ -96,7 +110,6 @@ h1 {
 }
 h2 {
   font-size: 20px;
-  line-height: 118%;
   letter-spacing: -0.2px;
   margin: 0 0 8px;
 }

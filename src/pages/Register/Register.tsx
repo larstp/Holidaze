@@ -52,8 +52,8 @@ function Register() {
       return;
     }
 
-    if (!email.endsWith('@stud.noroff.no') && !email.endsWith('@noroff.no')) {
-      setError('Use a stud.noroff.no or noroff.no email address.');
+    if (!email.endsWith('@stud.noroff.no')) {
+      setError('Use a stud.noroff.no email address.');
       return;
     }
 
@@ -108,7 +108,7 @@ function Register() {
                 <input
                   type="text"
                   autoComplete="given-name"
-                  placeholder="Ada"
+                  placeholder="Marius"
                   value={form.firstName}
                   onChange={(event) =>
                     updateField('firstName', event.target.value)
@@ -121,7 +121,7 @@ function Register() {
                 <input
                   type="text"
                   autoComplete="family-name"
-                  placeholder="Lovelace"
+                  placeholder="Genser"
                   value={form.lastName}
                   onChange={(event) =>
                     updateField('lastName', event.target.value)
