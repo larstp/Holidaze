@@ -407,6 +407,21 @@
   width: 100%;
 }
 
+.bookingFeedbackError,
+.bookingFeedbackSuccess {
+  margin-top: 0.75rem;
+  font-size: var(--text-size-s);
+  text-align: left;
+}
+
+.bookingFeedbackError {
+  color: #9b3f32;
+}
+
+.bookingFeedbackSuccess {
+  color: var(--dark-green);
+}
+
 .loginToBook {
   display: inline-flex;
   align-items: center;

@@ -87,7 +87,6 @@
 }
 
 .link,
-.exploreLink,
 .listLink {
   color: var(--text);
   font-size: 0.72rem;
@@ -97,16 +96,90 @@
   text-align: center;
 }
 
+.navLinkActive {
+  padding: 0.36rem 0.72rem;
+  border-radius: var(--radius-md);
+  color: var(--dark-green);
+  background: var(--accent-bg);
+  font-weight: 800;
+}
+
+.mobileOnlyLink,
+.mobileLogout {
+  display: flex;
+}
+
+.desktopOnlyProfile {
+  display: none;
+}
+
 .loginLink {
   color: var(--primary);
   text-decoration: none;
 }
 
-.exploreLink {
-  padding: 0.85rem;
-  border-radius: var(--radius-md);
+.profileLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  overflow: hidden;
+  border: 2px solid var(--primary);
+  border-radius: var(--radius-circle);
+  color: var(--pure-white);
+  background: var(--dark-green);
+  text-decoration: none;
+}
+
+.profileLink.desktopOnlyProfile {
+  display: none;
+}
+
+.profileLink:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+.mobileLogout {
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding: 0.75rem 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+  color: var(--text);
+  background: transparent;
+  font: inherit;
+  font-size: var(--text-size-s);
+  cursor: pointer;
+}
+
+.mobileOnlyLink {
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.mobileLogout svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.mobileLogout:hover,
+.mobileLogout:focus-visible {
   color: var(--primary);
-  background: var(--accent-bg);
+}
+
+.profileAvatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profileInitial {
+  font-size: var(--text-size-s);
+  font-weight: 800;
+  line-height: 1;
 }
 
 .link:hover,
@@ -115,12 +188,6 @@
 .listLink:focus-visible,
 .loginLink:focus-visible {
   color: var(--primary);
-}
-
-.exploreLink:hover,
-.exploreLink:focus-visible {
-  color: var(--surface);
-  background: var(--primary);
 }
 
 .listLink {
@@ -158,8 +225,15 @@
 .mobileThemeButton:hover,
 .mobileThemeButton:focus-visible {
   color: var(--surface);
-  background: var(--primary);
-} /* AAAARGH */
+  background: var(--dark-mode-secondary);
+}
+
+:global(:root[data-theme='dark']) .themeButton:hover,
+:global(:root[data-theme='dark']) .themeButton:focus-visible,
+:global(:root[data-theme='dark']) .mobileThemeButton:hover,
+:global(:root[data-theme='dark']) .mobileThemeButton:focus-visible {
+  background: var(--logo-color);
+}
 
 .themeButton svg {
   width: 0.9rem;
@@ -242,12 +316,11 @@
   }
 
   .link,
-  .exploreLink,
   .listLink {
     padding: 0;
   }
 
-  .exploreLink {
+  .navLinkActive {
     padding: 0.36rem 0.72rem;
   }
 
@@ -269,8 +342,40 @@
     display: none;
   }
 
+  .mobileOnlyLink,
+  .mobileLogout {
+    display: none;
+  }
+
+  .profileLink.desktopOnlyProfile {
+    display: inline-flex;
+  }
+
   .actions .themeButton {
     display: inline-flex;
+  }
+}
+
+@media (max-width: 700px) {
+  .link,
+  .listLink {
+    padding: 0.85rem 0.75rem;
+    text-align: left;
+  }
+
+  .navLinkActive {
+    padding: 0.36rem 0.75rem;
+  }
+
+  .actions {
+    border-top: 0;
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .mobileLogout {
+    justify-content: flex-start;
+    padding-left: 0.75rem;
   }
 }
 
