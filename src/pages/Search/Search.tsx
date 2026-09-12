@@ -164,7 +164,7 @@ function Search() {
             <Button
               ref={closeButtonRef}
               type="button"
-              variant="light"
+              variant="tertiary"
               size="small"
               onClick={closeFilters}
             >
@@ -246,7 +246,7 @@ function Search() {
             <Button
               ref={filterTriggerRef}
               className={styles.filterButton}
-              variant="light"
+              variant="tertiary"
               size="small"
               icon={<SlidersHorizontal size={16} aria-hidden="true" />}
               type="button"
@@ -287,7 +287,7 @@ function Search() {
               aria-label="Search results pages"
             >
               <Button
-                variant="light"
+                variant="tertiary"
                 size="small"
                 disabled={currentPage <= 1}
                 onClick={() => setPage(currentPage - 1)}
@@ -298,7 +298,7 @@ function Search() {
                 Page {currentPage} of {pageCount}
               </span>
               <Button
-                variant="light"
+                variant="tertiary"
                 size="small"
                 disabled={currentPage >= pageCount}
                 onClick={() => setPage(currentPage + 1)}

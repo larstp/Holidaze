@@ -13,6 +13,7 @@ import {
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../../components/Button/Button';
+import buttonStyles from '../../components/Button/Button.module.css';
 import ImageCarousel from '../../components/ImageCarousel/ImageCarousel';
 import PageLoader from '../../components/PageLoader/PageLoader';
 import VenueCard from '../../components/VenueCard/VenueCard';
@@ -355,10 +356,16 @@ function Home() {
             Join travellers who book their next good kind of daze with Holidaze.
           </p>
           <div className={styles.ctaActions}>
-            <Link className={styles.ctaPrimary} to="/search">
+            <Link
+              className={`${buttonStyles.button} ${buttonStyles.tertiary} ${styles.ctaPrimary}`}
+              to="/search"
+            >
               Start exploring
             </Link>
-            <Link className={styles.ctaSecondary} to="/become-manager">
+            <Link
+              className={`${buttonStyles.button} ${buttonStyles.secondaryDark} ${styles.ctaSecondary}`}
+              to="/become-manager"
+            >
               List your venue
             </Link>
           </div>

@@ -3,7 +3,7 @@
   z-index: -2;
   inset: 0;
   overflow: hidden;
-  background: #0f4f4c;
+  background: var(--hero-bg);
 }
 
 .image {

@@ -6,6 +6,7 @@
   border: 1px solid transparent;
   border-radius: var(--radius-md);
   font: inherit;
+  font-size: var(--button-text-large);
   font-weight: 700;
   line-height: 1;
   cursor: pointer;
@@ -27,12 +28,12 @@
 
 .primary {
   padding: 0.75rem 1rem;
-  color: #fff;
-  background: #2d6a4f;
+  color: var(--pure-white);
+  background: var(--dark-green);
 }
 
 .primary:hover:not(:disabled) {
-  background: #245e4a;
+  background: var(--button-hover);
 }
 
 .secondary {
@@ -47,11 +48,36 @@
   background: var(--primary);
 }
 
+.secondaryDark {
+  padding: 0.75rem 1rem;
+  border-color: var(--pure-white);
+  color: var(--pure-white);
+  background: transparent;
+}
+
+.secondaryDark:hover:not(:disabled) {
+  color: var(--pure-white);
+  background: var(--button-hover);
+}
+
+.tertiary {
+  padding: 0.75rem 1rem;
+  border-color: var(--pure-white);
+  color: var(--dark-green);
+  background: var(--pure-white);
+}
+
+.tertiary:hover:not(:disabled) {
+  border-color: var(--pure-white);
+  color: var(--pure-white);
+  background: var(--button-hover);
+}
+
 .light {
   padding: 0.55rem 1rem;
   border-color: var(--border);
   color: var(--text);
-  background: #fff;
+  background: var(--pure-white);
 }
 
 .light:hover:not(:disabled),
@@ -63,7 +89,7 @@
 
 .small {
   padding: 9px 20px;
-  font-size: 14px;
+  font-size: var(--button-text-small);
   font-weight: 600;
   line-height: 21px;
   text-decoration: none;

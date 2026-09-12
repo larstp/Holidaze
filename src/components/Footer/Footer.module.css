@@ -1,7 +1,7 @@
 .footer {
   box-sizing: border-box;
   padding: 3rem 1.25rem 6.5rem;
-  color: #fff;
+  color: var(--pure-white);
   background: #18231c;
 }
 
@@ -23,7 +23,7 @@
   display: flex;
   align-items: flex-start;
   gap: 0.45rem;
-  color: #fff;
+  color: var(--pure-white);
   text-decoration: none;
 }
 
@@ -69,7 +69,7 @@
 .linkGroup a:focus-visible,
 .bottomBar a:hover,
 .bottomBar a:focus-visible {
-  color: #fff;
+  color: var(--pure-white);
 }
 
 .bottomBar {

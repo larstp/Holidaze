@@ -1,7 +1,7 @@
 .home {
   min-height: calc(100svh - 4.5rem);
-  color: #fff;
-  background: #0f4f4c;
+  color: var(--pure-white);
+  background: var(--hero-bg);
 }
 
 .hero {
@@ -9,7 +9,7 @@
   isolation: isolate;
   min-height: calc(100svh - 4.5rem);
   overflow: hidden;
-  background: #0f4f4c;
+  background: var(--hero-bg);
 }
 
 .hero::before {
@@ -54,7 +54,7 @@
 h1 {
   max-width: 42rem;
   margin: 0;
-  color: #fff;
+  color: var(--pure-white);
   font-size: clamp(2.8rem, 13vw, 4rem);
   font-weight: 800;
   line-height: 0.98;
@@ -85,13 +85,13 @@ h1 {
   padding: 0.5rem;
   border-radius: var(--radius-lg);
   color: var(--text);
-  background: #fff;
+  background: var(--pure-white);
   box-shadow: 0 1rem 2rem rgba(0, 33, 30, 0.2);
 }
 
 :global(:root[data-theme='dark']) .searchPanel {
-  color: #fff;
-  background: #222;
+  color: var(--pure-white);
+  background: var(--dark-mode-secondary);
 }
 
 .searchField {
@@ -174,7 +174,7 @@ input::placeholder {
 :global(:root[data-theme='dark']) .searchPanel input,
 :global(:root[data-theme='dark']) .searchPanel select,
 :global(:root[data-theme='dark']) .searchPanel input::placeholder {
-  color: #fff;
+  color: var(--pure-white);
 }
 
 :global(:root[data-theme='dark']) .searchPanel select {
@@ -182,8 +182,8 @@ input::placeholder {
 }
 
 :global(:root[data-theme='dark']) .searchPanel option {
-  color: #fff;
-  background: #222;
+  color: var(--pure-white);
+  background: var(--dark-mode-secondary);
 }
 
 .searchButton {
@@ -196,17 +196,17 @@ input::placeholder {
   padding: 0.95rem;
   border: 0;
   border-radius: var(--radius-lg);
-  color: #fff;
-  background: #2d6a4f;
+  color: var(--pure-white);
+  background: var(--dark-green);
   font: inherit;
-  font-size: 1rem;
+  font-size: var(--button-text-large);
   font-weight: 700;
   cursor: pointer;
 }
 
 .searchButton:hover,
 .searchButton:focus-visible {
-  background: #245e4a;
+  background: var(--button-hover);
 }
 
 .stats {
@@ -319,7 +319,7 @@ input::placeholder {
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: var(--radius-md);
-  color: #fff;
+  color: var(--pure-white);
   text-decoration: none;
 }
 
@@ -405,8 +405,8 @@ input::placeholder {
   isolation: isolate;
   min-height: 17rem;
   overflow: hidden;
-  color: #fff;
-  background: #0f4f4c;
+  color: var(--pure-white);
+  background: var(--hero-bg);
 }
 
 .ctaOverlay {
@@ -425,7 +425,7 @@ input::placeholder {
 }
 
 .ctaContent h2 {
-  color: #fff;
+  color: var(--pure-white);
 }
 
 .ctaContent p {
@@ -444,29 +444,11 @@ input::placeholder {
 .ctaPrimary,
 .ctaSecondary {
   padding: 0.65rem 1rem;
-  border: 1px solid #fff;
   border-radius: var(--radius-md);
-  font-size: 0.75rem;
+  font-size: var(--button-text-small);
   font-weight: 700;
   text-decoration: none;
-}
-
-.ctaPrimary {
-  color: #2d6a4f;
-  background: #fff;
-}
-
-.ctaSecondary {
-  color: #fff;
-  background: transparent;
-}
-
-.ctaPrimary:hover,
-.ctaPrimary:focus-visible,
-.ctaSecondary:hover,
-.ctaSecondary:focus-visible {
-  color: #fff;
-  background: #2d6a4f;
+  min-height: 1.2rem;
 }
 
 .trustSection {
@@ -497,8 +479,8 @@ input::placeholder {
   width: 2.25rem;
   height: 2.25rem;
   border-radius: var(--radius-md);
-  color: #fff;
-  background: #2d6a4f;
+  color: var(--pure-white);
+  background: var(--dark-green);
 }
 
 .trustItem h3 {
@@ -527,6 +509,11 @@ input::placeholder {
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   background: var(--surface);
+}
+
+:global(:root[data-theme='dark']) .reviewCard {
+  color: var(--pure-white);
+  background: var(--dark-mode-secondary);
 }
 
 .reviewRating {
@@ -571,8 +558,8 @@ input::placeholder {
   width: 2rem;
   height: 2rem;
   border-radius: var(--radius-circle);
-  color: #fff;
-  background: #2d6a4f;
+  color: var(--pure-white);
+  background: var(--dark-green);
   font-size: 0.65rem;
   font-weight: 700;
 }
@@ -673,7 +660,7 @@ input::placeholder {
     align-self: center;
     padding: 0.75rem 1rem;
     border-radius: var(--radius-lg);
-    font-size: 0.75rem;
+    font-size: var(--button-text-small);
   }
 
   .stats {
