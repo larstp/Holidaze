@@ -15,7 +15,7 @@ function Navbar() {
         <House aria-hidden="true" />
         <span>Home</span>
       </NavLink>
-      <NavLink to="/dashboard">
+      <NavLink to={isAuthenticated ? '/dashboard' : '/login'}>
         <UserRound aria-hidden="true" />
         <span>Profile</span>
       </NavLink>
@@ -23,10 +23,12 @@ function Navbar() {
         <Search aria-hidden="true" />
         <span>Search</span>
       </NavLink>
-      <NavLink to="/dashboard">
-        <Heart aria-hidden="true" />
-        <span>Saved</span>
-      </NavLink>
+      {isAuthenticated && (
+        <NavLink to="/dashboard">
+          <Heart aria-hidden="true" />
+          <span>Saved</span>
+        </NavLink>
+      )}
       {isAuthenticated && (
         <button className={styles.logoutButton} type="button" onClick={logout}>
           <LogOut aria-hidden="true" />
