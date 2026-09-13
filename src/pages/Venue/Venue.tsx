@@ -16,6 +16,8 @@ import { useAuth } from '../../context/useAuth';
 import { useVenue } from '../../hooks/useVenue';
 import { getNextDate, getToday } from '../../lib/helpers/dateHelpers';
 import { getRandomReviews } from '../../lib/helpers/reviews';
+import { ApiError } from '../../lib/services/apiClient';
+import { createBooking } from '../../lib/services/bookingService';
 import styles from './Venue.module.css';
 
 const amenities = [
@@ -29,11 +31,15 @@ function Venue() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { venue, isLoading, error, refetch } = useVenue(id);
-  const { isAuthenticated } = useAuth();
+  const { accessToken, isAuthenticated } = useAuth();
   const mockReviews = useMemo(() => getRandomReviews(3), []);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
+  const [guests, setGuests] = useState(1);
+  const [bookingError, setBookingError] = useState('');
+  const [bookingSuccess, setBookingSuccess] = useState('');
+  const [isBooking, setIsBooking] = useState(false);
 
   if (isLoading) return <PageLoader />;
 
@@ -52,6 +58,47 @@ function Venue() {
   const location = [venue.location.city, venue.location.country]
     .filter(Boolean)
     .join(', ');
+  const hasDateConflict = venue.bookings?.some(
+    (booking) => checkIn < booking.dateTo && checkOut > booking.dateFrom
+  );
+
+  const clearBookingFeedback = () => {
+    setBookingError('');
+    setBookingSuccess('');
+  };
+
+  const handleBooking = async () => {
+    if (!accessToken || !id || !checkIn || !checkOut) return;
+
+    if (checkOut <= checkIn) {
+      setBookingError('Check-out must be after check-in.');
+      return;
+    }
+
+    if (hasDateConflict) {
+      setBookingError('Those dates are already booked. Choose another range.');
+      return;
+    }
+
+    setIsBooking(true);
+    clearBookingFeedback();
+
+    try {
+      await createBooking(
+        { dateFrom: checkIn, dateTo: checkOut, guests, venueId: id },
+        accessToken
+      );
+      setBookingSuccess('Your stay has been reserved.');
+    } catch (bookingRequestError) {
+      setBookingError(
+        bookingRequestError instanceof ApiError
+          ? bookingRequestError.message
+          : 'We could not complete your booking. Please try again.'
+      );
+    } finally {
+      setIsBooking(false);
+    }
+  };
 
   return (
     <main className={styles.page}>
@@ -199,9 +246,8 @@ function Venue() {
                   onChange={(event) => {
                     const nextCheckIn = event.target.value;
                     setCheckIn(nextCheckIn);
-                    if (checkOut && checkOut <= nextCheckIn) {
-                      setCheckOut('');
-                    }
+                    if (checkOut && checkOut <= nextCheckIn) setCheckOut('');
+                    clearBookingFeedback();
                   }}
                 />
               </label>
@@ -211,13 +257,22 @@ function Venue() {
                   type="date"
                   min={checkIn ? getNextDate(checkIn) : getToday()}
                   value={checkOut}
-                  onChange={(event) => setCheckOut(event.target.value)}
+                  onChange={(event) => {
+                    setCheckOut(event.target.value);
+                    clearBookingFeedback();
+                  }}
                 />
               </label>
               <label className={styles.guestsField}>
                 Guests
                 <span className={styles.selectWrapper}>
-                  <select defaultValue="1">
+                  <select
+                    value={guests}
+                    onChange={(event) => {
+                      setGuests(Number(event.target.value));
+                      clearBookingFeedback();
+                    }}
+                  >
                     {Array.from({ length: venue.maxGuests }, (_, index) => (
                       <option key={index + 1} value={index + 1}>
                         {index + 1} {index === 0 ? 'guest' : 'guests'}
@@ -232,16 +287,33 @@ function Venue() {
               <Button
                 type="button"
                 variant="primary"
-                disabled={!checkIn || !checkOut || checkOut <= checkIn}
+                disabled={
+                  isBooking || !checkIn || !checkOut || checkOut <= checkIn
+                }
+                onClick={handleBooking}
               >
-                Reserve
+                {isBooking ? 'Reserving...' : 'Reserve'}
               </Button>
             ) : (
-              <Link className={styles.loginToBook} to="/login">
+              <Link
+                className={styles.loginToBook}
+                to="/login"
+                state={{ from: `/venues/${id}` }}
+              >
                 Log in to book
               </Link>
             )}
-            <small>You won't be charged yet.</small>
+            {bookingError && (
+              <p className={styles.bookingFeedbackError} role="alert">
+                {bookingError}
+              </p>
+            )}
+            {bookingSuccess && (
+              <p className={styles.bookingFeedbackSuccess} role="status">
+                {bookingSuccess}
+              </p>
+            )}
+            <small>You won&apos;t be charged yet.</small>
           </aside>
         </div>
       </div>

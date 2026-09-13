@@ -229,7 +229,7 @@ function Register() {
       <aside className={styles.imagePanel} aria-label="Holidaze inspiration">
         <img
           src="/images/photo-1507525428034-b723cf961d3e.jpg"
-          alt="Aerial view of a tropical beach"
+          alt="Photo of a tropical beach"
         />
         <div className={styles.quote}>
           <strong>

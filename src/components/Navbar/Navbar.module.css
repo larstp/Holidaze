@@ -5,30 +5,53 @@
   bottom: 0;
   left: 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   padding: 0.7rem 0.4rem 0.8rem;
   color: var(--text);
   background: var(--surface);
 }
 
-.navbar a {
+.authenticated {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.navbar a,
+.logoutButton {
   display: flex;
   align-items: center;
   flex-direction: column;
   gap: 0.2rem;
-  color: var(--text-muted);
-  font-size: 0.7rem;
+  padding: 0;
+  border: 0;
+  color: var(--dark-green);
+  background: transparent;
+  font-size: var(--text-size-s);
   font-weight: 600;
   text-decoration: none;
+  font-family: inherit;
+  cursor: pointer;
 }
 
-.navbar a:first-child {
-  color: var(--primary);
+.navbar a.active {
+  padding: 0.35rem 0.7rem;
+  border-radius: var(--radius-md);
+  color: var(--dark-green);
+  background: var(--accent-bg);
 }
 
 .navbar svg {
   width: 1.5rem;
   height: 1.5rem;
+}
+
+.logoutButton:hover,
+.logoutButton:focus-visible {
+  color: var(--primary);
+}
+
+.logoutButton:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
 }
 
 @media (min-width: 701px) {

@@ -91,3 +91,13 @@ Outcome: I realized i only imported the first API page which probably came when 
 Model: Google Gemini Free
 Reason: Had worked a lot on the venue page and pushed to the branch, but discovered while working on the signup page that the network had been down for hours and the branch had not in fact been properly pushed (it must have happened as the network went out). had an enormous amount of git problems merging the non-synced branch i was on with a half pushed venue branch etc. so I had major help in fixing and merging them into one big push
 Outcome: copied a bunch of files around and managed to clean up the codespace with help from the LLM, then made a clean way-too-big push
+
+12 Sep
+Model: Google Gemini Free
+Reason: Had problems with authenticated users not being stored properly or wrongly. displayed wrong fallback images and everything was in a "half state" between logged in and not. Needed MUCh help debugging.
+Outcome: Read about client-side JWT claim parsing and got help implementing that. These things were very confusing and i wish we had more actual debugging in our courses because i feel lost easily, especially in TS. Thats where i at least get good debug help from gemini
+
+12 Sep
+Model: Google Gemini Free
+Reason: Needed corpo-jargon copy for a couple of pages
+Outcome: Generated text examples i could use in "Become a manager" page ++

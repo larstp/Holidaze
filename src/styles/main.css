@@ -2,6 +2,7 @@
   --primary: #6b9080;
   --pure-white: #fff;
   --dark-mode-secondary: #222;
+  --logo-color: #d05d37;
   --dark-green: #2d6a4f;
   --button-hover: #245e4a;
   --hero-bg: #0f4f4c;
@@ -13,6 +14,8 @@
   --text-size-xl: 1.5rem;
   --line-height-body: 1.5;
   --line-height-heading: 1.15;
+  --header-height-mobile: 4.5rem;
+  --header-height-desktop: 3.15rem;
   --secondary: #a7bfa8;
   --surface: #f8f5f2;
   --surface-muted: #cbd4c2;
@@ -82,6 +85,7 @@
   --accent-bg: rgba(167, 191, 168, 0.16);
   --accent-border: rgba(167, 191, 168, 0.6);
   --social-bg: rgba(63, 78, 79, 0.6);
+  --logo-color: #d05d37;
 }
 
 .logo {

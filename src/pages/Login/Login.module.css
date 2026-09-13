@@ -8,29 +8,12 @@
 .formPanel {
   display: flex;
   justify-content: center;
+  order: 2;
   padding: 2.5rem 1.5rem 4rem;
 }
 
 .formContent {
   width: min(100%, 31rem);
-}
-
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  color: var(--text);
-  text-decoration: none;
-}
-
-.brand img {
-  width: auto;
-  height: 2.35rem;
-}
-
-.brand strong {
-  font-size: 1rem;
-  font-weight: 900;
 }
 
 .heading {
@@ -61,24 +44,12 @@
   text-align: left;
 }
 
-.nameFields {
-  display: grid;
-  gap: 1rem;
-}
-
 .form label > span:first-child {
   display: block;
   margin-bottom: 0.42rem;
   color: var(--text);
   font-size: var(--text-size-s);
   font-weight: 800;
-}
-
-.form label small {
-  margin-left: 0.4rem;
-  color: var(--primary);
-  font-size: 0.65rem;
-  font-weight: 500;
 }
 
 .form input:not([type='checkbox']) {
@@ -132,44 +103,39 @@
   height: 1rem;
 }
 
-.managerOption {
+.formOptions {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
-  padding: 0.8rem;
-  border-radius: var(--radius-md);
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: -0.25rem;
 }
 
-.managerOption input {
-  flex: 0 0 auto;
+.rememberOption {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: var(--text-size-s);
+}
+
+.rememberOption input {
   width: 1rem;
   height: 1rem;
-  margin: 0.12rem 0 0;
+  margin: 0;
   accent-color: var(--primary);
   cursor: pointer;
 }
 
-.managerOption input:focus-visible {
+.rememberOption input:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
-.managerOption > span {
-  display: grid;
-  gap: 0.2rem;
-}
-
-.managerOption strong {
+.forgotPassword {
+  color: var(--dark-green);
   font-size: var(--text-size-s);
-}
-
-.managerOption small {
-  display: block;
-  max-width: 14rem;
-  margin: 0 !important;
-  color: var(--text-muted) !important;
-  font-size: 0.68rem !important;
-  line-height: 1.4;
+  font-weight: 800;
 }
 
 .error {
@@ -186,40 +152,31 @@
   min-height: 2.85rem;
 }
 
-.signInPrompt {
+.registerPrompt {
   margin-top: 1.2rem;
   color: var(--text-muted);
   font-size: var(--text-size-s);
   text-align: center;
 }
 
-.signInPrompt a {
+.registerPrompt a {
   color: var(--dark-green);
   font-weight: 800;
   text-decoration: none;
 }
 
-.signInPrompt a:hover,
-.signInPrompt a:focus-visible {
+.registerPrompt a:hover,
+.registerPrompt a:focus-visible {
   text-decoration: underline;
 }
 
 .imagePanel {
   position: relative;
   display: none;
+  order: 1;
   overflow: hidden;
   min-height: 40rem;
-  background: #246b68;
-}
-
-@media (max-width: 700px) {
-  .brand {
-    display: none;
-  }
-
-  .heading {
-    margin-top: 0;
-  }
+  background: var(--hero-bg);
 }
 
 .imagePanel::after {
@@ -255,12 +212,18 @@
 
 .quote strong {
   max-width: 29rem;
-  font-size: 1rem;
+  font-size: var(--text-size-l);
 }
 
 .quote span {
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.68rem;
+}
+
+@media (max-width: 700px) {
+  .heading {
+    margin-top: 0;
+  }
 }
 
 @media (min-width: 701px) {
@@ -284,7 +247,6 @@
 
   .heading h1 {
     font-size: var(--text-size-xl);
-    letter-spacing: -0.04em;
   }
 
   .heading p {
@@ -296,23 +258,13 @@
     margin-top: 1.4rem;
   }
 
-  .nameFields {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .form label > span:first-child {
     margin-bottom: 0.3rem;
-    font-size: var(--text-size-s);
-  }
-
-  .form label small {
-    font-size: 0.65rem;
   }
 
   .form input:not([type='checkbox']) {
     min-height: 2.35rem;
     padding: 0.6rem 0.65rem;
-    font-size: var(--text-size-s);
   }
 
   .passwordField input {
@@ -328,23 +280,12 @@
     height: 0.8rem;
   }
 
-  .managerOption {
-    padding: 0.6rem;
-  }
-
-  .managerOption strong,
-  .managerOption small {
-    font-size: var(--text-size-s) !important;
-  }
-
   .submitButton {
     min-height: 2.35rem;
-    font-size: var(--button-text-small);
   }
 
-  .signInPrompt {
+  .registerPrompt {
     margin-top: 0.85rem;
-    font-size: var(--text-size-s);
   }
 
   .imagePanel {

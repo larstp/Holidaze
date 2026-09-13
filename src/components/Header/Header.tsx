@@ -1,7 +1,8 @@
-import { Menu, Moon, Sun, X } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { LogOut, Menu, Moon, Sun, X } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import buttonStyles from '../Button/Button.module.css';
+import { useAuth } from '../../context/useAuth';
 import styles from './Header.module.css';
 
 function Header() {
@@ -10,6 +11,10 @@ function Header() {
   const [isDarkMode, setIsDarkMode] = useState(
     () => document.documentElement.dataset.theme === 'dark'
   );
+  const [failedAvatarUrl, setFailedAvatarUrl] = useState<string | null>(null);
+  const { isAuthenticated, profile, logout } = useAuth();
+  const navigationRef = useRef<HTMLElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   const closeMenu = () => setIsMenuOpen(false);
 
@@ -23,6 +28,26 @@ function Header() {
 
     const timeoutId = window.setTimeout(() => setIsMenuVisible(false), 220);
     return () => window.clearTimeout(timeoutId);
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const handleOutsidePointerDown = (event: PointerEvent) => {
+      const target = event.target as Node;
+      if (
+        navigationRef.current?.contains(target) ||
+        menuButtonRef.current?.contains(target)
+      ) {
+        return;
+      }
+
+      closeMenu();
+    };
+
+    document.addEventListener('pointerdown', handleOutsidePointerDown);
+    return () =>
+      document.removeEventListener('pointerdown', handleOutsidePointerDown);
   }, [isMenuOpen]);
 
   const toggleTheme = () => {
@@ -54,23 +79,47 @@ function Header() {
         </NavLink>
 
         <nav
+          ref={navigationRef}
           id="primary-navigation"
           className={`${styles.navigation} ${isMenuOpen ? styles.navigationOpen : ''} ${isMenuVisible && !isMenuOpen ? styles.navigationClosing : ''}`}
           aria-label="Primary navigation"
         >
           <NavLink
-            className={styles.exploreLink}
-            to="/search"
+            className={({ isActive }) =>
+              `${styles.link} ${isActive ? styles.navLinkActive : ''}`
+            }
+            to="/"
+            end
             onClick={closeMenu}
           >
-            Explore
+            Home
           </NavLink>
-          <NavLink className={styles.link} to="/search" onClick={closeMenu}>
+          {isAuthenticated && (
+            <NavLink
+              className={({ isActive }) =>
+                `${styles.link} ${styles.mobileOnlyLink} ${isActive ? styles.navLinkActive : ''}`
+              }
+              to="/dashboard"
+              onClick={closeMenu}
+            >
+              Profile
+            </NavLink>
+          )}
+          <NavLink
+            className={({ isActive }) =>
+              `${styles.link} ${isActive ? styles.navLinkActive : ''}`
+            }
+            to="/search"
+            end
+            onClick={closeMenu}
+          >
             Search
           </NavLink>
           <NavLink
-            className={styles.listLink}
-            to="/become-manager"
+            className={({ isActive }) =>
+              `${styles.listLink} ${isActive ? styles.navLinkActive : ''}`
+            }
+            to={isAuthenticated ? '/venues/create' : '/become-manager'}
             onClick={closeMenu}
           >
             List your venue
@@ -89,20 +138,65 @@ function Header() {
                 <Moon aria-hidden="true" />
               )}
             </button>
-            <NavLink
-              className={`${buttonStyles.button} ${buttonStyles.secondary} ${buttonStyles.small} ${styles.loginLink}`}
-              to="/login"
-              onClick={closeMenu}
-            >
-              Sign in
-            </NavLink>
-            <NavLink
-              className={`${buttonStyles.button} ${buttonStyles.primary} ${buttonStyles.small} ${styles.registerLink}`}
-              to="/register"
-              onClick={closeMenu}
-            >
-              Register
-            </NavLink>
+            {isAuthenticated ? (
+              <NavLink
+                className={`${styles.profileLink} ${styles.desktopOnlyProfile}`}
+                to="/dashboard"
+                onClick={closeMenu}
+                aria-label="Open your dashboard"
+                title="Open your dashboard"
+              >
+                {profile?.avatar?.url &&
+                profile.avatar.url !== failedAvatarUrl ? (
+                  <img
+                    className={styles.profileAvatar}
+                    src={profile.avatar.url}
+                    alt=""
+                    aria-hidden="true"
+                    loading="eager"
+                    decoding="async"
+                    fetchPriority="high"
+                    onError={() =>
+                      setFailedAvatarUrl(profile.avatar?.url ?? null)
+                    }
+                  />
+                ) : (
+                  <span className={styles.profileInitial} aria-hidden="true">
+                    {profile?.name?.charAt(0) || 'U'}
+                  </span>
+                )}
+              </NavLink>
+            ) : (
+              <>
+                <NavLink
+                  className={`${buttonStyles.button} ${buttonStyles.secondary} ${buttonStyles.small} ${styles.loginLink}`}
+                  to="/login"
+                  onClick={closeMenu}
+                >
+                  Sign in
+                </NavLink>
+                <NavLink
+                  className={`${buttonStyles.button} ${buttonStyles.primary} ${buttonStyles.small} ${styles.registerLink}`}
+                  to="/register"
+                  onClick={closeMenu}
+                >
+                  Register
+                </NavLink>
+              </>
+            )}
+            {isAuthenticated && (
+              <button
+                className={styles.mobileLogout}
+                type="button"
+                onClick={() => {
+                  logout();
+                  closeMenu();
+                }}
+              >
+                <LogOut aria-hidden="true" />
+                <span>Log out</span>
+              </button>
+            )}
           </div>
         </nav>
 
@@ -121,6 +215,7 @@ function Header() {
         </button>
 
         <button
+          ref={menuButtonRef}
           className={styles.menuButton}
           type="button"
           aria-expanded={isMenuOpen}

@@ -1,0 +1,360 @@
+.publicPage,
+.accountPage {
+  color: var(--text);
+  background: var(--surface);
+}
+
+.publicHero,
+.publicCta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: var(--pure-white);
+  background: var(--hero-bg);
+}
+
+.publicHero {
+  min-height: 24rem;
+}
+
+.publicHero img,
+.publicCta img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.publicHero img {
+  object-position: center;
+}
+
+.publicCta img {
+  object-position: center 55%;
+}
+
+.heroOverlay {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: rgba(0, 61, 56, 0.7);
+}
+
+.publicHeroContent,
+.ctaContent {
+  display: grid;
+  justify-items: center;
+  width: min(100%, 54rem);
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 5rem 1.25rem;
+}
+
+.publicHeroContent h1,
+.ctaContent h2 {
+  max-width: 35rem;
+  margin: 0;
+  color: var(--pure-white);
+  font-size: clamp(2rem, 8vw, 3.4rem);
+  font-weight: 900;
+  line-height: var(--line-height-heading);
+}
+
+.publicHeroContent,
+.ctaContent p {
+  max-width: 32rem;
+  margin-top: 0.75rem;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: var(--text-size-m);
+  text-align: left;
+  gap: 0.5rem;
+}
+
+.eyebrow {
+  justify-self: start;
+  margin-bottom: 0.8rem;
+  color: var(--secondary);
+  font-size: var(--text-size-s);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.heroButton,
+.darkButton,
+.primaryLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.8rem;
+  box-sizing: border-box;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: var(--button-text-small);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.heroButton {
+  margin-top: 1.4rem;
+  color: var(--dark-green);
+  background: var(--pure-white);
+}
+
+.heroButton:hover,
+.heroButton:focus-visible {
+  color: var(--pure-white);
+  background: var(--button-hover);
+}
+
+.darkButton {
+  margin-top: 1.4rem;
+  border: 1px solid var(--pure-white);
+  color: var(--pure-white);
+  background: transparent;
+}
+
+.darkButton:hover,
+.darkButton:focus-visible {
+  background: var(--button-hover);
+}
+
+.benefitsSection {
+  padding: 3.5rem 1.25rem;
+  background: var(--surface);
+}
+
+.sectionContent {
+  width: min(100%, 56rem);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.sectionContent > h2 {
+  margin: 0;
+  color: var(--text-h);
+  font-size: var(--text-size-xl);
+  font-weight: 900;
+}
+
+.sectionContent > p {
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+  font-size: var(--text-size-s);
+}
+
+.benefitGrid,
+.stepsGrid {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2.25rem;
+}
+
+.benefit {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  text-align: left;
+}
+
+.benefitIcon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--radius-sm);
+  color: var(--pure-white);
+  background: var(--dark-green);
+}
+
+.benefitIcon svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.benefit h3,
+.step h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: var(--text-size-s);
+  font-weight: 900;
+}
+
+.benefit p,
+.step p {
+  margin-top: 0.25rem;
+  color: var(--text-muted);
+  font-size: var(--text-size-s);
+  line-height: 1.45;
+}
+
+.stepsSection {
+  padding: 3.5rem 1.25rem;
+  background: rgba(203, 212, 194, 0.18);
+}
+
+.step {
+  text-align: center;
+}
+
+.step > strong {
+  display: block;
+  color: var(--primary);
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.publicCta {
+  min-height: 18rem;
+}
+
+.ctaContent {
+  min-height: 18rem;
+  padding-block: 4rem;
+}
+
+.ctaActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.ctaActions .heroButton,
+.ctaActions .darkButton {
+  margin-top: 1.25rem;
+}
+
+.accountPage {
+  display: grid;
+  place-items: start center;
+  min-height: calc(100svh - 4.5rem);
+  padding: 3.5rem 1.5rem 6rem;
+}
+
+.accountPanel {
+  width: min(100%, 35rem);
+  padding: 0;
+  text-align: left;
+}
+
+.accountPanel h1 {
+  margin: 2.5rem 0 0;
+  color: var(--text-h);
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  font-weight: 900;
+}
+
+.accountIntro {
+  padding-top: 1.8rem;
+  padding-bottom: 1.8rem;
+  color: var(--text-muted);
+  font-size: var(--text-size-m);
+}
+
+.rules {
+  display: grid;
+  gap: 1rem;
+  margin: 2rem 0 0;
+  padding-left: 1.3rem;
+  color: var(--text-muted);
+  font-size: var(--text-size-s);
+}
+
+.managerForm {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 2rem;
+}
+
+.checkOption {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--text);
+  font-size: var(--text-size-s);
+}
+
+.checkOption input {
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  accent-color: var(--primary);
+}
+
+.checkOption input:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.checkOption a {
+  color: var(--dark-green);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.managerForm button,
+.primaryLink {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.primaryLink {
+  color: var(--pure-white);
+  background: var(--dark-green);
+  text-align: center;
+}
+
+.primaryLink:hover,
+.primaryLink:focus-visible {
+  color: var(--pure-white);
+  background: var(--button-hover);
+}
+
+.feedbackError,
+.feedbackSuccess {
+  font-size: var(--text-size-s);
+}
+
+.feedbackError {
+  color: #9b3f32;
+}
+
+.feedbackSuccess {
+  color: var(--dark-green);
+}
+
+@media (min-width: 701px) {
+  .publicHero {
+    min-height: 25rem;
+  }
+
+  .publicHeroContent,
+  .ctaContent {
+    min-height: 25rem;
+    padding-block: 6rem;
+  }
+
+  .benefitGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    text-align: left;
+  }
+
+  .benefit:last-child {
+    grid-column: 1 / 2;
+  }
+
+  .stepsGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.5rem;
+  }
+
+  .accountPanel {
+    padding: 0 1rem;
+  }
+}

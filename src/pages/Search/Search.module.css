@@ -7,7 +7,7 @@
 .searchBarSection {
   position: sticky;
   z-index: 8;
-  top: 0;
+  top: var(--header-height-mobile);
   padding: 1rem 1.25rem;
   border-bottom: 1px solid var(--border);
   background: var(--surface);
@@ -272,6 +272,10 @@ fieldset input[type='checkbox'] {
 }
 
 @media (min-width: 701px) {
+  .searchBarSection {
+    top: var(--header-height-desktop);
+  }
+
   .searchBarSection {
     padding-inline: 2rem;
   }

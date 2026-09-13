@@ -2,8 +2,10 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
+import BecomeManager from './pages/BecomeManager/BecomeManager';
 import { AuthProvider } from './context/AuthContext';
 import Home from './pages/Home/Home';
+import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Search from './pages/Search/Search';
 import Venue from './pages/Venue/Venue';
@@ -31,16 +33,13 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<Search />} />
             <Route path="/venues/:id" element={<Venue />} />
-            <Route path="/login" element={<PagePlaceholder title="Login" />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route
               path="/dashboard"
               element={<PagePlaceholder title="Dashboard" />}
             />
-            <Route
-              path="/become-manager"
-              element={<PagePlaceholder title="Become a manager" />}
-            />
+            <Route path="/become-manager" element={<BecomeManager />} />
             <Route
               path="/venues/create"
               element={<PagePlaceholder title="Create venue" />}
