@@ -252,6 +252,7 @@
 
 .accountIntro {
   padding-top: 1.8rem;
+  padding-bottom: 1.8rem;
   color: var(--text-muted);
   font-size: var(--text-size-m);
 }
@@ -301,6 +302,18 @@
 .primaryLink {
   width: 100%;
   margin-top: 0.5rem;
+}
+
+.primaryLink {
+  color: var(--pure-white);
+  background: var(--dark-green);
+  text-align: center;
+}
+
+.primaryLink:hover,
+.primaryLink:focus-visible {
+  color: var(--pure-white);
+  background: var(--button-hover);
 }
 
 .feedbackError,

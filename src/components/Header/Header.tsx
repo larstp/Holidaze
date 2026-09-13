@@ -96,7 +96,9 @@ function Header() {
           </NavLink>
           {isAuthenticated && (
             <NavLink
-              className={`${styles.link} ${styles.mobileOnlyLink}`}
+              className={({ isActive }) =>
+                `${styles.link} ${styles.mobileOnlyLink} ${isActive ? styles.navLinkActive : ''}`
+              }
               to="/dashboard"
               onClick={closeMenu}
             >
@@ -114,8 +116,10 @@ function Header() {
             Search
           </NavLink>
           <NavLink
-            className={styles.listLink}
-            to="/become-manager"
+            className={({ isActive }) =>
+              `${styles.listLink} ${isActive ? styles.navLinkActive : ''}`
+            }
+            to={isAuthenticated ? '/venues/create' : '/become-manager'}
             onClick={closeMenu}
           >
             List your venue
