@@ -35,6 +35,7 @@ export type Booking = {
   guests: number;
   created: string;
   updated: string;
+  venue?: Venue;
 };
 
 export type Venue = {

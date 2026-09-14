@@ -101,3 +101,8 @@ Outcome: Read about client-side JWT claim parsing and got help implementing that
 Model: Google Gemini Free
 Reason: Needed corpo-jargon copy for a couple of pages
 Outcome: Generated text examples i could use in "Become a manager" page ++
+
+14 Sep
+Model: Google Gemini Free
+Reason: Needed help displaying the correct dates in the bookingList item. I really struggle with Math..
+Outcome: Managed to implement it, i think i understand but I'll probably forget again like I do every time..

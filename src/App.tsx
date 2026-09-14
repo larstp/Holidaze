@@ -3,6 +3,7 @@ import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import BecomeManager from './pages/BecomeManager/BecomeManager';
+import Dashboard from './pages/Dashboard/Dashboard';
 import { AuthProvider } from './context/AuthContext';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
@@ -35,10 +36,7 @@ function App() {
             <Route path="/venues/:id" element={<Venue />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route
-              path="/dashboard"
-              element={<PagePlaceholder title="Dashboard" />}
-            />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/become-manager" element={<BecomeManager />} />
             <Route
               path="/venues/create"

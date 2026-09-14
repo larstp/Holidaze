@@ -1,0 +1,159 @@
+.card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 0.85rem;
+  min-height: 6.5rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--text);
+  background: var(--surface);
+  text-decoration: none;
+}
+
+.card:hover,
+.card:focus-visible {
+  border-color: var(--primary);
+}
+
+.card > img,
+.card > span:first-child {
+  width: 7.5rem;
+  height: 6.5rem;
+  object-fit: cover;
+}
+
+.info {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+  text-align: left;
+}
+
+.info strong {
+  overflow: hidden;
+  font-size: var(--text-size-m);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.info span,
+.info small {
+  overflow: hidden;
+  color: var(--primary);
+  font-size: var(--text-size-s);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.info b {
+  color: var(--text);
+}
+
+.status {
+  align-self: start;
+  margin-top: 0.8rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-pill);
+  color: var(--dark-green);
+  background: #d3f0d9;
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+
+.completed {
+  color: var(--primary);
+  background: var(--accent-bg);
+}
+
+.arrow {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 1rem;
+  color: var(--primary);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-right: 0.65rem;
+}
+
+.actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  min-height: 2rem;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--dark-green);
+  border-radius: var(--radius-sm);
+  color: var(--dark-green);
+  background: transparent;
+  font: inherit;
+  font-size: var(--text-size-s);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.actions button:hover,
+.actions button:focus-visible {
+  color: var(--pure-white);
+  background: var(--dark-green);
+}
+
+.actions svg {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+.actions .deleteButton {
+  width: 2rem;
+  padding: 0.4rem;
+  border-color: #f2c3c3;
+  color: #a63d32;
+  background: #fde5e5;
+}
+
+.actions .deleteButton:hover,
+.actions .deleteButton:focus-visible {
+  color: var(--pure-white);
+  background: #a63d32;
+}
+
+@media (max-width: 700px) {
+  .card {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .card > img,
+  .card > span:first-child {
+    width: 100%;
+    height: 10rem;
+  }
+
+  .info {
+    padding: 1rem;
+  }
+
+  .status {
+    position: absolute;
+    top: 10.6rem;
+    right: 0.8rem;
+    margin-top: 0;
+  }
+
+  .arrow {
+    display: none;
+  }
+
+  .rentedCard .actions {
+    justify-content: flex-end;
+    padding: 0 1rem 1rem;
+    margin: 0;
+  }
+}
