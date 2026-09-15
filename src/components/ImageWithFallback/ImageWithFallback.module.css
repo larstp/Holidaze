@@ -23,7 +23,29 @@
   filter: grayscale(1);
 }
 
+.logoDark {
+  display: none;
+}
+
+:global(:root[data-theme='dark']) .logoLight {
+  display: none;
+}
+
+:global(:root[data-theme='dark']) .logoDark {
+  display: block;
+}
+
 :global(:root[data-theme='dark']) .fallback {
   color: #f8f5f2;
   background: #313131;
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme='light'])) .logoLight {
+    display: none;
+  }
+
+  :global(:root:not([data-theme='light'])) .logoDark {
+    display: block;
+  }
 }

@@ -11,6 +11,10 @@
   text-align: left;
 }
 
+:global(:root[data-theme='dark']) .card {
+  background: var(--dark-mode-secondary);
+}
+
 .icon {
   grid-row: span 2;
   display: inline-flex;
@@ -21,6 +25,10 @@
   border-radius: var(--radius-md);
   color: var(--dark-green);
   background: var(--accent-bg);
+}
+
+:global(:root[data-theme='dark']) .icon {
+  color: var(--pure-white);
 }
 
 .icon svg {
@@ -36,4 +44,14 @@
 .card small {
   color: var(--primary);
   font-size: 0.68rem;
+}
+
+:global(:root[data-theme='dark']) .card small {
+  color: var(--text-muted);
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme='light'])) .card small {
+    color: var(--text-muted);
+  }
 }

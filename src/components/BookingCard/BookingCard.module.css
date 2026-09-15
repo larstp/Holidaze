@@ -48,6 +48,22 @@
   white-space: nowrap;
 }
 
+:global(:root[data-theme='dark']) .info span,
+:global(:root[data-theme='dark']) .info small,
+:global(:root[data-theme='dark']) .arrow,
+:global(:root[data-theme='dark']) .completed {
+  color: var(--text-muted);
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme='light'])) .info span,
+  :global(:root:not([data-theme='light'])) .info small,
+  :global(:root:not([data-theme='light'])) .arrow,
+  :global(:root:not([data-theme='light'])) .completed {
+    color: var(--text-muted);
+  }
+}
+
 .info b {
   color: var(--text);
 }

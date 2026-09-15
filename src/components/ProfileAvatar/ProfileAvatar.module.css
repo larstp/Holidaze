@@ -1,0 +1,12 @@
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border-radius: var(--radius-circle);
+  color: var(--pure-white);
+  background: var(--dark-green);
+  font-weight: 800;
+  object-fit: cover;
+}

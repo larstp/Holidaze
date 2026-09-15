@@ -1,0 +1,62 @@
+import { CalendarDays, LogOut, Pencil, Store } from 'lucide-react';
+import type { ReactNode } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { useAuth } from '../../context/useAuth';
+import ProfileAvatar from '../ProfileAvatar/ProfileAvatar';
+import styles from './DashboardShell.module.css';
+
+type DashboardShellProps = {
+  children: ReactNode;
+};
+
+function DashboardShell({ children }: DashboardShellProps) {
+  const { profile, logout } = useAuth();
+
+  if (!profile) return null;
+
+  return (
+    <main className={styles.page}>
+      <div className={styles.layout}>
+        <aside className={styles.sidebar} aria-label="Dashboard navigation">
+          <div className={styles.profileCard}>
+            <ProfileAvatar profile={profile} />
+            <div>
+              <strong>{profile.name}</strong>
+              <small>{profile.email}</small>
+            </div>
+          </div>
+          <nav className={styles.sideNav} aria-label="Account sections">
+            <NavLink
+              className={({ isActive }) => (isActive ? styles.active : '')}
+              to="/dashboard"
+              end
+            >
+              <CalendarDays aria-hidden="true" /> My Trips
+            </NavLink>
+            <NavLink
+              className={({ isActive }) => (isActive ? styles.active : '')}
+              to="/dashboard/profile"
+            >
+              <Pencil aria-hidden="true" /> Profile settings
+            </NavLink>
+          </nav>
+          {!profile.venueManager && (
+            <Link className={styles.managerLink} to="/become-manager">
+              <Store aria-hidden="true" /> Become a Manager
+            </Link>
+          )}
+          <button
+            className={styles.logoutButton}
+            type="button"
+            onClick={logout}
+          >
+            <LogOut aria-hidden="true" /> Log out
+          </button>
+        </aside>
+        <section className={styles.content}>{children}</section>
+      </div>
+    </main>
+  );
+}
+
+export default DashboardShell;

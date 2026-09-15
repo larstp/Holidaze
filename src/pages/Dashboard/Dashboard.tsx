@@ -1,8 +1,9 @@
-import { CalendarDays, LogOut, Pencil, Store, TrendingUp } from 'lucide-react';
+import { CalendarDays, TrendingUp } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import BookingCard from '../../components/BookingCard/BookingCard';
+import DashboardShell from '../../components/DashboardShell/DashboardShell';
 import PageLoader from '../../components/PageLoader/PageLoader';
 import StatCard from '../../components/StatCard/StatCard';
 import { useAuth } from '../../context/useAuth';
@@ -16,7 +17,7 @@ const isUpcoming = (booking: Booking) =>
 
 function Dashboard() {
   const navigate = useNavigate();
-  const { accessToken, isAuthenticated, profile, logout } = useAuth();
+  const { accessToken, isAuthenticated, profile } = useAuth();
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
@@ -78,83 +79,46 @@ function Dashboard() {
   }
 
   return (
-    <main className={styles.page}>
-      <div className={styles.layout}>
-        <aside className={styles.sidebar} aria-label="Dashboard navigation">
-          <div className={styles.profileCard}>
-            {profile.avatar?.url ? (
-              <img
-                src={profile.avatar.url}
-                alt={profile.avatar.alt || `${profile.name} profile`}
-              />
-            ) : (
-              <span aria-hidden="true">{profile.name.charAt(0)}</span>
-            )}
-            <div>
-              <strong>{profile.name}</strong>
-              <small>{profile.email}</small>
-            </div>
-          </div>
-          <nav className={styles.sideNav} aria-label="Account sections">
-            <Link className={styles.sideNavActive} to="/dashboard">
-              <CalendarDays aria-hidden="true" /> My Trips
-            </Link>
-            <Link to="/dashboard/profile">
-              <Pencil aria-hidden="true" /> Profile settings
-            </Link>
-          </nav>
-          {!profile.venueManager && (
-            <Link className={styles.managerLink} to="/become-manager">
-              <Store aria-hidden="true" /> Become a Manager
-            </Link>
-          )}
-          <button
-            className={styles.logoutButton}
-            type="button"
-            onClick={logout}
-          >
-            <LogOut aria-hidden="true" /> Log out
-          </button>
-        </aside>
+    <DashboardShell>
+      <section aria-labelledby="trips-heading">
+        <h1 className={styles.pageHeading} id="trips-heading">
+          My Trips
+        </h1>
+        <div className={styles.stats}>
+          <StatCard
+            icon={CalendarDays}
+            value={upcomingBookings.length}
+            label="Upcoming trips"
+          />
+          <StatCard
+            icon={TrendingUp}
+            value={`€${totalSpent.toLocaleString('en-GB')}`}
+            label="Total spent"
+          />
+        </div>
 
-        <section className={styles.content} aria-labelledby="trips-heading">
-          <h1 id="trips-heading">My Trips</h1>
-          <div className={styles.stats}>
-            <StatCard
-              icon={CalendarDays}
-              value={upcomingBookings.length}
-              label="Upcoming trips"
-            />
-            <StatCard
-              icon={TrendingUp}
-              value={`€${totalSpent.toLocaleString('en-GB')}`}
-              label="Total spent"
-            />
+        {error && (
+          <p className={styles.feedbackError} role="alert">
+            {error}
+          </p>
+        )}
+        {!error && bookings.length === 0 && (
+          <div className={styles.emptyState}>
+            <h2>No trips yet</h2>
+            <p>Find a stay and start planning your next adventure.</p>
+            <Button onClick={() => navigate('/search')} size="small">
+              Explore stays
+            </Button>
           </div>
-
-          {error && (
-            <p className={styles.feedbackError} role="alert">
-              {error}
-            </p>
-          )}
-          {!error && bookings.length === 0 && (
-            <div className={styles.emptyState}>
-              <h2>No trips yet</h2>
-              <p>Find a stay and start planning your next adventure.</p>
-              <Button onClick={() => navigate('/search')} size="small">
-                Explore stays
-              </Button>
-            </div>
-          )}
-          {upcomingBookings.length > 0 && (
-            <BookingSection title="Upcoming" bookings={upcomingBookings} />
-          )}
-          {pastBookings.length > 0 && (
-            <BookingSection title="Past trips" bookings={pastBookings} />
-          )}
-        </section>
-      </div>
-    </main>
+        )}
+        {upcomingBookings.length > 0 && (
+          <BookingSection title="Upcoming" bookings={upcomingBookings} />
+        )}
+        {pastBookings.length > 0 && (
+          <BookingSection title="Past trips" bookings={pastBookings} />
+        )}
+      </section>
+    </DashboardShell>
   );
 }
 

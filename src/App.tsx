@@ -4,12 +4,14 @@ import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import BecomeManager from './pages/BecomeManager/BecomeManager';
 import Dashboard from './pages/Dashboard/Dashboard';
+import EditProfile from './pages/EditProfile/EditProfile';
 import { AuthProvider } from './context/AuthContext';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Search from './pages/Search/Search';
 import Venue from './pages/Venue/Venue';
+import ProfileSettings from './pages/ProfileSettings/ProfileSettings';
 
 type PageProps = {
   title: string;
@@ -37,6 +39,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard/profile" element={<ProfileSettings />} />
+            <Route path="/dashboard/profile/edit" element={<EditProfile />} />
             <Route path="/become-manager" element={<BecomeManager />} />
             <Route
               path="/venues/create"

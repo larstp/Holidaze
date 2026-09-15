@@ -106,3 +106,8 @@ Outcome: Generated text examples i could use in "Become a manager" page ++
 Model: Google Gemini Free
 Reason: Needed help displaying the correct dates in the bookingList item. I really struggle with Math..
 Outcome: Managed to implement it, i think i understand but I'll probably forget again like I do every time..
+
+14 Sep
+Model: Google Gemini Free
+Reason: I have designed the Dashboard page a little too much, and needed a way to navigate using the nav on the left while switching out all the info on the right. As i was about to push the update i noticed the Dashboard.tsx file was starting to be longer than a LOTR marathon, and looking through it was very confusing, so i needed help splitting it up.
+Outcome: guided me through the process of "Shells" (hadn't heard of before, but makes so much sense), and I managed to set up a Dashboard shell for the nav so that I more easily could split up the different sections of the dashboard page into more manageable chunks (separate page files) and load them via that. Now I can navigate through /dashboard/profile and /dashboard/profile/edit for example. I am planning on adding venue management on the same page, so this was invaluable. MUCH cleaner and learned something new c:

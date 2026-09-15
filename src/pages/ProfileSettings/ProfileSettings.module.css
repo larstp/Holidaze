@@ -1,0 +1,200 @@
+.page {
+  min-height: calc(100svh - var(--header-height-mobile));
+  padding: 2rem 1.25rem 6rem;
+  color: var(--text);
+  background: var(--surface);
+}
+
+.panel {
+  width: min(100%, 56rem);
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.backLink,
+.editButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--pure-white);
+  font-size: var(--text-size-s);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.backLink {
+  padding: 1rem 1.25rem 0;
+}
+
+.backLink svg,
+.editButton svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.headingRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem;
+}
+
+.headingRow h1 {
+  margin: 0;
+  color: var(--text-h);
+  font-size: var(--text-size-xl);
+  font-weight: 900;
+}
+
+.headingRow p {
+  margin-top: 0.35rem;
+  color: var(--text-muted);
+  font-size: var(--text-size-s);
+}
+
+.editButton {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  padding: 0.65rem 0.9rem;
+}
+
+:global(:root[data-theme='dark']) .editButton {
+  border-color: var(--pure-white);
+  color: var(--pure-white);
+  background: transparent;
+}
+
+:global(:root[data-theme='dark']) .editButton:hover,
+:global(:root[data-theme='dark']) .editButton:focus-visible {
+  border-color: var(--pure-white);
+  color: var(--pure-white);
+  background: var(--button-hover);
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme='light'])) .editButton {
+    border-color: var(--pure-white);
+    color: var(--pure-white);
+    background: transparent;
+  }
+
+  :global(:root:not([data-theme='light'])) .editButton:hover,
+  :global(:root:not([data-theme='light'])) .editButton:focus-visible {
+    border-color: var(--pure-white);
+    color: var(--pure-white);
+    background: var(--button-hover);
+  }
+}
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  gap: 0.9rem;
+  padding: 1.25rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+:global(:root[data-theme='dark']) .profileHeader small {
+  color: var(--text-muted);
+}
+
+.profileHeader img,
+.profileHeader > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  overflow: hidden;
+  border-radius: var(--radius-circle);
+  color: var(--pure-white);
+  background: var(--dark-green);
+  font-weight: 800;
+  object-fit: cover;
+}
+
+.profileHeader div {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.profileHeader strong {
+  font-size: var(--text-size-m);
+}
+
+.profileHeader small {
+  color: var(--primary);
+  font-size: var(--text-size-s);
+}
+
+.details {
+  margin: 0;
+  padding: 0 1.25rem;
+}
+
+.details div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: var(--text-size-s);
+}
+
+.details dt {
+  color: var(--text);
+  font-weight: 800;
+}
+
+.details dd {
+  margin: 0;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+.dangerZone {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem;
+}
+
+.dangerZone strong {
+  color: #a63d32;
+  font-size: var(--text-size-s);
+}
+
+.dangerZone button {
+  padding: 0.65rem 0.9rem;
+  border: 1px solid #f2c3c3;
+  border-radius: var(--radius-md);
+  color: #a63d32;
+  background: #fde5e5;
+  font: inherit;
+  font-size: var(--text-size-s);
+  font-weight: 700;
+}
+
+@media (min-width: 701px) {
+  .page {
+    min-height: calc(100svh - var(--header-height-desktop));
+    padding: 2.5rem 2rem 6rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .headingRow {
+    flex-direction: column;
+  }
+
+  .editButton {
+    width: 100%;
+    justify-content: center;
+  }
+}

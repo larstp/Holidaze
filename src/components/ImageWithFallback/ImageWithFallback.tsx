@@ -22,8 +22,14 @@ function ImageWithFallback({
     return (
       <span className={styles.fallback} role="img" aria-label={alt}>
         <img
-          className={styles.logo}
+          className={`${styles.logo} ${styles.logoLight}`}
           src="/images/logos/Logo-Black.svg"
+          alt=""
+          aria-hidden="true"
+        />
+        <img
+          className={`${styles.logo} ${styles.logoDark}`}
+          src="/images/logos/Logo-white.svg"
           alt=""
           aria-hidden="true"
         />
