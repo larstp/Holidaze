@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import BookingCard from '../../components/BookingCard/BookingCard';
 import DashboardShell from '../../components/DashboardShell/DashboardShell';
-import PageLoader from '../../components/PageLoader/PageLoader';
 import StatCard from '../../components/StatCard/StatCard';
 import { useAuth } from '../../context/useAuth';
 import { ApiError } from '../../lib/services/apiClient';
@@ -74,12 +73,12 @@ function Dashboard() {
     return total + booking.venue.price * nights;
   }, 0);
 
-  if (!isAuthenticated || !profile || isLoading) {
-    return <PageLoader label="Loading your trips" />;
+  if (!isAuthenticated || !profile) {
+    return null;
   }
 
   return (
-    <DashboardShell>
+    <DashboardShell isLoading={isLoading} loadingLabel="Loading your trips">
       <section aria-labelledby="trips-heading">
         <h1 className={styles.pageHeading} id="trips-heading">
           My Trips

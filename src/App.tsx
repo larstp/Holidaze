@@ -8,6 +8,7 @@ import EditProfile from './pages/EditProfile/EditProfile';
 import { AuthProvider } from './context/AuthContext';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
+import ManagerVenues from './pages/ManagerVenues/ManagerVenues';
 import Register from './pages/Register/Register';
 import Search from './pages/Search/Search';
 import Venue from './pages/Venue/Venue';
@@ -41,6 +42,10 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/dashboard/profile" element={<ProfileSettings />} />
             <Route path="/dashboard/profile/edit" element={<EditProfile />} />
+            <Route
+              path="/dashboard/manager/venues"
+              element={<ManagerVenues />}
+            />
             <Route path="/become-manager" element={<BecomeManager />} />
             <Route
               path="/venues/create"
