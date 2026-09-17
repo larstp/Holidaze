@@ -11,8 +11,16 @@ import { getProfileBookings } from '../../lib/services/profileService';
 import type { Booking } from '../../types/api';
 import styles from './Dashboard.module.css';
 
+function getBookingEndDate(dateValue: string): Date {
+  const date = /^\d{4}-\d{2}-\d{2}$/.test(dateValue)
+    ? new Date(`${dateValue}T23:59:59`)
+    : new Date(dateValue);
+
+  return date;
+}
+
 const isUpcoming = (booking: Booking) =>
-  new Date(`${booking.dateTo}T23:59:59`) >= new Date();
+  getBookingEndDate(booking.dateTo).getTime() >= Date.now();
 
 function Dashboard() {
   const navigate = useNavigate();

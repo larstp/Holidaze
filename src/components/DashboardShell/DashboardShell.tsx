@@ -40,12 +40,6 @@ function DashboardShell({
             >
               <CalendarDays aria-hidden="true" /> My Trips
             </NavLink>
-            <NavLink
-              className={({ isActive }) => (isActive ? styles.active : '')}
-              to="/dashboard/profile"
-            >
-              <Pencil aria-hidden="true" /> Profile settings
-            </NavLink>
             {profile.venueManager && (
               <NavLink
                 className={({ isActive }) => (isActive ? styles.active : '')}
@@ -54,6 +48,12 @@ function DashboardShell({
                 <Building2 aria-hidden="true" /> My Venues
               </NavLink>
             )}
+            <NavLink
+              className={({ isActive }) => (isActive ? styles.active : '')}
+              to="/dashboard/profile"
+            >
+              <Pencil aria-hidden="true" /> Profile settings
+            </NavLink>
           </nav>
           {!profile.venueManager && (
             <Link className={styles.managerLink} to="/become-manager">

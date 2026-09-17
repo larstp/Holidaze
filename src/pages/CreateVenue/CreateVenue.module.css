@@ -190,14 +190,16 @@
 .priceField > span {
   position: absolute;
   top: 50%;
-  left: 0.8rem;
+  right: 0.8rem;
   color: var(--text-muted);
   font-size: var(--text-size-s);
+  font-weight: 400;
+  pointer-events: none;
   transform: translateY(-50%);
 }
 
 .priceField input {
-  padding-left: 1.8rem;
+  padding-right: 1.8rem;
 }
 
 .amenities {
