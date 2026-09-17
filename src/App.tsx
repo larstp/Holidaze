@@ -6,6 +6,7 @@ import BecomeManager from './pages/BecomeManager/BecomeManager';
 import Dashboard from './pages/Dashboard/Dashboard';
 import CreateVenue from './pages/CreateVenue/CreateVenue';
 import EditProfile from './pages/EditProfile/EditProfile';
+import EditVenue from './pages/EditVenue/EditVenue';
 import { AuthProvider } from './context/AuthContext';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
@@ -14,18 +15,6 @@ import Register from './pages/Register/Register';
 import Search from './pages/Search/Search';
 import Venue from './pages/Venue/Venue';
 import ProfileSettings from './pages/ProfileSettings/ProfileSettings';
-
-type PageProps = {
-  title: string;
-};
-
-function PagePlaceholder({ title }: PageProps) {
-  return (
-    <main>
-      <h1>{title}</h1>
-    </main>
-  );
-}
 
 function App() {
   return (
@@ -49,10 +38,7 @@ function App() {
             />
             <Route path="/become-manager" element={<BecomeManager />} />
             <Route path="/venues/create" element={<CreateVenue />} />
-            <Route
-              path="/venues/:id/edit"
-              element={<PagePlaceholder title="Edit venue" />}
-            />
+            <Route path="/venues/:id/edit" element={<EditVenue />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>

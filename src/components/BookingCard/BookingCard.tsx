@@ -32,13 +32,17 @@ function BookingCard(props: BookingCardProps) {
   if (props.variant === 'rentedVenue') {
     return (
       <article className={`${styles.card} ${styles.rentedCard}`}>
-        <ImageWithFallback
-          src={props.venue.media[0]?.url}
-          alt={props.venue.media[0]?.alt || props.venue.name}
-          loading="lazy"
-        />
+        <Link className={styles.imageLink} to={`/venues/${props.venue.id}`}>
+          <ImageWithFallback
+            src={props.venue.media[0]?.url}
+            alt={props.venue.media[0]?.alt || props.venue.name}
+            loading="lazy"
+          />
+        </Link>
         <div className={styles.info}>
-          <strong>{props.venue.name}</strong>
+          <strong>
+            <Link to={`/venues/${props.venue.id}`}>{props.venue.name}</Link>
+          </strong>
           <span>
             {[props.venue.location.city, props.venue.location.country]
               .filter(Boolean)

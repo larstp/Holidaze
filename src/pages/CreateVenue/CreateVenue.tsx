@@ -7,7 +7,8 @@ import PageLoader from '../../components/PageLoader/PageLoader';
 import { useAuth } from '../../context/useAuth';
 import { ApiError } from '../../lib/services/apiClient';
 import { createVenue } from '../../lib/services/venueService';
-import type { CreateVenueRequest, VenueMeta } from '../../types/api';
+import { updateVenue } from '../../lib/services/venueService';
+import type { CreateVenueRequest, Venue, VenueMeta } from '../../types/api';
 import styles from './CreateVenue.module.css';
 
 type VenueForm = {
@@ -51,11 +52,35 @@ const initialForm: VenueForm = {
   pets: false,
 };
 
-function CreateVenue() {
+type CreateVenueProps = {
+  venue?: Venue;
+};
+
+function CreateVenue({ venue }: CreateVenueProps) {
   const navigate = useNavigate();
   const { accessToken, isAuthenticated, profile } = useAuth();
-  const [form, setForm] = useState(initialForm);
-  const [images, setImages] = useState<VenueImage[]>([]);
+  const [form, setForm] = useState<VenueForm>(() =>
+    venue
+      ? {
+          name: venue.name,
+          description: venue.description,
+          price: String(venue.price),
+          maxGuests: String(venue.maxGuests),
+          imageUrl: '',
+          imageAlt: '',
+          address: venue.location.address ?? '',
+          city: venue.location.city ?? '',
+          zip: venue.location.zip ?? '',
+          country: venue.location.country ?? '',
+          continent: venue.location.continent ?? '',
+          wifi: venue.meta.wifi,
+          parking: venue.meta.parking,
+          breakfast: venue.meta.breakfast,
+          pets: venue.meta.pets,
+        }
+      : initialForm
+  );
+  const [images, setImages] = useState<VenueImage[]>(() => venue?.media ?? []);
   const [error, setError] = useState('');
   const [isSaving, setIsSaving] = useState(false);
 
@@ -140,7 +165,8 @@ function CreateVenue() {
     setIsSaving(true);
     setError('');
     try {
-      await createVenue(payload, accessToken);
+      if (venue) await updateVenue(venue.id, payload, accessToken);
+      else await createVenue(payload, accessToken);
       navigate('/dashboard/manager/venues');
     } catch (requestError) {
       setError(
@@ -159,9 +185,11 @@ function CreateVenue() {
         <Link className={styles.backLink} to="/dashboard/manager/venues">
           <ArrowLeft aria-hidden="true" /> Back to my venues
         </Link>
-        <h1>Create venue</h1>
+        <h1>{venue ? 'Edit venue' : 'Create venue'}</h1>
         <p className={styles.intro}>
-          Add a stay and start welcoming guests through Holidaze.
+          {venue
+            ? 'Update your venue details and keep your listing accurate.'
+            : 'Add a stay and start welcoming guests through Holidaze.'}
         </p>
 
         <section className={styles.section} aria-labelledby="photos-heading">
@@ -347,7 +375,13 @@ function CreateVenue() {
             Cancel
           </Link>
           <Button type="submit" disabled={isSaving}>
-            {isSaving ? 'Creating venue...' : 'Create venue'}
+            {isSaving
+              ? venue
+                ? 'Saving changes...'
+                : 'Creating venue...'
+              : venue
+                ? 'Save changes'
+                : 'Create venue'}
           </Button>
         </div>
       </form>

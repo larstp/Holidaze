@@ -111,3 +111,13 @@ Outcome: Managed to implement it, i think i understand but I'll probably forget 
 Model: Google Gemini Free
 Reason: I have designed the Dashboard page a little too much, and needed a way to navigate using the nav on the left while switching out all the info on the right. As i was about to push the update i noticed the Dashboard.tsx file was starting to be longer than a LOTR marathon, and looking through it was very confusing, so i needed help splitting it up.
 Outcome: guided me through the process of "Shells" (hadn't heard of before, but makes so much sense), and I managed to set up a Dashboard shell for the nav so that I more easily could split up the different sections of the dashboard page into more manageable chunks (separate page files) and load them via that. Now I can navigate through /dashboard/profile and /dashboard/profile/edit for example. I am planning on adding venue management on the same page, so this was invaluable. MUCH cleaner and learned something new c:
+
+17 Sep
+Model: Google Gemini Free
+Reason: Wanted planning help on how to implement "Create" and "Edit" venue pages, as they would be very similar and server _almost_ the same function. I didn't want to make it un-DRY (wet?)
+Outcome: Helped me set up a plan for shared utilities based on if a prop exists or not on the selected venue.
+
+- CreateVenue.tsx contains the reusable form
+- EditVenue.tsx loads an existing venue, verifies manager ownership, and passes it into CreateVenue
+- CreateVenue.module.css styles both modes
+  Hopefully im thinking right here, architecture-wise
