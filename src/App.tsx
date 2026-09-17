@@ -4,6 +4,7 @@ import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import BecomeManager from './pages/BecomeManager/BecomeManager';
 import Dashboard from './pages/Dashboard/Dashboard';
+import CreateVenue from './pages/CreateVenue/CreateVenue';
 import EditProfile from './pages/EditProfile/EditProfile';
 import { AuthProvider } from './context/AuthContext';
 import Home from './pages/Home/Home';
@@ -47,10 +48,7 @@ function App() {
               element={<ManagerVenues />}
             />
             <Route path="/become-manager" element={<BecomeManager />} />
-            <Route
-              path="/venues/create"
-              element={<PagePlaceholder title="Create venue" />}
-            />
+            <Route path="/venues/create" element={<CreateVenue />} />
             <Route
               path="/venues/:id/edit"
               element={<PagePlaceholder title="Edit venue" />}
