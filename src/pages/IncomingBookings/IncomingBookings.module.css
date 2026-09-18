@@ -104,6 +104,22 @@
   background: var(--button-hover);
 }
 
+.calendar :global(.fc .fc-toolbar) {
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.calendar :global(.fc .fc-toolbar-title) {
+  color: var(--text-h);
+  font-size: var(--text-size-l);
+  font-weight: 500;
+  text-align: center;
+}
+
+.calendar :global(.fc .fc-toolbar) {
+  padding-top: 0.5rem;
+}
+
 .calendar :global(.fc .fc-event) {
   color: var(--pure-white);
   white-space: pre-line;

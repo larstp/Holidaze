@@ -142,9 +142,12 @@ function VenueCalendar({ events }: VenueCalendarProps) {
       height: 'auto',
       events,
       headerToolbar: {
-        left: 'prev,next today',
+        left: 'prev,next',
         center: 'title',
-        right: '',
+        right: 'today',
+      },
+      buttonText: {
+        today: 'Today',
       },
       eventColor: 'var(--dark-green)',
       dayMaxEvents: true,
