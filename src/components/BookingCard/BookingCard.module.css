@@ -13,6 +13,19 @@
   text-decoration: none;
 }
 
+.rentedCard {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.rentedCard .summary {
+  min-width: 0;
+}
+
+.rentedCard .actions {
+  grid-column: 2;
+  grid-row: 1;
+}
+
 .card:hover,
 .card:focus-visible {
   border-color: var(--primary);
@@ -198,6 +211,8 @@
   }
 
   .rentedCard .actions {
+    grid-column: 1;
+    grid-row: auto;
     justify-content: flex-end;
     padding: 0 1rem 1rem;
     margin: 0;

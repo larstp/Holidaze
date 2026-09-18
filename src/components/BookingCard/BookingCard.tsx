@@ -1,6 +1,7 @@
 import { ArrowRight, Pencil, Trash2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ImageWithFallback from '../ImageWithFallback/ImageWithFallback';
+import VenueSummary from '../VenueSummary/VenueSummary';
 import type { Booking, Venue } from '../../types/api';
 import styles from './BookingCard.module.css';
 
@@ -32,28 +33,7 @@ function BookingCard(props: BookingCardProps) {
   if (props.variant === 'rentedVenue') {
     return (
       <article className={`${styles.card} ${styles.rentedCard}`}>
-        <Link className={styles.imageLink} to={`/venues/${props.venue.id}`}>
-          <ImageWithFallback
-            src={props.venue.media[0]?.url}
-            alt={props.venue.media[0]?.alt || props.venue.name}
-            loading="lazy"
-          />
-        </Link>
-        <div className={styles.info}>
-          <strong>
-            <Link to={`/venues/${props.venue.id}`}>{props.venue.name}</Link>
-          </strong>
-          <span>
-            {[props.venue.location.city, props.venue.location.country]
-              .filter(Boolean)
-              .join(', ') || 'Location unavailable'}
-          </span>
-          <small>
-            ★ {props.venue.rating.toFixed(1)} ·{' '}
-            {props.venue._count?.bookings ?? 0} bookings · €{props.venue.price}
-            /night
-          </small>
-        </div>
+        <VenueSummary venue={props.venue} />
         <div className={styles.actions}>
           <button type="button" onClick={() => props.onEdit?.(props.venue)}>
             <Pencil aria-hidden="true" /> Edit

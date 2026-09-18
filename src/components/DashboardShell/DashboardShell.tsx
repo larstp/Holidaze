@@ -1,4 +1,11 @@
-import { Building2, CalendarDays, LogOut, Pencil, Store } from 'lucide-react';
+import {
+  Building2,
+  CalendarDays,
+  ClipboardList,
+  LogOut,
+  Pencil,
+  Store,
+} from 'lucide-react';
 import type { ReactNode } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/useAuth';
@@ -46,6 +53,14 @@ function DashboardShell({
                 to="/dashboard/manager/venues"
               >
                 <Building2 aria-hidden="true" /> My Venues
+              </NavLink>
+            )}
+            {profile.venueManager && (
+              <NavLink
+                className={({ isActive }) => (isActive ? styles.active : '')}
+                to="/dashboard/manager/bookings"
+              >
+                <ClipboardList aria-hidden="true" /> Incoming Bookings
               </NavLink>
             )}
             <NavLink

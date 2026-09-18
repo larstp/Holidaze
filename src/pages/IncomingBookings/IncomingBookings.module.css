@@ -1,0 +1,131 @@
+.pageSection h1 {
+  margin: 0;
+  color: var(--text-h);
+  font-size: var(--text-size-xl);
+  font-weight: 900;
+  text-align: left;
+}
+
+.error {
+  margin-top: 1rem;
+  color: #9b3f32;
+  font-size: var(--text-size-s);
+}
+
+.empty {
+  margin-top: 1.5rem;
+  color: var(--text-muted);
+  font-size: var(--text-size-s);
+}
+
+.venueList {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.venueCard {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.venueHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem;
+  border: 0;
+  color: var(--text);
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.venueHeader:hover,
+.venueHeader:focus-visible {
+  background: var(--accent-bg);
+}
+
+.venueHeader .summary {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+.venueHeader strong {
+  color: var(--text-h);
+  font-size: var(--text-size-m);
+}
+
+.venueHeader > span:last-child {
+  color: var(--text-muted);
+  font-size: var(--text-size-s);
+}
+
+.calendar {
+  padding: 0 1rem 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.calendarEmpty {
+  margin: 1rem 0 0;
+  color: var(--text-muted);
+  font-size: var(--text-size-s);
+  text-align: center;
+}
+
+.calendar :global(.fc) {
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: var(--text-size-s);
+}
+
+.calendar :global(.fc-theme-standard td),
+.calendar :global(.fc-theme-standard th),
+.calendar :global(.fc-theme-standard .fc-scrollgrid) {
+  border-color: var(--border);
+}
+
+.calendar :global(.fc .fc-button) {
+  border-color: var(--dark-green);
+  background: var(--dark-green);
+  font: inherit;
+  font-size: var(--button-text-small);
+}
+
+.calendar :global(.fc .fc-button:hover),
+.calendar :global(.fc .fc-button:focus) {
+  border-color: var(--button-hover);
+  background: var(--button-hover);
+}
+
+.calendar :global(.fc .fc-event) {
+  color: var(--pure-white);
+  white-space: pre-line;
+}
+
+.calendar :global(.fc .fc-daygrid-day-number) {
+  color: var(--text-muted);
+}
+
+.calendar :global(.fc .fc-col-header-cell-cushion) {
+  color: var(--text-muted);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+@media (max-width: 700px) {
+  .calendar {
+    padding-inline: 0.5rem;
+  }
+
+  .venueHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

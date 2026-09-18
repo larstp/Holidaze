@@ -7,6 +7,7 @@ import { useAuth } from '../../context/useAuth';
 import { getRandomAboutQuote } from '../../lib/helpers/aboutQuotes';
 import { ApiError } from '../../lib/services/apiClient';
 import { loginUser } from '../../lib/services/authService';
+import { getProfile } from '../../lib/services/profileService';
 import styles from './Login.module.css';
 
 type LoginForm = {
@@ -65,7 +66,12 @@ function Login() {
       }
 
       setAccessToken(accessToken, form.rememberMe);
-      setProfile(response.data, form.rememberMe);
+      const profileResponse = await getProfile(
+        response.data.name,
+        '',
+        accessToken
+      );
+      setProfile(profileResponse?.data ?? response.data, form.rememberMe);
       const destination =
         (location.state as { from?: string } | null)?.from ?? '/dashboard';
       navigate(destination, { replace: true });
