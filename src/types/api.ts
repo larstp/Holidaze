@@ -33,8 +33,10 @@ export type Booking = {
   dateFrom: string;
   dateTo: string;
   guests: number;
+  customer?: ProfileSummary;
   created: string;
   updated: string;
+  venue?: Venue;
 };
 
 export type Venue = {

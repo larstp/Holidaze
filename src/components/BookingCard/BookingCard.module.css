@@ -1,0 +1,203 @@
+.card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--text);
+  background: var(--surface);
+  text-decoration: none;
+}
+
+.rentedCard {
+  grid-template-columns: 1fr;
+}
+.rentedCard .summary {
+  min-width: 0;
+}
+.rentedCard .actions {
+  grid-column: 1;
+  grid-row: auto;
+  justify-content: flex-end;
+  padding: 0 1rem 1rem;
+  margin: 0;
+}
+.card:hover,
+.card:focus-visible {
+  border-color: var(--primary);
+}
+
+.card > img,
+.card > span:first-child {
+  width: 100%;
+  height: 10rem;
+  object-fit: cover;
+}
+
+.imageLink {
+  display: block;
+  width: 100%;
+  height: 10rem;
+}
+.imageLink :global(img),
+.imageLink :global(span) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.info {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+  padding: 1rem;
+  text-align: left;
+}
+.info strong {
+  overflow: hidden;
+  font-size: var(--text-size-m);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.info strong a {
+  color: inherit;
+  text-decoration: none;
+}
+.info strong a:hover,
+.info strong a:focus-visible {
+  color: var(--dark-green);
+  text-decoration: underline;
+}
+.info span,
+.info small {
+  overflow: hidden;
+  color: var(--primary);
+  font-size: var(--text-size-s);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+:global(:root[data-theme='dark']) .info span,
+:global(:root[data-theme='dark']) .info small,
+:global(:root[data-theme='dark']) .arrow,
+:global(:root[data-theme='dark']) .completed {
+  color: var(--text-muted);
+}
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme='light'])) .info span,
+  :global(:root:not([data-theme='light'])) .info small,
+  :global(:root:not([data-theme='light'])) .arrow,
+  :global(:root:not([data-theme='light'])) .completed {
+    color: var(--text-muted);
+  }
+}
+.info b {
+  color: var(--text);
+}
+
+.status {
+  position: absolute;
+  top: 10.6rem;
+  right: 0.8rem;
+  align-self: start;
+  margin-top: 0;
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-pill);
+  color: var(--dark-green);
+  background: #d3f0d9;
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+.completed {
+  color: var(--primary);
+  background: var(--accent-bg);
+}
+.arrow {
+  display: none;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 1rem;
+  color: var(--primary);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  min-height: 2rem;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--dark-green);
+  border-radius: var(--radius-sm);
+  color: var(--dark-green);
+  background: transparent;
+  font: inherit;
+  font-size: var(--text-size-s);
+  font-weight: 700;
+  cursor: pointer;
+}
+.actions button:hover,
+.actions button:focus-visible {
+  color: var(--pure-white);
+  background: var(--dark-green);
+}
+.actions svg {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+.actions .deleteButton {
+  width: 2rem;
+  padding: 0.4rem;
+  border-color: #f2c3c3;
+  color: #a63d32;
+  background: #fde5e5;
+}
+.actions .deleteButton:hover,
+.actions .deleteButton:focus-visible {
+  color: var(--pure-white);
+  background: #a63d32;
+}
+
+@media (min-width: 701px) {
+  .card {
+    grid-template-columns: 7.5rem minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 0.85rem;
+    min-height: 6.5rem;
+  }
+  .rentedCard {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .rentedCard .actions {
+    grid-column: 2;
+    grid-row: 1;
+    padding: 0;
+    margin-right: 0.65rem;
+  }
+  .card > img,
+  .card > span:first-child {
+    width: 7.5rem;
+    height: 6.5rem;
+  }
+  .imageLink {
+    width: 7.5rem;
+    height: 6.5rem;
+  }
+  .info {
+    padding: 0;
+  }
+  .status {
+    position: static;
+    margin-top: 0.8rem;
+  }
+  .arrow {
+    display: block;
+  }
+}

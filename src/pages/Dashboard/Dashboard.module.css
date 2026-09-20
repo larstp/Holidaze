@@ -1,0 +1,72 @@
+.pageHeading {
+  margin: 0;
+  color: var(--text);
+  font-size: var(--text-size-xl);
+  font-weight: 900;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  justify-content: start;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.bookingSection {
+  margin-top: 2rem;
+}
+
+.bookingSection h2 {
+  margin: 0 0 0.85rem;
+  color: var(--text-h);
+  font-size: var(--text-size-m);
+  font-weight: 900;
+  text-align: left;
+}
+
+:global(:root[data-theme='dark']) .bookingSection a {
+  background: var(--dark-mode-secondary);
+}
+
+.bookingList {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.feedbackError {
+  margin-top: 1.5rem;
+  color: #9b3f32;
+  font-size: var(--text-size-s);
+}
+
+.emptyState {
+  display: grid;
+  justify-items: start;
+  gap: 0.6rem;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.emptyState h2 {
+  margin: 0;
+  font-size: var(--text-size-m);
+}
+
+.emptyState p {
+  color: var(--text-muted);
+  font-size: var(--text-size-s);
+}
+
+@media (max-width: 700px) {
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stats > * {
+    width: auto;
+    min-width: 0;
+  }
+}

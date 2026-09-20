@@ -7,6 +7,7 @@ import { useAuth } from '../../context/useAuth';
 import { getRandomAboutQuote } from '../../lib/helpers/aboutQuotes';
 import { ApiError } from '../../lib/services/apiClient';
 import { loginUser } from '../../lib/services/authService';
+import { getProfile } from '../../lib/services/profileService';
 import styles from './Login.module.css';
 
 type LoginForm = {
@@ -65,9 +66,20 @@ function Login() {
       }
 
       setAccessToken(accessToken, form.rememberMe);
-      setProfile(response.data, form.rememberMe);
+      const profileResponse = await getProfile(
+        response.data.name,
+        '',
+        accessToken
+      );
+      const loggedInProfile = profileResponse?.data ?? response.data;
+      setProfile(loggedInProfile, form.rememberMe);
+      const requestedDestination = (location.state as { from?: string } | null)
+        ?.from;
       const destination =
-        (location.state as { from?: string } | null)?.from ?? '/dashboard';
+        requestedDestination ??
+        (loggedInProfile.venueManager
+          ? '/dashboard/manager/overview'
+          : '/dashboard');
       navigate(destination, { replace: true });
     } catch (submissionError) {
       setError(

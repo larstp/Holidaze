@@ -1,5 +1,9 @@
+I have mostly used AI as a debug-helper (boy have I been debugging this project. Two user states were more complicated than I thought) and a artificial "lecturer".
+
+As i previous projects I have instructed the LLM to be a "expert coding lecturer" and only help me generate code where specifically requested (like with README organizing, copy, other blocks of text), but instead focus on guiding me through my questions as a lecturer would, by walking me through the process and explaining concepts for me. This, I feel, works very well, especially on larger pages where there might be a LOT going on at a time in the code. I also personally feel that i need it, since we only had TS for 2 weeks half a year ago, and its very complicated for a beginner.
+
 19 Aug
-Reason: Inital commit needed a simple README
+Reason: Initial commit needed a simple README
 Outcome: I had copilot generate a simple folder structure in .md format to have in the README while working on project
 
 25 Aug
@@ -101,3 +105,43 @@ Outcome: Read about client-side JWT claim parsing and got help implementing that
 Model: Google Gemini Free
 Reason: Needed corpo-jargon copy for a couple of pages
 Outcome: Generated text examples i could use in "Become a manager" page ++
+
+14 Sep
+Model: Google Gemini Free
+Reason: Needed help displaying the correct dates in the bookingList item. I really struggle with Math..
+Outcome: Managed to implement it, i think i understand but I'll probably forget again like I do every time..
+
+14 Sep
+Model: Google Gemini Free
+Reason: I have designed the Dashboard page a little too much, and needed a way to navigate using the nav on the left while switching out all the info on the right. As i was about to push the update i noticed the Dashboard.tsx file was starting to be longer than a LOTR marathon, and looking through it was very confusing, so i needed help splitting it up.
+Outcome: guided me through the process of "Shells" (hadn't heard of before, but makes so much sense), and I managed to set up a Dashboard shell for the nav so that I more easily could split up the different sections of the dashboard page into more manageable chunks (separate page files) and load them via that. Now I can navigate through /dashboard/profile and /dashboard/profile/edit for example. I am planning on adding venue management on the same page, so this was invaluable. MUCH cleaner and learned something new c:
+
+17 Sep
+Model: Google Gemini Free
+Reason: Wanted planning help on how to implement "Create" and "Edit" venue pages, as they would be very similar and server _almost_ the same function. I didn't want to make it un-DRY (wet?)
+Outcome: Helped me set up a plan for shared utilities based on if a prop exists or not on the selected venue.
+
+- CreateVenue.tsx contains the reusable form
+- EditVenue.tsx loads an existing venue, verifies manager ownership, and passes it into CreateVenue
+- CreateVenue.module.css styles both modes
+  Hopefully im thinking right here, architecture-wise
+
+18 Sep
+Model: Google Gemini Free
+Reason: I wanted to import a calendar from the FullCalendar react library, but i had a lot of problems getting it to work and none of the error messages and debugging messages meant anything to me, Needed help debugging
+Outcome: got help debugging. Was 3x version missmatches and wrong importing that made it difficult. Works now.
+
+18 Sep
+Model: Google Gemini Free
+Reason: Needed copy for venue
+Outcome: Got copy for venue (and a bunch other things that ive saved for later just in case, like comments and fake legal text copy etc.)
+
+19+20 Sep
+Model: GH Copilot (can't believe I paid $2 just to get help debugging...)
+Reason: Needed help troubleshooting why NONE of the imported calendars worked. I was following all their documentation but really struggled with styling them (nothing took)
+Outcome: gave me an overview of all the calendar's special class setup and how to style them. SUPER messy but it worked.
+
+20 Sep
+Model: GH Copilot
+Reason: For some reason if I was logged in as a user registered as manager, then logged out and in as a non-manager user, that user suddenly became a manager as well.
+Outcome: Got help debugging. Turns out i needed if (profile?.name === profileName) return;

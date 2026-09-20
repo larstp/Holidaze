@@ -1,0 +1,218 @@
+.page {
+  min-height: calc(100svh - var(--header-height-mobile));
+  color: var(--text);
+  background: var(--surface);
+}
+
+.layout {
+  display: grid;
+  gap: 2rem;
+  width: min(1126px, 100%);
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 5rem;
+}
+
+.sidebar {
+  display: grid;
+  align-content: start;
+  gap: 0.7rem;
+}
+
+.profileCard,
+.sideNav {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+:global(:root[data-theme='dark']) .sideNav,
+:global(:root[data-theme='dark']) .profileCard {
+  background: var(--dark-mode-secondary);
+}
+
+.profileCard {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem;
+}
+
+.profileCard img,
+.profileCard > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 2.5rem;
+  height: 2.5rem;
+  overflow: hidden;
+  border-radius: var(--radius-circle);
+  color: var(--pure-white);
+  background: var(--dark-green);
+  font-weight: 800;
+  object-fit: cover;
+}
+
+.profileCard div {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+  text-align: left;
+}
+
+.profileCard strong {
+  font-size: var(--text-size-s);
+}
+
+.profileCard small {
+  overflow: hidden;
+  color: var(--primary);
+  font-size: 0.68rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+:global(:root[data-theme='dark']) .profileCard small,
+:global(:root[data-theme='dark']) .logoutButton {
+  color: var(--text-muted);
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme='light'])) .profileCard small,
+  :global(:root:not([data-theme='light'])) .logoutButton {
+    color: var(--text-muted);
+  }
+}
+
+.sideNav {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.5rem;
+}
+
+.sideNav a,
+.managerLink,
+.logoutButton {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.5rem;
+  box-sizing: border-box;
+  padding: 0.65rem 0.8rem;
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  font-size: var(--text-size-s);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.sideNav a svg,
+.managerLink svg,
+.logoutButton svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+:global(:root[data-theme='dark']) .logoutButton:hover {
+  color: var(--logo-color);
+}
+
+.sideNav a:not(.active):hover,
+.sideNav a:not(.active):focus-visible,
+.managerLink:hover,
+.managerLink:focus-visible {
+  color: var(--dark-green);
+  background: var(--accent-bg);
+}
+
+.sideNav a.active {
+  color: var(--dark-green);
+  background: var(--accent-bg);
+}
+
+:global(:root[data-theme='dark']) .sideNav a.active,
+:global(:root[data-theme='dark']) .sideNav a.active:hover,
+:global(:root[data-theme='dark']) .sideNav a.active:focus-visible {
+  color: var(--pure-white) !important;
+}
+
+:global(:root[data-theme='dark']) .sideNav a:not(.active):hover,
+:global(:root[data-theme='dark']) .sideNav a:not(.active):focus-visible {
+  color: var(--text-muted) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme='light'])) .sideNav a.active,
+  :global(:root:not([data-theme='light'])) .sideNav a.active:hover,
+  :global(:root:not([data-theme='light'])) .sideNav a.active:focus-visible {
+    color: var(--pure-white) !important;
+  }
+
+  :global(:root:not([data-theme='light'])) .sideNav a:not(.active):hover,
+  :global(:root:not([data-theme='light']))
+    .sideNav
+    a:not(.active):focus-visible {
+    color: var(--text-muted) !important;
+  }
+} /*ARGH tis was infuriating*/
+
+.managerLink {
+  justify-content: center;
+  border: 1px solid var(--dark-green);
+  color: var(--pure-white);
+  background: var(--dark-green);
+}
+
+.managerLink:hover,
+.managerLink:focus-visible {
+  color: var(--pure-white);
+  background: var(--button-hover);
+}
+
+.sideNav + .managerLink:hover,
+.sideNav + .managerLink:focus-visible {
+  color: var(--pure-white);
+}
+
+:global(:root[data-theme='dark']) .managerLink:hover,
+:global(:root[data-theme='dark']) .managerLink:focus-visible {
+  color: var(--pure-white);
+}
+
+.logoutButton {
+  width: fit-content;
+  padding-left: 0.8rem;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+.logoutButton:hover,
+.logoutButton:focus-visible {
+  color: var(--logo-color);
+}
+
+.content {
+  min-width: 0;
+  min-height: 12rem;
+}
+
+@media (min-width: 701px) {
+  .page {
+    min-height: calc(100svh - var(--header-height-desktop));
+  }
+
+  .layout {
+    grid-template-columns: 16rem minmax(0, 1fr);
+    gap: 2rem;
+    padding: 2.5rem 2rem 6rem;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: calc(var(--header-height-desktop) + 1.5rem);
+    align-self: start;
+  }
+}
