@@ -14,6 +14,7 @@ import ManagerVenues from './pages/ManagerVenues/ManagerVenues';
 import IncomingBookings from './pages/IncomingBookings/IncomingBookings';
 import Register from './pages/Register/Register';
 import Search from './pages/Search/Search';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import Venue from './pages/Venue/Venue';
 import ProfileSettings from './pages/ProfileSettings/ProfileSettings';
 
@@ -21,6 +22,7 @@ function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Header />
         <Navbar />
         <div className="routeContent">

@@ -121,3 +121,13 @@ Outcome: Helped me set up a plan for shared utilities based on if a prop exists 
 - EditVenue.tsx loads an existing venue, verifies manager ownership, and passes it into CreateVenue
 - CreateVenue.module.css styles both modes
   Hopefully im thinking right here, architecture-wise
+
+18 Sep
+Model: Google Gemini Free
+Reason: I wanted to import a calendar from the FullCalendar react library, but i had a lot of problems getting it to work and none of the error messages and debugging messages meant anything to me, Needed help debugging
+Outcome: got help debugging. Was 3x version missmatches and wrong importing that made it difficult. Works now.
+
+18 Sep
+Model: Google Gemini Free
+Reason: Needed copy for venue
+Outcome: Got copy for venue (and a bunch other things that ive saved for later just in case, like comments and fake legal text copy etc.)

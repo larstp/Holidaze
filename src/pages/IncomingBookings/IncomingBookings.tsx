@@ -90,7 +90,7 @@ function IncomingBookings() {
             return (
               <article className={styles.venueCard} key={venue.id}>
                 <button
-                  className={styles.venueHeader}
+                  className={`${styles.venueHeader} ${styles.calendarToggle}`}
                   type="button"
                   aria-expanded={isExpanded}
                   onClick={() =>
