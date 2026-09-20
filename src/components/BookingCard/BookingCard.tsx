@@ -1,4 +1,4 @@
-import { ArrowRight, Pencil, Trash2 } from 'lucide-react';
+import { ArrowRight, CalendarDays, Pencil, Trash2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ImageWithFallback from '../ImageWithFallback/ImageWithFallback';
 import VenueSummary from '../VenueSummary/VenueSummary';
@@ -16,6 +16,7 @@ type BookingCardProps =
   | {
       variant: 'rentedVenue';
       venue: Venue;
+      onBookings?: (venue: Venue) => void;
       onEdit?: (venue: Venue) => void;
       onDelete?: (venue: Venue) => void;
     };
@@ -35,6 +36,9 @@ function BookingCard(props: BookingCardProps) {
       <article className={`${styles.card} ${styles.rentedCard}`}>
         <VenueSummary venue={props.venue} />
         <div className={styles.actions}>
+          <button type="button" onClick={() => props.onBookings?.(props.venue)}>
+            <CalendarDays aria-hidden="true" /> Bookings
+          </button>
           <button type="button" onClick={() => props.onEdit?.(props.venue)}>
             <Pencil aria-hidden="true" /> Edit
           </button>

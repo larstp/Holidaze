@@ -1,5 +1,9 @@
+I have mostly used AI as a debug-helper (boy have I been debugging this project. Two user states were more complicated than I thought) and a artificial "lecturer".
+
+As i previous projects I have instructed the LLM to be a "expert coding lecturer" and only help me generate code where specifically requested (like with README organizing, copy, other blocks of text), but instead focus on guiding me through my questions as a lecturer would, by walking me through the process and explaining concepts for me. This, I feel, works very well, especially on larger pages where there might be a LOT going on at a time in the code. I also personally feel that i need it, since we only had TS for 2 weeks half a year ago, and its very complicated for a beginner.
+
 19 Aug
-Reason: Inital commit needed a simple README
+Reason: Initial commit needed a simple README
 Outcome: I had copilot generate a simple folder structure in .md format to have in the README while working on project
 
 25 Aug

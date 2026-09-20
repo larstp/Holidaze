@@ -1,7 +1,7 @@
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import DashboardShell from '../../components/DashboardShell/DashboardShell';
 import { useAuth } from '../../context/useAuth';
 import VenueSummary from '../../components/VenueSummary/VenueSummary';
@@ -12,6 +12,7 @@ import styles from './IncomingBookings.module.css';
 
 function IncomingBookings() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { accessToken, isAuthenticated, profile } = useAuth();
   const [venues, setVenues] = useState<Venue[]>([]);
   const [expandedVenueId, setExpandedVenueId] = useState<string | null>(null);
@@ -35,7 +36,7 @@ function IncomingBookings() {
         if (isCurrentRequest) {
           const loadedVenues = response?.data ?? [];
           setVenues(loadedVenues);
-          setExpandedVenueId(loadedVenues[0]?.id ?? null);
+          setExpandedVenueId(searchParams.get('venue'));
         }
       })
       .catch((requestError: unknown) => {
@@ -54,7 +55,7 @@ function IncomingBookings() {
     return () => {
       isCurrentRequest = false;
     };
-  }, [accessToken, isAuthenticated, navigate, profile]);
+  }, [accessToken, isAuthenticated, navigate, profile, searchParams]);
 
   if (!isAuthenticated || !profile?.venueManager) return null;
 

@@ -71,9 +71,15 @@ function Login() {
         '',
         accessToken
       );
-      setProfile(profileResponse?.data ?? response.data, form.rememberMe);
+      const loggedInProfile = profileResponse?.data ?? response.data;
+      setProfile(loggedInProfile, form.rememberMe);
+      const requestedDestination = (location.state as { from?: string } | null)
+        ?.from;
       const destination =
-        (location.state as { from?: string } | null)?.from ?? '/dashboard';
+        requestedDestination ??
+        (loggedInProfile.venueManager
+          ? '/dashboard/manager/overview'
+          : '/dashboard');
       navigate(destination, { replace: true });
     } catch (submissionError) {
       setError(

@@ -105,6 +105,9 @@ function ManagerVenues() {
                 key={venue.id}
                 variant="rentedVenue"
                 venue={venue}
+                onBookings={() =>
+                  navigate(`/dashboard/manager/bookings?venue=${venue.id}`)
+                }
                 onEdit={() => navigate(`/venues/${venue.id}/edit`)}
                 onDelete={handleDelete}
               />
