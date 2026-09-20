@@ -12,6 +12,7 @@ import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import ManagerVenues from './pages/ManagerVenues/ManagerVenues';
 import IncomingBookings from './pages/IncomingBookings/IncomingBookings';
+import ManagerOverview from './pages/ManagerOverview/ManagerOverview';
 import Register from './pages/Register/Register';
 import Search from './pages/Search/Search';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
@@ -42,6 +43,10 @@ function App() {
             <Route
               path="/dashboard/manager/bookings"
               element={<IncomingBookings />}
+            />
+            <Route
+              path="/dashboard/manager/overview"
+              element={<ManagerOverview />}
             />
             <Route path="/become-manager" element={<BecomeManager />} />
             <Route path="/venues/create" element={<CreateVenue />} />

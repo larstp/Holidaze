@@ -131,3 +131,13 @@ Outcome: got help debugging. Was 3x version missmatches and wrong importing that
 Model: Google Gemini Free
 Reason: Needed copy for venue
 Outcome: Got copy for venue (and a bunch other things that ive saved for later just in case, like comments and fake legal text copy etc.)
+
+19+20 Sep
+Model: GH Copilot (can't believe I paid $2 just to get help debugging...)
+Reason: Needed help troubleshooting why NONE of the imported calendars worked. I was following all their documentation but really struggled with styling them (nothing took)
+Outcome: gave me an overview of all the calendar's special class setup and how to style them. SUPER messy but it worked.
+
+20 Sep
+Model: GH Copilot
+Reason: For some reason if I was logged in as a user registered as manager, then logged out and in as a non-manager user, that user suddenly became a manager as well.
+Outcome: Got help debugging. Turns out i needed if (profile?.name === profileName) return;

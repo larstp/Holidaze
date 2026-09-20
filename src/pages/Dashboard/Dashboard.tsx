@@ -94,8 +94,8 @@ function Dashboard() {
         <div className={styles.stats}>
           <StatCard
             icon={CalendarDays}
-            value={upcomingBookings.length}
-            label="Upcoming trips"
+            value={bookings.length}
+            label="Booked trips"
           />
           <StatCard
             icon={TrendingUp}

@@ -66,10 +66,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
-    if (!accessToken || profile) return;
+    if (!accessToken) return;
 
     const profileName = getTokenProfileName(accessToken);
     if (!profileName) return;
+    if (profile?.name === profileName) return;
 
     let isCurrentRequest = true;
     const rememberMe = Boolean(localStorage.getItem(ACCESS_TOKEN_KEY));
