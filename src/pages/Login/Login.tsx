@@ -125,7 +125,7 @@ function Login() {
               <input
                 type="email"
                 autoComplete="email"
-                placeholder="you@example.com"
+                placeholder="you@stud.noroff.no"
                 value={form.email}
                 onChange={(event) => updateField('email', event.target.value)}
                 required
