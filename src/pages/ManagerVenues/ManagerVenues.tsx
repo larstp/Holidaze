@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import BookingCard from '../../components/BookingCard/BookingCard';
+import ConfirmDialog from '../../components/ConfirmDialog/ConfirmDialog';
 import DashboardShell from '../../components/DashboardShell/DashboardShell';
 import { useAuth } from '../../context/useAuth';
 import { ApiError } from '../../lib/services/apiClient';
@@ -13,18 +14,15 @@ import styles from './ManagerVenues.module.css';
 
 function ManagerVenues() {
   const navigate = useNavigate();
-  const { accessToken, isAuthenticated, profile } = useAuth();
+  const { accessToken, profile } = useAuth();
   const [venues, setVenues] = useState<Venue[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+  const [venueToDelete, setVenueToDelete] = useState<Venue | null>(null);
+  const [isDeleteComplete, setIsDeleteComplete] = useState(false);
 
   useEffect(() => {
-    if (!isAuthenticated || !profile?.venueManager) {
-      navigate('/dashboard', { replace: true });
-      return;
-    }
-
-    if (!accessToken) return;
+    if (!accessToken || !profile) return;
 
     let isCurrentRequest = true;
     getProfileVenues(profile.name, '', accessToken)
@@ -47,26 +45,36 @@ function ManagerVenues() {
     return () => {
       isCurrentRequest = false;
     };
-  }, [accessToken, isAuthenticated, navigate, profile]);
+  }, [accessToken, profile]);
 
-  if (!isAuthenticated || !profile?.venueManager) {
-    return null;
-  }
+  const requestDelete = (venue: Venue) => {
+    setError('');
+    setIsDeleteComplete(false);
+    setVenueToDelete(venue);
+  };
 
-  const handleDelete = async (venue: Venue) => {
-    if (!accessToken || !window.confirm(`Delete ${venue.name}?`)) return;
+  const closeDeleteDialog = () => {
+    setIsDeleteComplete(false);
+    setVenueToDelete(null);
+  };
+
+  const handleDelete = async () => {
+    if (!accessToken || !venueToDelete) return;
 
     setError('');
     try {
-      await deleteVenue(venue.id, accessToken);
+      await deleteVenue(venueToDelete.id, accessToken);
       setVenues((currentVenues) =>
-        currentVenues.filter((currentVenue) => currentVenue.id !== venue.id)
+        currentVenues.filter(
+          (currentVenue) => currentVenue.id !== venueToDelete.id
+        )
       );
+      setIsDeleteComplete(true);
     } catch (requestError) {
       setError(
         requestError instanceof ApiError
           ? requestError.message
-          : 'We could not delete this venue.'
+          : 'We could not delete this venue. Please try again later.'
       );
     }
   };
@@ -109,12 +117,25 @@ function ManagerVenues() {
                   navigate(`/dashboard/manager/bookings?venue=${venue.id}`)
                 }
                 onEdit={() => navigate(`/venues/${venue.id}/edit`)}
-                onDelete={handleDelete}
+                onDelete={requestDelete}
               />
             ))}
           </div>
         )}
       </section>
+      <ConfirmDialog
+        open={Boolean(venueToDelete)}
+        title={isDeleteComplete ? 'Venue deleted' : 'Delete venue?'}
+        confirmLabel="Delete venue"
+        isComplete={isDeleteComplete}
+        error={isDeleteComplete ? undefined : error}
+        onCancel={closeDeleteDialog}
+        onConfirm={handleDelete}
+      >
+        {isDeleteComplete
+          ? `${venueToDelete?.name} has been deleted successfully.`
+          : `This will permanently delete ${venueToDelete?.name}. This action cannot be undone.`}
+      </ConfirmDialog>
     </DashboardShell>
   );
 }

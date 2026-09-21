@@ -44,6 +44,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [profile, setProfileState] = useState<Profile | null>(
     readStoredProfile
   );
+  const [failedProfileToken, setFailedProfileToken] = useState<string | null>(
+    null
+  );
 
   const setAccessToken = (nextToken: string | null, rememberMe = true) => {
     localStorage.removeItem(ACCESS_TOKEN_KEY);
@@ -69,8 +72,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!accessToken) return;
 
     const profileName = getTokenProfileName(accessToken);
-    if (!profileName) return;
-    if (profile?.name === profileName) return;
+    if (!profileName || profile?.name === profileName) return;
 
     let isCurrentRequest = true;
     const rememberMe = Boolean(localStorage.getItem(ACCESS_TOKEN_KEY));
@@ -81,18 +83,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           setProfile(response.data, rememberMe);
         }
       })
-      .catch(() => undefined);
+      .catch(() => setFailedProfileToken(accessToken));
 
     return () => {
       isCurrentRequest = false;
     };
   }, [accessToken, profile]);
 
+  const tokenProfileName = accessToken
+    ? getTokenProfileName(accessToken)
+    : null;
+  const isAuthLoading = Boolean(
+    accessToken &&
+    tokenProfileName &&
+    profile?.name !== tokenProfileName &&
+    failedProfileToken !== accessToken
+  );
+
   const value = useMemo(
     () => ({
       accessToken,
       profile,
       isAuthenticated: Boolean(accessToken),
+      isAuthLoading,
       setAccessToken,
       setProfile,
       logout: () => {
@@ -100,7 +113,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setProfile(null);
       },
     }),
-    [accessToken, profile]
+    [accessToken, isAuthLoading, profile]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

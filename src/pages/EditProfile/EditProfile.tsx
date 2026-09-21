@@ -3,7 +3,6 @@ import { useState } from 'react';
 import type { SyntheticEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
-import PageLoader from '../../components/PageLoader/PageLoader';
 import { useAuth } from '../../context/useAuth';
 import { ApiError } from '../../lib/services/apiClient';
 import { updateProfile } from '../../lib/services/profileService';
@@ -11,7 +10,7 @@ import styles from './EditProfile.module.css';
 
 function EditProfile() {
   const navigate = useNavigate();
-  const { accessToken, isAuthenticated, profile, setProfile } = useAuth();
+  const { accessToken, profile, setProfile } = useAuth();
   const [avatarUrl, setAvatarUrl] = useState(profile?.avatar?.url ?? '');
   const [bannerUrl, setBannerUrl] = useState(profile?.banner?.url ?? '');
   const [bio, setBio] = useState(profile?.bio ?? '');
@@ -24,9 +23,7 @@ function EditProfile() {
   const [error, setError] = useState('');
   const [isSaving, setIsSaving] = useState(false);
 
-  if (!isAuthenticated || !profile || !accessToken) {
-    return <PageLoader label="Loading your profile" />;
-  }
+  if (!profile || !accessToken) return null;
 
   const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();

@@ -5,8 +5,17 @@ import './styles/main.css';
 import App from './App.tsx';
 
 const savedTheme = localStorage.getItem('holidaze-theme');
-document.documentElement.dataset.theme =
-  savedTheme === 'dark' ? 'dark' : 'light';
+const prefersDarkMode = window.matchMedia(
+  '(prefers-color-scheme: dark)'
+).matches;
+const initialTheme =
+  savedTheme === 'dark' || savedTheme === 'light'
+    ? savedTheme
+    : prefersDarkMode
+      ? 'dark'
+      : 'light';
+
+document.documentElement.dataset.theme = initialTheme;
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -1,0 +1,63 @@
+.backdrop {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  background: rgb(0 0 0 / 45%);
+}
+
+.dialog {
+  width: min(100%, 28rem);
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--text);
+  background: var(--surface);
+  box-shadow: 0 1rem 3rem rgb(0 0 0 / 20%);
+}
+
+.dialog h2 {
+  margin: 0;
+  color: var(--text-h);
+  font-size: var(--text-size-l);
+}
+
+.dialog p {
+  margin: 0.75rem 0 0;
+  color: var(--text-muted);
+  font-size: var(--text-size-s);
+  line-height: var(--line-height-body);
+}
+
+.dialog .error {
+  color: #9b3f32;
+  font-weight: 700;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.deleteButton {
+  border-color: #f2c3c3;
+  color: #a63d32;
+  background: var(--danger);
+}
+
+.deleteButton:hover:not(:disabled),
+.deleteButton:focus-visible {
+  color: var(--pure-white);
+  background: var(--logo-color);
+}
+
+@media (max-width: 420px) {
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}

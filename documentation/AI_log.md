@@ -145,3 +145,8 @@ Outcome: gave me an overview of all the calendar's special class setup and how t
 Model: GH Copilot
 Reason: For some reason if I was logged in as a user registered as manager, then logged out and in as a non-manager user, that user suddenly became a manager as well.
 Outcome: Got help debugging. Turns out i needed if (profile?.name === profileName) return;
+
+20 Sep
+Model: GH Copilot
+Reason: Needed help debugging after i added auth guard and wanted to remove all redundant route-access redirects
+Outcome: helped me fix it. it was so many instances that i needed it to find them and list the,, and double check when i removed them wrongly

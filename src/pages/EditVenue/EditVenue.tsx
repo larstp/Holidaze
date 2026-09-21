@@ -10,15 +10,12 @@ import type { Venue } from '../../types/api';
 function EditVenue() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { accessToken, isAuthenticated, profile } = useAuth();
+  const { accessToken, profile } = useAuth();
   const [venue, setVenue] = useState<Venue | null>(null);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    if (!isAuthenticated || !profile?.venueManager || !id || !accessToken) {
-      navigate('/dashboard/manager/venues', { replace: true });
-      return;
-    }
+    if (!id || !accessToken || !profile) return;
 
     let isCurrentRequest = true;
     getVenue(id, '?_owner=true')
@@ -44,9 +41,9 @@ function EditVenue() {
     return () => {
       isCurrentRequest = false;
     };
-  }, [accessToken, id, isAuthenticated, navigate, profile]);
+  }, [accessToken, id, navigate, profile]);
 
-  if (!isAuthenticated || !profile?.venueManager || !accessToken || !venue) {
+  if (!accessToken || !profile || !venue) {
     return <PageLoader label={error || 'Loading venue'} />;
   }
 

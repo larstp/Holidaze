@@ -5,6 +5,7 @@ type AuthContextValue = {
   accessToken: string | null;
   profile: Profile | null;
   isAuthenticated: boolean;
+  isAuthLoading: boolean;
   setAccessToken: (accessToken: string | null, rememberMe?: boolean) => void;
   setProfile: (profile: Profile | null, rememberMe?: boolean) => void;
   logout: () => void;

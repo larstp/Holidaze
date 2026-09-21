@@ -65,13 +65,13 @@ function Login() {
         throw new Error('The login response did not include an access token.');
       }
 
-      setAccessToken(accessToken, form.rememberMe);
       const profileResponse = await getProfile(
         response.data.name,
         '',
         accessToken
       );
       const loggedInProfile = profileResponse?.data ?? response.data;
+      setAccessToken(accessToken, form.rememberMe);
       setProfile(loggedInProfile, form.rememberMe);
       const requestedDestination = (location.state as { from?: string } | null)
         ?.from;
@@ -82,6 +82,8 @@ function Login() {
           : '/dashboard');
       navigate(destination, { replace: true });
     } catch (submissionError) {
+      setAccessToken(null);
+      setProfile(null);
       setError(
         submissionError instanceof ApiError
           ? submissionError.message

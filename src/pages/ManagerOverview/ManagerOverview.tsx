@@ -1,7 +1,6 @@
 import { CalendarDays, Store, TrendingUp, Users } from 'lucide-react';
 import { DayPicker } from 'react-day-picker';
 import { useEffect, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import BookingCard from '../../components/BookingCard/BookingCard';
 import DashboardShell from '../../components/DashboardShell/DashboardShell';
 import StatCard from '../../components/StatCard/StatCard';
@@ -35,19 +34,14 @@ const bookingTotal = (booking: Booking) => {
 };
 
 function ManagerOverview() {
-  const navigate = useNavigate();
-  const { accessToken, isAuthenticated, profile } = useAuth();
+  const { accessToken, profile } = useAuth();
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [venues, setVenues] = useState<Venue[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    if (!isAuthenticated || !profile?.venueManager) {
-      navigate('/dashboard', { replace: true });
-      return;
-    }
-    if (!accessToken) return;
+    if (!accessToken || !profile) return;
 
     let isCurrentRequest = true;
     Promise.all([
@@ -79,7 +73,7 @@ function ManagerOverview() {
     return () => {
       isCurrentRequest = false;
     };
-  }, [accessToken, isAuthenticated, navigate, profile]);
+  }, [accessToken, profile]);
 
   const upcomingTrips = useMemo(() => bookings.filter(isUpcoming), [bookings]);
   const totalSpent = bookings.reduce(
@@ -100,8 +94,6 @@ function ManagerOverview() {
       ),
     0
   );
-
-  if (!isAuthenticated || !profile?.venueManager) return null;
 
   return (
     <DashboardShell isLoading={isLoading} loadingLabel="Loading your overview">
