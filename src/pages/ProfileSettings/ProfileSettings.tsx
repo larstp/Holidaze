@@ -1,20 +1,15 @@
 import { Pencil } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import buttonStyles from '../../components/Button/Button.module.css';
 import ProfileAvatar from '../../components/ProfileAvatar/ProfileAvatar';
 import DashboardShell from '../../components/DashboardShell/DashboardShell';
-import PageLoader from '../../components/PageLoader/PageLoader';
 import { useAuth } from '../../context/useAuth';
 import styles from './ProfileSettings.module.css';
 
 function ProfileSettings() {
-  const navigate = useNavigate();
-  const { isAuthenticated, profile } = useAuth();
+  const { profile } = useAuth();
 
-  if (!isAuthenticated || !profile) {
-    navigate('/login', { replace: true });
-    return <PageLoader label="Loading your profile" />;
-  }
+  if (!profile) return null;
 
   return (
     <DashboardShell>

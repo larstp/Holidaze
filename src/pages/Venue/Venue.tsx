@@ -12,6 +12,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import ImageWithFallback from '../../components/ImageWithFallback/ImageWithFallback';
 import PageLoader from '../../components/PageLoader/PageLoader';
+import { VenueNotFoundPage } from '../../components/PageStates/PageStates';
 import { useAuth } from '../../context/useAuth';
 import { useVenue } from '../../hooks/useVenue';
 import { getNextDate, getToday } from '../../lib/helpers/dateHelpers';
@@ -44,15 +45,7 @@ function Venue() {
   if (isLoading) return <PageLoader />;
 
   if (error || !venue) {
-    return (
-      <main className={styles.state}>
-        <h1>We could not find this stay.</h1>
-        <p>The venue may have been removed or is temporarily unavailable.</p>
-        <Button variant="secondary" size="small" onClick={refetch}>
-          Try again
-        </Button>
-      </main>
-    );
+    return <VenueNotFoundPage onRetry={refetch} />;
   }
 
   const location = [venue.location.city, venue.location.country]

@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
@@ -18,6 +18,8 @@ import Search from './pages/Search/Search';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import Venue from './pages/Venue/Venue';
 import ProfileSettings from './pages/ProfileSettings/ProfileSettings';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import { NotFoundPage } from './components/PageStates/PageStates';
 
 function App() {
   return (
@@ -33,25 +35,72 @@ function App() {
             <Route path="/venues/:id" element={<Venue />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/dashboard/profile" element={<ProfileSettings />} />
-            <Route path="/dashboard/profile/edit" element={<EditProfile />} />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard/profile"
+              element={
+                <ProtectedRoute>
+                  <ProfileSettings />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard/profile/edit"
+              element={
+                <ProtectedRoute>
+                  <EditProfile />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/dashboard/manager/venues"
-              element={<ManagerVenues />}
+              element={
+                <ProtectedRoute managerOnly>
+                  <ManagerVenues />
+                </ProtectedRoute>
+              }
             />
             <Route
               path="/dashboard/manager/bookings"
-              element={<IncomingBookings />}
+              element={
+                <ProtectedRoute managerOnly>
+                  <IncomingBookings />
+                </ProtectedRoute>
+              }
             />
             <Route
               path="/dashboard/manager/overview"
-              element={<ManagerOverview />}
+              element={
+                <ProtectedRoute managerOnly>
+                  <ManagerOverview />
+                </ProtectedRoute>
+              }
             />
             <Route path="/become-manager" element={<BecomeManager />} />
-            <Route path="/venues/create" element={<CreateVenue />} />
-            <Route path="/venues/:id/edit" element={<EditVenue />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route
+              path="/venues/create"
+              element={
+                <ProtectedRoute managerOnly>
+                  <CreateVenue />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/venues/:id/edit"
+              element={
+                <ProtectedRoute managerOnly>
+                  <EditVenue />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
         <Footer />

@@ -3,7 +3,6 @@ import { useState } from 'react';
 import type { SyntheticEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
-import PageLoader from '../../components/PageLoader/PageLoader';
 import { useAuth } from '../../context/useAuth';
 import { ApiError } from '../../lib/services/apiClient';
 import { createVenue } from '../../lib/services/venueService';
@@ -58,7 +57,7 @@ type CreateVenueProps = {
 
 function CreateVenue({ venue }: CreateVenueProps) {
   const navigate = useNavigate();
-  const { accessToken, isAuthenticated, profile } = useAuth();
+  const { accessToken } = useAuth();
   const [form, setForm] = useState<VenueForm>(() =>
     venue
       ? {
@@ -84,9 +83,7 @@ function CreateVenue({ venue }: CreateVenueProps) {
   const [error, setError] = useState('');
   const [isSaving, setIsSaving] = useState(false);
 
-  if (!isAuthenticated || !profile?.venueManager || !accessToken) {
-    return <PageLoader label="Loading venue form" />;
-  }
+  if (!accessToken) return null;
 
   const updateField = <Field extends keyof VenueForm>(
     field: Field,

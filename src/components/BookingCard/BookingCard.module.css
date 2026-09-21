@@ -157,12 +157,12 @@
   padding: 0.4rem;
   border-color: #f2c3c3;
   color: #a63d32;
-  background: #fde5e5;
+  background: var(--danger);
 }
 .actions .deleteButton:hover,
 .actions .deleteButton:focus-visible {
   color: var(--pure-white);
-  background: #a63d32;
+  background: var(--logo-color);
 }
 
 @media (min-width: 701px) {

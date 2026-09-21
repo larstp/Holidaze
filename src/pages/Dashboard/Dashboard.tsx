@@ -24,17 +24,12 @@ const isUpcoming = (booking: Booking) =>
 
 function Dashboard() {
   const navigate = useNavigate();
-  const { accessToken, isAuthenticated, profile } = useAuth();
+  const { accessToken, profile } = useAuth();
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate('/login', { replace: true });
-      return;
-    }
-
     if (!profile || !accessToken) return;
 
     let isCurrentRequest = true;
@@ -58,7 +53,7 @@ function Dashboard() {
     return () => {
       isCurrentRequest = false;
     };
-  }, [accessToken, isAuthenticated, navigate, profile]);
+  }, [accessToken, profile]);
 
   const upcomingBookings = useMemo(
     () => bookings.filter(isUpcoming),
@@ -80,10 +75,6 @@ function Dashboard() {
     );
     return total + booking.venue.price * nights;
   }, 0);
-
-  if (!isAuthenticated || !profile) {
-    return null;
-  }
 
   return (
     <DashboardShell isLoading={isLoading} loadingLabel="Loading your trips">
