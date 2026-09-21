@@ -116,7 +116,7 @@ function Login() {
         <div className={styles.formContent}>
           <div className={styles.heading}>
             <h1 id="login-heading">Welcome back</h1>
-            <p>Sign in to manage your bookings and saved venues.</p>
+            <p>Sign in to manage your bookings and venues.</p>
           </div>
 
           <form className={styles.form} onSubmit={handleSubmit} noValidate>

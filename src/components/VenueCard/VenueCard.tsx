@@ -1,4 +1,4 @@
-import { Heart, MapPin, Star } from 'lucide-react';
+import { MapPin, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { Venue } from '@/types/api';
 import ImageWithFallback from '../ImageWithFallback/ImageWithFallback';
@@ -30,13 +30,6 @@ function VenueCard({ venue }: VenueCardProps) {
           <span className={styles.favoriteBadge}>Guest favourite</span>
         )}
       </Link>
-      <button
-        className={styles.saveButton}
-        type="button"
-        aria-label={`Save ${venue.name}`}
-      >
-        <Heart aria-hidden="true" />
-      </button>
       <div className={styles.content}>
         <div className={styles.titleRow}>
           <p className={styles.category}>Stay</p>

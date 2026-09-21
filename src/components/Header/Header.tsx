@@ -118,6 +118,9 @@ function Header() {
           >
             Search
           </NavLink>
+          <NavLink className={styles.link} to="/search" end onClick={closeMenu}>
+            All venues
+          </NavLink>
           <NavLink
             className={({ isActive }) =>
               `${styles.listLink} ${isActive ? styles.navLinkActive : ''}`

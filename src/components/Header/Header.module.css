@@ -294,7 +294,7 @@
   height: 0.9rem;
 }
 
-@media (min-width: 701px) {
+@media (min-width: 901px) {
   .inner {
     gap: 1.5rem;
     min-height: var(--header-height-desktop);
@@ -365,7 +365,17 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
+  .inner {
+    height: 60px;
+    min-height: 60px;
+    box-sizing: border-box;
+  }
+
+  .navigation {
+    top: 60px;
+  }
+
   .link,
   .listLink {
     padding: 0.85rem 0.75rem;

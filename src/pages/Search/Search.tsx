@@ -34,6 +34,8 @@ function Search() {
     dateFrom,
     dateTo,
     draftAmenity,
+    draftCity,
+    draftCountry,
     draftDateFrom,
     draftDateTo,
     page,
@@ -44,6 +46,8 @@ function Search() {
     updateDateRange,
     applyFilters,
     clearFilters,
+    setDraftCity,
+    setDraftCountry,
     setPage,
   } = useSearchFilters();
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
@@ -192,6 +196,27 @@ function Search() {
             Clear filters
           </Button>
           <fieldset>
+            <legend>Location</legend>
+            <label className={styles.locationField}>
+              City
+              <input
+                type="text"
+                value={draftCity}
+                onChange={(event) => setDraftCity(event.target.value)}
+                placeholder="Cape Town"
+              />
+            </label>
+            <label className={styles.locationField}>
+              Country
+              <input
+                type="text"
+                value={draftCountry}
+                onChange={(event) => setDraftCountry(event.target.value)}
+                placeholder="South Africa"
+              />
+            </label>
+          </fieldset>
+          <fieldset>
             <legend>Dates</legend>
             <div className={styles.dateFilters}>
               <label className={styles.dateField}>
@@ -307,7 +332,7 @@ function Search() {
               aria-label="Search results pages"
             >
               <Button
-                variant="tertiary"
+                variant="secondary"
                 size="small"
                 disabled={currentPage <= 1}
                 onClick={() => setPage(currentPage - 1)}
@@ -318,7 +343,7 @@ function Search() {
                 Page {currentPage} of {pageCount}
               </span>
               <Button
-                variant="tertiary"
+                variant="secondary"
                 size="small"
                 disabled={currentPage >= pageCount}
                 onClick={() => setPage(currentPage + 1)}

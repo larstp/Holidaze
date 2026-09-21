@@ -64,9 +64,14 @@
   box-shadow: var(--shadow);
 }
 
-.filtersOpen {
-  display: block;
-  animation: filterSlideIn 220ms ease-out both;
+:global(:root[data-theme='dark']) .filters {
+  background: var(--dark-mode-secondary);
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme='light'])) .filters {
+    background: var(--dark-mode-secondary);
+  }
 }
 
 .filtersClosing {
@@ -181,6 +186,23 @@ fieldset label {
   gap: 0.75rem;
   width: 100%;
   min-width: 0;
+}
+
+.locationField {
+  display: grid !important;
+  align-items: start !important;
+  gap: 0.35rem !important;
+}
+
+.locationField input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  background: var(--surface);
+  font: inherit;
 }
 
 .dateField {

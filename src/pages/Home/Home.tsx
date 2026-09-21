@@ -210,7 +210,11 @@ function Home() {
       <section className="section">
         <div className={styles.sectionContent}>
           <p className={styles.sectionEyebrow}>Explore</p>
-          <h2>Popular destinations</h2>
+          <h2>
+            <Link className={styles.sectionHeadingLink} to="/search">
+              Popular destinations
+            </Link>
+          </h2>
           <p className={styles.sectionIntro}>
             Explore venues in the world's most sought-after locations.
           </p>
@@ -254,7 +258,11 @@ function Home() {
       <section className="section">
         <div className={styles.sectionContent}>
           <p className={styles.sectionEyebrow}>Explore</p>
-          <h2>Featured stays</h2>
+          <h2>
+            <Link className={styles.sectionHeadingLink} to="/search">
+              Featured stays
+            </Link>
+          </h2>
           <p className={styles.sectionIntro}>
             Hand-picked places for your next stay.
           </p>

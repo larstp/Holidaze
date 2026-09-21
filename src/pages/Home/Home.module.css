@@ -234,6 +234,18 @@ input::placeholder {
   font-weight: 700;
 }
 
+.sectionHeadingLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.sectionHeadingLink:hover,
+.sectionHeadingLink:focus-visible {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
 .sectionIntro {
   margin-top: 0.45rem;
   color: var(--text-muted);

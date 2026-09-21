@@ -1,4 +1,4 @@
-import { Heart, House, LogOut, Search, UserRound } from 'lucide-react';
+import { House, LogOut, Search, UserRound } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/useAuth';
 import styles from './Navbar.module.css';
@@ -26,12 +26,6 @@ function Navbar() {
         <Search aria-hidden="true" />
         <span>Search</span>
       </NavLink>
-      {isAuthenticated && (
-        <NavLink to={dashboardPath}>
-          <Heart aria-hidden="true" />
-          <span>Saved</span>
-        </NavLink>
-      )}
       {isAuthenticated && (
         <button className={styles.logoutButton} type="button" onClick={logout}>
           <LogOut aria-hidden="true" />

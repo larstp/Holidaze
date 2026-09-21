@@ -160,3 +160,8 @@ Outcome: quite simple setup, really. Ill try to do moe nice animating in CSS now
 Model: Google Gemini free
 Reason: Needed debugging help on why ratings were not being added
 Outcome: guided through fix. i had misunderstood from documentation
+
+21 Sep
+Model: Google Gemini Free
+Reason: needed help figuring out why searching and displaying results for city's and countries never worked
+Outcome: found out that its not a search parameter in the API, needed to add separate filtering options (got some help with that also, as i could not figure out how)

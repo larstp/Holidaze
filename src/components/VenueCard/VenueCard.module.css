@@ -112,30 +112,6 @@ h3 a:focus-visible {
   text-transform: uppercase;
 }
 
-.saveButton {
-  position: absolute;
-  z-index: 2;
-  top: 0.6rem;
-  right: 0.6rem;
-  display: inline-flex;
-  flex: 0 0 auto;
-  align-items: center;
-  justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  padding: 0.25rem;
-  border: 0;
-  border-radius: var(--radius-circle);
-  color: var(--primary);
-  background: rgba(248, 245, 242, 0.9);
-  cursor: pointer;
-}
-
-.saveButton svg {
-  width: 1.1rem;
-  height: 1.1rem;
-}
-
 .location {
   display: flex;
   align-items: center;

@@ -14,6 +14,8 @@ export function useSearchFilters() {
   const dateTo = searchParams.get('dateTo') ?? '';
   const page = Number(searchParams.get('page') ?? '1');
   const [draftAmenity, setDraftAmenity] = useState(amenity);
+  const [draftCity, setDraftCity] = useState(city ?? '');
+  const [draftCountry, setDraftCountry] = useState(country ?? '');
   const [draftDateFrom, setDraftDateFrom] = useState(dateFrom);
   const [draftDateTo, setDraftDateTo] = useState(dateTo);
 
@@ -50,6 +52,14 @@ export function useSearchFilters() {
   const applyFilters = () => {
     const nextParams = new URLSearchParams(searchParams);
     resetPage(nextParams);
+    const trimmedCity = draftCity.trim();
+    const trimmedCountry = draftCountry.trim();
+
+    if (trimmedCity) nextParams.set('city', trimmedCity);
+    else nextParams.delete('city');
+
+    if (trimmedCountry) nextParams.set('country', trimmedCountry);
+    else nextParams.delete('country');
 
     if (draftAmenity.length > 0)
       nextParams.set('amenity', draftAmenity.join(','));
@@ -71,6 +81,8 @@ export function useSearchFilters() {
     );
     setQuery('');
     setDraftAmenity([]);
+    setDraftCity('');
+    setDraftCountry('');
     setDraftDateFrom('');
     setDraftDateTo('');
     setSearchParams(nextParams);
@@ -83,8 +95,12 @@ export function useSearchFilters() {
     dateFrom,
     dateTo,
     draftAmenity,
+    draftCity,
+    draftCountry,
     draftDateFrom,
     draftDateTo,
+    setDraftCity,
+    setDraftCountry,
     page,
     query,
     setQuery,
