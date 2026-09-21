@@ -80,7 +80,11 @@ function ManagerVenues() {
   };
 
   return (
-    <DashboardShell isLoading={isLoading} loadingLabel="Loading your venues">
+    <DashboardShell
+      isLoading={isLoading}
+      loadingLabel="Loading your venues"
+      desktopAt800
+    >
       <section aria-labelledby="venues-heading">
         <div className={styles.headingRow}>
           <h1 id="venues-heading">My Venues</h1>

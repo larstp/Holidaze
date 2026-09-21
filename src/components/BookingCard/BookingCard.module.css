@@ -172,15 +172,6 @@
     gap: 0.85rem;
     min-height: 6.5rem;
   }
-  .rentedCard {
-    grid-template-columns: minmax(0, 1fr) auto;
-  }
-  .rentedCard .actions {
-    grid-column: 2;
-    grid-row: 1;
-    padding: 0;
-    margin-right: 0.65rem;
-  }
   .card > img,
   .card > span:first-child {
     width: 7.5rem;
@@ -199,5 +190,33 @@
   }
   .arrow {
     display: block;
+  }
+}
+
+@media (min-width: 800px) {
+  .rentedCard {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .rentedCard .actions {
+    grid-column: 2;
+    grid-row: 1;
+    padding: 0;
+    margin-right: 0.65rem;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 799px) {
+  .rentedCard {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    min-height: 0;
+  }
+
+  .rentedCard .actions {
+    grid-column: 1;
+    grid-row: auto;
+    padding: 0 1rem 1rem;
+    margin: 0;
   }
 }

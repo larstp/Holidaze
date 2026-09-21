@@ -216,3 +216,19 @@
     align-self: start;
   }
 }
+
+@media (min-width: 701px) and (max-width: 799px) {
+  .desktopAt800 {
+    min-height: calc(100svh - var(--header-height-mobile));
+  }
+
+  .desktopAt800 .layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem 1.25rem 5rem;
+  }
+
+  .desktopAt800 .sidebar {
+    position: static;
+  }
+}

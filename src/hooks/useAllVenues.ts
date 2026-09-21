@@ -36,10 +36,23 @@ export function useAllVenues(includeBookings = false): UseAllVenuesResult {
         );
 
         if (isCurrentRequest) {
-          setVenues([
+          const allVenues = [
             ...firstVenues,
             ...remainingPages.flatMap((response) => response?.data ?? []),
-          ]);
+          ].sort((firstVenue, secondVenue) => {
+            const firstStartsWithLetter = /^[a-z]/i.test(firstVenue.name);
+            const secondStartsWithLetter = /^[a-z]/i.test(secondVenue.name);
+
+            if (firstStartsWithLetter !== secondStartsWithLetter) {
+              return firstStartsWithLetter ? -1 : 1;
+            }
+
+            return firstVenue.name.localeCompare(secondVenue.name, undefined, {
+              numeric: true,
+              sensitivity: 'base',
+            });
+          });
+          setVenues(allVenues);
         }
       } catch (requestError: unknown) {
         if (isCurrentRequest) {

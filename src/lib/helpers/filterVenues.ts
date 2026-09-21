@@ -1,7 +1,7 @@
 import type { Venue } from '@/types/api';
 
 export type VenueFilters = {
-  amenity: string | null;
+  amenity: string[];
   city: string | null;
   country: string | null;
   dateFrom?: string;
@@ -10,14 +10,15 @@ export type VenueFilters = {
 
 export function filterVenues(venues: Venue[], filters: VenueFilters): Venue[] {
   return venues.filter((venue) => {
-    const matchesAmenity = filters.amenity
-      ? venue.meta[filters.amenity as keyof Venue['meta']] === true
-      : true;
+    const normalize = (value: string) => value.trim().toLowerCase();
+    const matchesAmenity = filters.amenity.every(
+      (amenity) => venue.meta[amenity as keyof Venue['meta']] === true
+    );
     const matchesCity = filters.city
-      ? venue.location.city?.toLowerCase() === filters.city.toLowerCase()
+      ? normalize(venue.location.city ?? '') === normalize(filters.city)
       : true;
     const matchesCountry = filters.country
-      ? venue.location.country?.toLowerCase() === filters.country.toLowerCase()
+      ? normalize(venue.location.country ?? '') === normalize(filters.country)
       : true;
     const hasCompleteDateRange = Boolean(filters.dateFrom && filters.dateTo);
     const matchesAvailability = hasCompleteDateRange

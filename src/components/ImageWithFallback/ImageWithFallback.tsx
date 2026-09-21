@@ -20,7 +20,11 @@ function ImageWithFallback({
 
   if (hasError) {
     return (
-      <span className={styles.fallback} role="img" aria-label={alt}>
+      <span
+        className={`${styles.fallback} ${className}`.trim()}
+        role="img"
+        aria-label={alt}
+      >
         <img
           className={`${styles.logo} ${styles.logoLight}`}
           src="/images/logos/Logo-Black.svg"

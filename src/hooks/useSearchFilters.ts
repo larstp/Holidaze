@@ -5,13 +5,17 @@ export function useSearchFilters() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState(searchParams.get('q') ?? '');
 
-  const amenity = searchParams.get('amenity');
+  const amenity = searchParams
+    .getAll('amenity')
+    .flatMap((value) => value.split(',').filter(Boolean));
   const city = searchParams.get('city');
   const country = searchParams.get('country');
   const dateFrom = searchParams.get('dateFrom') ?? '';
   const dateTo = searchParams.get('dateTo') ?? '';
   const page = Number(searchParams.get('page') ?? '1');
   const [draftAmenity, setDraftAmenity] = useState(amenity);
+  const [draftCity, setDraftCity] = useState(city ?? '');
+  const [draftCountry, setDraftCountry] = useState(country ?? '');
   const [draftDateFrom, setDraftDateFrom] = useState(dateFrom);
   const [draftDateTo, setDraftDateTo] = useState(dateTo);
 
@@ -31,8 +35,10 @@ export function useSearchFilters() {
   };
 
   const toggleAmenity = (value: string) => {
-    setDraftAmenity((currentAmenity) =>
-      currentAmenity === value ? null : value
+    setDraftAmenity((currentAmenities) =>
+      currentAmenities.includes(value)
+        ? currentAmenities.filter((amenityValue) => amenityValue !== value)
+        : [...currentAmenities, value]
     );
   };
 
@@ -46,8 +52,17 @@ export function useSearchFilters() {
   const applyFilters = () => {
     const nextParams = new URLSearchParams(searchParams);
     resetPage(nextParams);
+    const trimmedCity = draftCity.trim();
+    const trimmedCountry = draftCountry.trim();
 
-    if (draftAmenity) nextParams.set('amenity', draftAmenity);
+    if (trimmedCity) nextParams.set('city', trimmedCity);
+    else nextParams.delete('city');
+
+    if (trimmedCountry) nextParams.set('country', trimmedCountry);
+    else nextParams.delete('country');
+
+    if (draftAmenity.length > 0)
+      nextParams.set('amenity', draftAmenity.join(','));
     else nextParams.delete('amenity');
 
     if (draftDateFrom) nextParams.set('dateFrom', draftDateFrom);
@@ -59,6 +74,20 @@ export function useSearchFilters() {
     setSearchParams(nextParams);
   };
 
+  const clearFilters = () => {
+    const nextParams = new URLSearchParams(searchParams);
+    ['q', 'amenity', 'city', 'country', 'dateFrom', 'dateTo', 'page'].forEach(
+      (key) => nextParams.delete(key)
+    );
+    setQuery('');
+    setDraftAmenity([]);
+    setDraftCity('');
+    setDraftCountry('');
+    setDraftDateFrom('');
+    setDraftDateTo('');
+    setSearchParams(nextParams);
+  };
+
   return {
     amenity,
     city,
@@ -66,8 +95,12 @@ export function useSearchFilters() {
     dateFrom,
     dateTo,
     draftAmenity,
+    draftCity,
+    draftCountry,
     draftDateFrom,
     draftDateTo,
+    setDraftCity,
+    setDraftCountry,
     page,
     query,
     setQuery,
@@ -75,6 +108,7 @@ export function useSearchFilters() {
     toggleAmenity,
     updateDateRange,
     applyFilters,
+    clearFilters,
     setPage: (nextPage: number) => {
       const nextParams = new URLSearchParams(searchParams);
       if (nextPage <= 1) nextParams.delete('page');

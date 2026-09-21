@@ -57,6 +57,12 @@
   font-size: var(--text-size-s);
   text-align: left;
 }
+.calendarEmpty {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: var(--text-size-s);
+  text-align: left;
+}
 .calendar {
   width: 100%;
   color: var(--text);
@@ -179,6 +185,9 @@
   .stats {
     grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
   }
+}
+
+@media (min-width: 930px) {
   .calendarGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

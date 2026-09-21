@@ -169,7 +169,7 @@ function ManagerOverview() {
 }
 
 function VenueCalendar({ venue }: { venue: Venue }) {
-  const bookings = venue.bookings ?? [];
+  const bookings = (venue.bookings ?? []).filter(isUpcoming);
   const toCalendarDate = (value: string) => {
     const [year, month, day] = value.slice(0, 10).split('-').map(Number);
     return new Date(year, month - 1, day);
@@ -192,6 +192,17 @@ function VenueCalendar({ venue }: { venue: Venue }) {
 
     return dates;
   });
+
+  if (bookings.length === 0) {
+    return (
+      <article className={styles.calendarCard}>
+        <h3>{venue.name}</h3>
+        <p className={styles.calendarEmpty}>
+          No upcoming bookings for this venue yet.
+        </p>
+      </article>
+    );
+  }
 
   return (
     <article className={styles.calendarCard}>
