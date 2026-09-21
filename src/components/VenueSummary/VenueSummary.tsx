@@ -6,9 +6,14 @@ import styles from './VenueSummary.module.css';
 type VenueSummaryProps = {
   venue: Venue;
   linkToVenue?: boolean;
+  stackedUntilWide?: boolean;
 };
 
-function VenueSummary({ venue, linkToVenue = true }: VenueSummaryProps) {
+function VenueSummary({
+  venue,
+  linkToVenue = true,
+  stackedUntilWide = false,
+}: VenueSummaryProps) {
   const location = [venue.location.city, venue.location.country]
     .filter(Boolean)
     .join(', ');
@@ -32,10 +37,17 @@ function VenueSummary({ venue, linkToVenue = true }: VenueSummaryProps) {
     </>
   );
 
-  if (!linkToVenue) return <span className={styles.summary}>{content}</span>;
+  const summaryClassName = [
+    styles.summary,
+    stackedUntilWide ? styles.stackedUntilWide : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  if (!linkToVenue) return <span className={summaryClassName}>{content}</span>;
 
   return (
-    <Link className={styles.summary} to={`/venues/${venue.id}`}>
+    <Link className={summaryClassName} to={`/venues/${venue.id}`}>
       {content}
     </Link>
   );

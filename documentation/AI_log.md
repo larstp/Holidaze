@@ -150,3 +150,13 @@ Outcome: Got help debugging. Turns out i needed if (profile?.name === profileNam
 Model: GH Copilot
 Reason: Needed help debugging after i added auth guard and wanted to remove all redundant route-access redirects
 Outcome: helped me fix it. it was so many instances that i needed it to find them and list the,, and double check when i removed them wrongly
+
+21 Sep
+Model: Google Gemini free
+Reason: Needed help with the Math on the booking card when displaying total price and updating as more people and days are added.I REALLY struggle with the math parts of JS
+Outcome: quite simple setup, really. Ill try to do moe nice animating in CSS now.
+
+21 Sep
+Model: Google Gemini free
+Reason: Needed debugging help on why ratings were not being added
+Outcome: guided through fix. i had misunderstood from documentation

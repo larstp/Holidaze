@@ -4,8 +4,10 @@ import {
   Coffee,
   MapPin,
   PawPrint,
+  Pencil,
   Star,
   Wifi,
+  CalendarDays,
 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -32,7 +34,7 @@ function Venue() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { venue, isLoading, error, refetch } = useVenue(id);
-  const { accessToken, isAuthenticated } = useAuth();
+  const { accessToken, isAuthenticated, profile } = useAuth();
   const mockReviews = useMemo(() => getRandomReviews(3), []);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [checkIn, setCheckIn] = useState('');
@@ -53,6 +55,21 @@ function Venue() {
     .join(', ');
   const hasDateConflict = venue.bookings?.some(
     (booking) => checkIn < booking.dateTo && checkOut > booking.dateFrom
+  );
+  const bookingNights =
+    checkIn && checkOut && checkOut > checkIn
+      ? Math.round(
+          (new Date(`${checkOut}T00:00:00`).getTime() -
+            new Date(`${checkIn}T00:00:00`).getTime()) /
+            86400000
+        )
+      : 0;
+  const bookingSubtotal = venue.price * bookingNights;
+  const bookingTotal = bookingSubtotal * guests;
+  const isOwnVenue = Boolean(
+    isAuthenticated &&
+    profile?.venueManager &&
+    profile.name === venue.owner?.name
   );
 
   const clearBookingFeedback = () => {
@@ -221,93 +238,147 @@ function Venue() {
             </section>
           </div>
 
-          <aside className={styles.bookingCard} aria-label="Book this stay">
-            <p className={styles.bookingPrice}>
-              €{venue.price} <span>/ night</span>
-            </p>
-            <p className={styles.bookingCapacity}>
-              Up to {venue.maxGuests}{' '}
-              {venue.maxGuests === 1 ? 'guest' : 'guests'}
-            </p>
-            <div className={styles.bookingFields}>
-              <label>
-                Check-in
-                <input
-                  type="date"
-                  min={getToday()}
-                  value={checkIn}
-                  onChange={(event) => {
-                    const nextCheckIn = event.target.value;
-                    setCheckIn(nextCheckIn);
-                    if (checkOut && checkOut <= nextCheckIn) setCheckOut('');
-                    clearBookingFeedback();
-                  }}
-                />
-              </label>
-              <label>
-                Check-out
-                <input
-                  type="date"
-                  min={checkIn ? getNextDate(checkIn) : getToday()}
-                  value={checkOut}
-                  onChange={(event) => {
-                    setCheckOut(event.target.value);
-                    clearBookingFeedback();
-                  }}
-                />
-              </label>
-              <label className={styles.guestsField}>
-                Guests
-                <span className={styles.selectWrapper}>
-                  <select
-                    value={guests}
+          {isOwnVenue ? (
+            <aside
+              className={styles.bookingCard}
+              aria-label="Manage this venue"
+            >
+              <p className={styles.managerCardTitle}>This is your venue</p>
+              <p className={styles.managerCardMessage}>
+                Manage your listing or review its upcoming bookings.
+              </p>
+              <div className={styles.managerActions}>
+                <Button
+                  type="button"
+                  size="small"
+                  icon={<Pencil aria-hidden="true" />}
+                  onClick={() => navigate(`/venues/${venue.id}/edit`)}
+                >
+                  Edit venue
+                </Button>
+                <Button
+                  type="button"
+                  size="small"
+                  variant="secondary"
+                  icon={<CalendarDays aria-hidden="true" />}
+                  onClick={() =>
+                    navigate(`/dashboard/manager/bookings?venue=${venue.id}`)
+                  }
+                >
+                  Booking calendar
+                </Button>
+              </div>
+            </aside>
+          ) : (
+            <aside className={styles.bookingCard} aria-label="Book this stay">
+              <p className={styles.bookingPrice}>
+                €{venue.price} <span>/ night</span>
+              </p>
+              <p className={styles.bookingCapacity}>
+                Up to {venue.maxGuests}{' '}
+                {venue.maxGuests === 1 ? 'guest' : 'guests'}
+              </p>
+              <div className={styles.bookingFields}>
+                <label>
+                  Check-in
+                  <input
+                    type="date"
+                    min={getToday()}
+                    value={checkIn}
                     onChange={(event) => {
-                      setGuests(Number(event.target.value));
+                      const nextCheckIn = event.target.value;
+                      setCheckIn(nextCheckIn);
+                      if (checkOut && checkOut <= nextCheckIn) setCheckOut('');
                       clearBookingFeedback();
                     }}
-                  >
-                    {Array.from({ length: venue.maxGuests }, (_, index) => (
-                      <option key={index + 1} value={index + 1}>
-                        {index + 1} {index === 0 ? 'guest' : 'guests'}
-                      </option>
-                    ))}
-                  </select>
-                  <ChevronDown aria-hidden="true" />
-                </span>
-              </label>
-            </div>
-            {isAuthenticated ? (
-              <Button
-                type="button"
-                variant="primary"
-                disabled={
-                  isBooking || !checkIn || !checkOut || checkOut <= checkIn
-                }
-                onClick={handleBooking}
-              >
-                {isBooking ? 'Reserving...' : 'Reserve'}
-              </Button>
-            ) : (
-              <Link
-                className={styles.loginToBook}
-                to="/login"
-                state={{ from: `/venues/${id}` }}
-              >
-                Log in to book
-              </Link>
-            )}
-            {bookingError && (
-              <p className={styles.bookingFeedbackError} role="alert">
-                {bookingError}
-              </p>
-            )}
-            {bookingSuccess && (
-              <p className={styles.bookingFeedbackSuccess} role="status">
-                {bookingSuccess}
-              </p>
-            )}
-            <small>You won&apos;t be charged yet.</small>
-          </aside>
+                  />
+                </label>
+                <label>
+                  Check-out
+                  <input
+                    type="date"
+                    min={checkIn ? getNextDate(checkIn) : getToday()}
+                    value={checkOut}
+                    onChange={(event) => {
+                      setCheckOut(event.target.value);
+                      clearBookingFeedback();
+                    }}
+                  />
+                </label>
+                <label className={styles.guestsField}>
+                  Guests
+                  <span className={styles.selectWrapper}>
+                    <select
+                      value={guests}
+                      onChange={(event) => {
+                        setGuests(Number(event.target.value));
+                        clearBookingFeedback();
+                      }}
+                    >
+                      {Array.from({ length: venue.maxGuests }, (_, index) => (
+                        <option key={index + 1} value={index + 1}>
+                          {index + 1} {index === 0 ? 'guest' : 'guests'}
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown aria-hidden="true" />
+                  </span>
+                </label>
+              </div>
+              {bookingNights > 0 && (
+                <div className={styles.bookingSummary} aria-live="polite">
+                  <div>
+                    <span>
+                      {bookingNights} x{' '}
+                      {bookingNights === 1 ? 'night' : 'nights'}
+                    </span>
+                    <span>€{bookingSubtotal}</span>
+                  </div>
+                  <div>
+                    <span>
+                      {guests} x {guests === 1 ? 'person' : 'people'}
+                    </span>
+                    <span>€{bookingTotal}</span>
+                  </div>
+                  <div className={styles.bookingTotal}>
+                    <strong>Total</strong>
+                    <strong>€{bookingTotal}</strong>
+                  </div>
+                </div>
+              )}
+              {isAuthenticated ? (
+                <Button
+                  type="button"
+                  variant="primary"
+                  disabled={
+                    isBooking || !checkIn || !checkOut || checkOut <= checkIn
+                  }
+                  onClick={handleBooking}
+                >
+                  {isBooking ? 'Reserving...' : 'Reserve'}
+                </Button>
+              ) : (
+                <Link
+                  className={styles.loginToBook}
+                  to="/login"
+                  state={{ from: `/venues/${id}` }}
+                >
+                  Log in to book
+                </Link>
+              )}
+              {bookingError && (
+                <p className={styles.bookingFeedbackError} role="alert">
+                  {bookingError}
+                </p>
+              )}
+              {bookingSuccess && (
+                <p className={styles.bookingFeedbackSuccess} role="status">
+                  {bookingSuccess}
+                </p>
+              )}
+              <small>You won&apos;t be charged yet.</small>
+            </aside>
+          )}
         </div>
       </div>
     </main>

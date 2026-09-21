@@ -34,7 +34,7 @@ function BookingCard(props: BookingCardProps) {
   if (props.variant === 'rentedVenue') {
     return (
       <article className={`${styles.card} ${styles.rentedCard}`}>
-        <VenueSummary venue={props.venue} />
+        <VenueSummary venue={props.venue} stackedUntilWide />
         <div className={styles.actions}>
           <button type="button" onClick={() => props.onBookings?.(props.venue)}>
             <CalendarDays aria-hidden="true" /> Bookings

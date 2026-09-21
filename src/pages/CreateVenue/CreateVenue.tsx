@@ -15,6 +15,7 @@ type VenueForm = {
   description: string;
   price: string;
   maxGuests: string;
+  rating: string;
   imageUrl: string;
   imageAlt: string;
   address: string;
@@ -38,6 +39,7 @@ const initialForm: VenueForm = {
   description: '',
   price: '',
   maxGuests: '2',
+  rating: '0',
   imageUrl: '',
   imageAlt: '',
   address: '',
@@ -65,6 +67,7 @@ function CreateVenue({ venue }: CreateVenueProps) {
           description: venue.description,
           price: String(venue.price),
           maxGuests: String(venue.maxGuests),
+          rating: String(venue.rating),
           imageUrl: '',
           imageAlt: '',
           address: venue.location.address ?? '',
@@ -120,6 +123,7 @@ function CreateVenue({ venue }: CreateVenueProps) {
     const name = form.name.trim();
     const price = Number(form.price);
     const maxGuests = Number(form.maxGuests);
+    const rating = Number(form.rating);
 
     if (!name || !form.description.trim() || images.length === 0) {
       setError('Add a name, description, and at least one image.');
@@ -129,9 +133,12 @@ function CreateVenue({ venue }: CreateVenueProps) {
       !Number.isFinite(price) ||
       price <= 0 ||
       !Number.isInteger(maxGuests) ||
-      maxGuests < 1
+      maxGuests < 1 ||
+      !Number.isFinite(rating) ||
+      rating < 0 ||
+      rating > 5
     ) {
-      setError('Enter a valid nightly price and guest capacity.');
+      setError('Enter a valid nightly price, guest capacity, and rating.');
       return;
     }
 
@@ -147,6 +154,7 @@ function CreateVenue({ venue }: CreateVenueProps) {
       media: images,
       price,
       maxGuests,
+      rating,
       meta,
       location: {
         address: form.address.trim() || null,
@@ -292,6 +300,19 @@ function CreateVenue({ venue }: CreateVenueProps) {
                 onChange={(event) =>
                   updateField('maxGuests', event.target.value)
                 }
+                required
+              />
+            </label>
+            <label>
+              Venue rating <small>Manager assigned, from 0 to 5</small>
+              <input
+                type="number"
+                min="0"
+                max="5"
+                step="0.1"
+                value={form.rating}
+                onChange={(event) => updateField('rating', event.target.value)}
+                placeholder="4.5"
                 required
               />
             </label>

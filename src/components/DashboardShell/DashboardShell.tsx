@@ -18,19 +18,23 @@ type DashboardShellProps = {
   children: ReactNode;
   isLoading?: boolean;
   loadingLabel?: string;
+  desktopAt800?: boolean;
 };
 
 function DashboardShell({
   children,
   isLoading = false,
   loadingLabel = 'Loading your dashboard',
+  desktopAt800 = false,
 }: DashboardShellProps) {
   const { profile, logout } = useAuth();
 
   if (!profile) return null;
 
   return (
-    <main className={styles.page}>
+    <main
+      className={`${styles.page} ${desktopAt800 ? styles.desktopAt800 : ''}`}
+    >
       <div className={styles.layout}>
         <aside className={styles.sidebar} aria-label="Dashboard navigation">
           <div className={styles.profileCard}>

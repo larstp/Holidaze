@@ -13,6 +13,9 @@ function Header() {
   );
   const [failedAvatarUrl, setFailedAvatarUrl] = useState<string | null>(null);
   const { isAuthenticated, profile, logout } = useAuth();
+  const dashboardPath = profile?.venueManager
+    ? '/dashboard/manager/overview'
+    : '/dashboard';
   const navigationRef = useRef<HTMLElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -99,7 +102,7 @@ function Header() {
               className={({ isActive }) =>
                 `${styles.link} ${styles.mobileOnlyLink} ${isActive ? styles.navLinkActive : ''}`
               }
-              to="/dashboard"
+              to={dashboardPath}
               onClick={closeMenu}
             >
               Profile
@@ -141,7 +144,7 @@ function Header() {
             {isAuthenticated ? (
               <NavLink
                 className={`${styles.profileLink} ${styles.desktopOnlyProfile}`}
-                to="/dashboard"
+                to={dashboardPath}
                 onClick={closeMenu}
                 aria-label="Open your dashboard"
                 title="Open your dashboard"

@@ -4,7 +4,10 @@ import { useAuth } from '../../context/useAuth';
 import styles from './Navbar.module.css';
 
 function Navbar() {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, profile, logout } = useAuth();
+  const dashboardPath = profile?.venueManager
+    ? '/dashboard/manager/overview'
+    : '/dashboard';
 
   return (
     <nav
@@ -15,7 +18,7 @@ function Navbar() {
         <House aria-hidden="true" />
         <span>Home</span>
       </NavLink>
-      <NavLink to={isAuthenticated ? '/dashboard' : '/login'}>
+      <NavLink to={isAuthenticated ? dashboardPath : '/login'}>
         <UserRound aria-hidden="true" />
         <span>Profile</span>
       </NavLink>
@@ -24,7 +27,7 @@ function Navbar() {
         <span>Search</span>
       </NavLink>
       {isAuthenticated && (
-        <NavLink to="/dashboard">
+        <NavLink to={dashboardPath}>
           <Heart aria-hidden="true" />
           <span>Saved</span>
         </NavLink>
