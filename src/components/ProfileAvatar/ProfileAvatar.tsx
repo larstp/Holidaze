@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { ProfileSummary } from '../../types/api';
 import styles from './ProfileAvatar.module.css';
 
@@ -8,8 +9,9 @@ type ProfileAvatarProps = {
 
 function ProfileAvatar({ profile, className = '' }: ProfileAvatarProps) {
   const avatarClassName = `${styles.avatar} ${className}`.trim();
+  const [hasAvatarError, setHasAvatarError] = useState(false);
 
-  if (profile.avatar?.url) {
+  if (profile.avatar?.url && !hasAvatarError) {
     return (
       <img
         className={avatarClassName}
@@ -17,6 +19,7 @@ function ProfileAvatar({ profile, className = '' }: ProfileAvatarProps) {
         alt={profile.avatar.alt || `${profile.name} profile`}
         loading="lazy"
         decoding="async"
+        onError={() => setHasAvatarError(true)}
       />
     );
   }

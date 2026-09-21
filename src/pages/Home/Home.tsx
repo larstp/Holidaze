@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import buttonStyles from '../../components/Button/Button.module.css';
 import ImageCarousel from '../../components/ImageCarousel/ImageCarousel';
+import ImageWithFallback from '../../components/ImageWithFallback/ImageWithFallback';
 import PageLoader from '../../components/PageLoader/PageLoader';
 import VenueCard from '../../components/VenueCard/VenueCard';
 import { useAllVenues } from '../../hooks/useAllVenues';
@@ -211,7 +212,7 @@ function Home() {
           <p className={styles.sectionEyebrow}>Explore</p>
           <h2>Popular destinations</h2>
           <p className={styles.sectionIntro}>
-            Explore stays in the world's most sought-after locations.
+            Explore venues in the world's most sought-after locations.
           </p>
           {!isLoading && popularDestinations.length === 0 && (
             <p className={styles.status}>
@@ -226,17 +227,14 @@ function Home() {
                   key={destination.country}
                   to={`/search?country=${encodeURIComponent(destination.country)}`}
                 >
-                  <img
-                    src={
-                      destination.image?.url ??
-                      '/images/photo-1507525428034-b723cf961d3e.jpg'
-                    }
+                  <ImageWithFallback
+                    className={styles.destinationImage}
+                    src={destination.image?.url}
                     alt={
                       destination.image?.alt ??
                       `${destination.city}, ${destination.country}`
                     }
                     loading="lazy"
-                    decoding="async"
                   />
                   <span className={styles.destinationCount}>
                     {destination.count}{' '}

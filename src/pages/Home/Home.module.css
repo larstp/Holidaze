@@ -328,7 +328,7 @@ input::placeholder {
   aspect-ratio: 2 / 1;
 }
 
-.destinationCard img {
+.destinationImage {
   display: block;
   width: 100%;
   height: 100%;
@@ -343,8 +343,8 @@ input::placeholder {
   content: '';
 }
 
-.destinationCard:hover img,
-.destinationCard:focus-visible img {
+.destinationCard:hover .destinationImage,
+.destinationCard:focus-visible .destinationImage {
   transform: scale(1.04);
 }
 

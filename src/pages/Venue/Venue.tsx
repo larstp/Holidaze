@@ -15,6 +15,7 @@ import Button from '../../components/Button/Button';
 import ImageWithFallback from '../../components/ImageWithFallback/ImageWithFallback';
 import PageLoader from '../../components/PageLoader/PageLoader';
 import { VenueNotFoundPage } from '../../components/PageStates/PageStates';
+import ProfileAvatar from '../../components/ProfileAvatar/ProfileAvatar';
 import { useAuth } from '../../context/useAuth';
 import { useVenue } from '../../hooks/useVenue';
 import { getNextDate, getToday } from '../../lib/helpers/dateHelpers';
@@ -164,17 +165,15 @@ function Venue() {
             </div>
 
             <div className={styles.hostProfile}>
-              {venue.owner?.avatar?.url ? (
-                <img
-                  className={styles.hostAvatar}
-                  src={venue.owner.avatar.url}
-                  alt={venue.owner.avatar.alt || `${venue.owner.name} avatar`}
-                />
-              ) : (
-                <span className={styles.hostAvatar} aria-hidden="true">
-                  {venue.owner?.name?.charAt(0) || 'H'}
-                </span>
-              )}
+              <ProfileAvatar
+                className={styles.hostAvatar}
+                profile={
+                  venue.owner ?? {
+                    name: 'Holidaze host',
+                    email: '',
+                  }
+                }
+              />
               <div className={styles.hostInfo}>
                 <strong>
                   Hosted by {venue.owner?.name || 'a Holidaze host'}

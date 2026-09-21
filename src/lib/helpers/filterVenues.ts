@@ -1,7 +1,7 @@
 import type { Venue } from '@/types/api';
 
 export type VenueFilters = {
-  amenity: string | null;
+  amenity: string[];
   city: string | null;
   country: string | null;
   dateFrom?: string;
@@ -10,9 +10,9 @@ export type VenueFilters = {
 
 export function filterVenues(venues: Venue[], filters: VenueFilters): Venue[] {
   return venues.filter((venue) => {
-    const matchesAmenity = filters.amenity
-      ? venue.meta[filters.amenity as keyof Venue['meta']] === true
-      : true;
+    const matchesAmenity = filters.amenity.every(
+      (amenity) => venue.meta[amenity as keyof Venue['meta']] === true
+    );
     const matchesCity = filters.city
       ? venue.location.city?.toLowerCase() === filters.city.toLowerCase()
       : true;

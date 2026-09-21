@@ -17,6 +17,15 @@ const amenityOptions = [
   ['pets', 'Pet friendly'],
 ] as const;
 
+const getAmenityLabels = (selectedAmenities: string[]) =>
+  selectedAmenities
+    .map(
+      (value) =>
+        amenityOptions.find(([optionValue]) => optionValue === value)?.[1] ??
+        value
+    )
+    .join(', ');
+
 function Search() {
   const {
     amenity,
@@ -34,6 +43,7 @@ function Search() {
     toggleAmenity,
     updateDateRange,
     applyFilters,
+    clearFilters,
     setPage,
   } = useSearchFilters();
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
@@ -58,6 +68,7 @@ function Search() {
     : Math.max(1, Math.ceil(filteredVenues.length / 15));
   const currentPage = query ? searchResult.currentPage : page;
   const today = getToday();
+  const amenityHeading = getAmenityLabels(amenity);
   const dateRangeError =
     draftDateFrom && draftDateTo && draftDateTo < draftDateFrom;
 
@@ -171,6 +182,15 @@ function Search() {
               Close
             </Button>
           </div>
+          <Button
+            className={styles.clearFiltersButton}
+            type="button"
+            variant="secondary"
+            size="small"
+            onClick={clearFilters}
+          >
+            Clear filters
+          </Button>
           <fieldset>
             <legend>Dates</legend>
             <div className={styles.dateFilters}>
@@ -209,7 +229,7 @@ function Search() {
               <label key={value}>
                 <input
                   type="checkbox"
-                  checked={draftAmenity === value}
+                  checked={draftAmenity.includes(value)}
                   onChange={() => toggleAmenity(value)}
                 />
                 {label}
@@ -240,7 +260,7 @@ function Search() {
                   : `${filteredVenues.length} venues`}
               </p>
               <h1 id="results-heading">
-                {city || country || amenity || query || 'Explore stays'}
+                {city || country || amenityHeading || query || 'Explore stays'}
               </h1>
             </div>
             <Button

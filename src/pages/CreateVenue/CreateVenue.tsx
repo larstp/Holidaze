@@ -3,6 +3,7 @@ import { useState } from 'react';
 import type { SyntheticEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
+import ImageWithFallback from '../../components/ImageWithFallback/ImageWithFallback';
 import { useAuth } from '../../context/useAuth';
 import { ApiError } from '../../lib/services/apiClient';
 import { createVenue } from '../../lib/services/venueService';
@@ -203,7 +204,11 @@ function CreateVenue({ venue }: CreateVenueProps) {
             <div className={styles.imageList} aria-label="Added venue images">
               {images.map((image, index) => (
                 <div className={styles.imageItem} key={`${image.url}-${index}`}>
-                  <img src={image.url} alt={image.alt} />
+                  <ImageWithFallback
+                    className={styles.imageItemImage}
+                    src={image.url}
+                    alt={image.alt}
+                  />
                   <div>
                     <strong>{image.alt || `Image ${index + 1}`}</strong>
                     <button

@@ -5,7 +5,9 @@ export function useSearchFilters() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState(searchParams.get('q') ?? '');
 
-  const amenity = searchParams.get('amenity');
+  const amenity = searchParams
+    .getAll('amenity')
+    .flatMap((value) => value.split(',').filter(Boolean));
   const city = searchParams.get('city');
   const country = searchParams.get('country');
   const dateFrom = searchParams.get('dateFrom') ?? '';
@@ -31,8 +33,10 @@ export function useSearchFilters() {
   };
 
   const toggleAmenity = (value: string) => {
-    setDraftAmenity((currentAmenity) =>
-      currentAmenity === value ? null : value
+    setDraftAmenity((currentAmenities) =>
+      currentAmenities.includes(value)
+        ? currentAmenities.filter((amenityValue) => amenityValue !== value)
+        : [...currentAmenities, value]
     );
   };
 
@@ -47,7 +51,8 @@ export function useSearchFilters() {
     const nextParams = new URLSearchParams(searchParams);
     resetPage(nextParams);
 
-    if (draftAmenity) nextParams.set('amenity', draftAmenity);
+    if (draftAmenity.length > 0)
+      nextParams.set('amenity', draftAmenity.join(','));
     else nextParams.delete('amenity');
 
     if (draftDateFrom) nextParams.set('dateFrom', draftDateFrom);
@@ -56,6 +61,18 @@ export function useSearchFilters() {
     if (draftDateTo) nextParams.set('dateTo', draftDateTo);
     else nextParams.delete('dateTo');
 
+    setSearchParams(nextParams);
+  };
+
+  const clearFilters = () => {
+    const nextParams = new URLSearchParams(searchParams);
+    ['q', 'amenity', 'city', 'country', 'dateFrom', 'dateTo', 'page'].forEach(
+      (key) => nextParams.delete(key)
+    );
+    setQuery('');
+    setDraftAmenity([]);
+    setDraftDateFrom('');
+    setDraftDateTo('');
     setSearchParams(nextParams);
   };
 
@@ -75,6 +92,7 @@ export function useSearchFilters() {
     toggleAmenity,
     updateDateRange,
     applyFilters,
+    clearFilters,
     setPage: (nextPage: number) => {
       const nextParams = new URLSearchParams(searchParams);
       if (nextPage <= 1) nextParams.delete('page');
