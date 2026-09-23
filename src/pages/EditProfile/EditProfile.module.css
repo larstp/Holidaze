@@ -175,19 +175,7 @@
 }
 
 .cancelButton {
-  border: 1px solid var(--logo-color);
-  color: var(--logo-color);
-  background: transparent;
-}
-
-.cancelButton:hover,
-.cancelButton:focus-visible {
-  color: var(--pure-white);
-  background: var(--logo-color);
-  transition:
-    background-color 160ms ease,
-    border-color 160ms ease,
-    color 160ms ease;
+  text-align: center;
 }
 
 .error {

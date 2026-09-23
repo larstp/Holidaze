@@ -1,5 +1,6 @@
 import { ArrowRight, CalendarDays, Pencil, Trash2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Button from '../Button/Button';
 import ImageWithFallback from '../ImageWithFallback/ImageWithFallback';
 import VenueSummary from '../VenueSummary/VenueSummary';
 import type { Booking, Venue } from '../../types/api';
@@ -36,20 +37,35 @@ function BookingCard(props: BookingCardProps) {
       <article className={`${styles.card} ${styles.rentedCard}`}>
         <VenueSummary venue={props.venue} stackedUntilWide />
         <div className={styles.actions}>
-          <button type="button" onClick={() => props.onBookings?.(props.venue)}>
-            <CalendarDays aria-hidden="true" /> Bookings
-          </button>
-          <button type="button" onClick={() => props.onEdit?.(props.venue)}>
-            <Pencil aria-hidden="true" /> Edit
-          </button>
-          <button
+          <Button
+            type="button"
+            variant="secondary"
+            size="small"
+            className={styles.cardAction}
+            icon={<CalendarDays aria-hidden="true" />}
+            onClick={() => props.onBookings?.(props.venue)}
+          >
+            Bookings
+          </Button>
+          <Button
+            type="button"
+            variant="secondary"
+            size="small"
+            className={styles.cardAction}
+            icon={<Pencil aria-hidden="true" />}
+            onClick={() => props.onEdit?.(props.venue)}
+          >
+            Edit
+          </Button>
+          <Button
             className={styles.deleteButton}
             type="button"
+            variant="danger"
+            size="small"
             aria-label={`Delete ${props.venue.name}`}
+            icon={<Trash2 aria-hidden="true" />}
             onClick={() => props.onDelete?.(props.venue)}
-          >
-            <Trash2 aria-hidden="true" />
-          </button>
+          />
         </div>
       </article>
     );

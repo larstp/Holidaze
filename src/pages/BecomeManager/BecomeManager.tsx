@@ -3,6 +3,7 @@ import { useState } from 'react';
 import type { SyntheticEvent } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../../components/Button/Button';
+import buttonStyles from '../../components/Button/Button.module.css';
 import { useAuth } from '../../context/useAuth';
 import { ApiError } from '../../lib/services/apiClient';
 import { updateProfile } from '../../lib/services/profileService';
@@ -164,7 +165,10 @@ function BecomeManager() {
           )}
 
           {profile?.venueManager && (
-            <Link className={styles.primaryLink} to="/venues/create">
+            <Link
+              className={`${buttonStyles.button} ${buttonStyles.primary} ${buttonStyles.small} ${styles.primaryLink}`}
+              to="/venues/create"
+            >
               Create your first venue
             </Link>
           )}
@@ -188,7 +192,10 @@ function BecomeManager() {
             Turn your space into a destination. Reach thousands of travellers
             and earn on your schedule.
           </p>
-          <Link className={styles.heroButton} to="/register">
+          <Link
+            className={`${buttonStyles.button} ${buttonStyles.tertiary} ${buttonStyles.small} ${styles.heroButton}`}
+            to="/register"
+          >
             Get started
           </Link>
         </div>
@@ -242,10 +249,16 @@ function BecomeManager() {
           <h2>Ready to start hosting?</h2>
           <p>Create your free account and list your first venue today.</p>
           <div className={styles.ctaActions}>
-            <Link className={styles.heroButton} to="/register">
+            <Link
+              className={`${buttonStyles.button} ${buttonStyles.tertiary} ${buttonStyles.small} ${styles.heroButton}`}
+              to="/register"
+            >
               Register as Manager
             </Link>
-            <Link className={styles.darkButton} to="/login">
+            <Link
+              className={`${buttonStyles.button} ${buttonStyles.secondaryDark} ${buttonStyles.small} ${styles.darkButton}`}
+              to="/login"
+            >
               I already have an account
             </Link>
           </div>

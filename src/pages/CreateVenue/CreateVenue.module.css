@@ -243,15 +243,7 @@
 }
 
 .cancelButton {
-  border: 1px solid var(--dark-green);
-  color: var(--dark-green);
-  background: transparent;
-}
-
-.cancelButton:hover,
-.cancelButton:focus-visible {
-  color: var(--pure-white);
-  background: var(--dark-green);
+  text-align: center;
 }
 
 .error {

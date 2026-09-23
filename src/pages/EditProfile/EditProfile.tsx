@@ -3,6 +3,7 @@ import { useState } from 'react';
 import type { SyntheticEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
+import buttonStyles from '../../components/Button/Button.module.css';
 import { useAuth } from '../../context/useAuth';
 import { ApiError } from '../../lib/services/apiClient';
 import { updateProfile } from '../../lib/services/profileService';
@@ -161,7 +162,10 @@ function EditProfile() {
           </p>
         )}
         <div className={styles.actions}>
-          <Link className={styles.cancelButton} to="/dashboard/profile">
+          <Link
+            className={`${buttonStyles.button} ${buttonStyles.secondary} ${buttonStyles.small} ${styles.cancelButton}`}
+            to="/dashboard/profile"
+          >
             Cancel
           </Link>
           <Button type="submit" disabled={isSaving}>

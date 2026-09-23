@@ -421,6 +421,140 @@
   -webkit-appearance: none;
 }
 
+.availabilityButton {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.availabilityCalendar {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+
+.calendar {
+  width: 100%;
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 0.7rem;
+}
+
+.calendar:global(.rdp-root) :global(.rdp-months),
+.calendar:global(.rdp-root) :global(.rdp-month),
+.calendar:global(.rdp-root) :global(.rdp-month_grid) {
+  width: 100%;
+}
+
+.calendar:global(.rdp-root) :global(.rdp-months) {
+  position: relative;
+}
+
+.calendar:global(.rdp-root) :global(.rdp-month_caption) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  color: var(--text-h);
+  font-size: var(--text-size-m);
+}
+
+.calendar:global(.rdp-root) :global(.rdp-nav) {
+  position: absolute;
+  z-index: 1;
+  inset: 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+  height: 2rem;
+  pointer-events: none;
+}
+
+.calendar:global(.rdp-root) :global(.rdp-button_previous),
+.calendar:global(.rdp-root) :global(.rdp-button_next) {
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  color: var(--dark-green);
+  background: var(--surface);
+  pointer-events: auto;
+}
+
+.calendar:global(.rdp-root) :global(.rdp-weekday) {
+  color: var(--text-muted);
+  font-size: 0.65rem;
+}
+
+.calendar:global(.rdp-root) :global(.rdp-day),
+.calendar:global(.rdp-root) :global(.rdp-day_button) {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.3rem;
+  color: var(--text);
+  font: inherit;
+}
+
+.calendar:global(.rdp-root) :global(.rdp-day_button) {
+  border: 0;
+  background: transparent;
+}
+
+.calendar .bookedDay,
+.calendar .bookedDay :global(.rdp-day_button) {
+  color: var(--text-muted);
+  background: #d1d1d1;
+}
+
+.calendar .checkInDay,
+.calendar .checkInDay :global(.rdp-day_button),
+.calendar .checkOutDay,
+.calendar .checkOutDay :global(.rdp-day_button) {
+  color: var(--pure-white);
+  background: var(--dark-green);
+}
+
+.calendar .selectedRangeDay,
+.calendar .selectedRangeDay :global(.rdp-day_button) {
+  color: var(--text);
+  background: #d3f0d9;
+}
+
+.calendar:global(.rdp-root) :global(.rdp-selected),
+.calendar:global(.rdp-root) :global(.rdp-selected) :global(.rdp-day_button) {
+  color: var(--pure-white);
+  background: var(--dark-green);
+}
+
+.calendar:global(.rdp-root) :global(.rdp-selected) :global(.rdp-day_button) {
+  font-weight: 800;
+}
+
+.calendar:global(.rdp-root) :global(.rdp-disabled) {
+  opacity: 0.45;
+}
+
+.calendarLegend {
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.65rem;
+}
+
+.calendarLegend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.calendarLegend i {
+  display: inline-block;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 0.15rem;
+  background: #d3f0d9;
+}
+
 .selectWrapper {
   position: relative;
   display: block;
@@ -510,27 +644,34 @@
 }
 
 .loginToBook {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
   box-sizing: border-box;
-  padding: 0.75rem 1rem;
-  border-radius: var(--radius-md);
-  color: var(--pure-white);
-  background: var(--dark-green);
-  font-size: var(--button-text-large);
-  font-weight: 700;
   text-decoration: none;
 }
 
-.loginToBook:hover,
-.loginToBook:focus-visible {
-  background: var(--button-hover);
+.guestsField {
+  display: grid;
+  gap: 0.3rem;
+  min-width: 0;
+  margin-bottom: 1rem;
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
-.guestsField {
-  grid-column: span 2;
+.guestsField select {
+  width: 100%;
+  min-width: 0;
+  min-height: 2.75rem;
+  box-sizing: border-box;
+  padding: 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  background: var(--surface);
+  font: inherit;
+  font-size: 0.75rem;
 }
 
 .bookingCard small {

@@ -269,9 +269,15 @@ function Home() {
           {error && (
             <div className={styles.status} role="alert">
               <p>We could not load stays right now.</p>
-              <button type="button" onClick={refetch}>
+              <Button
+                className={styles.statusButton}
+                type="button"
+                variant="secondary"
+                size="small"
+                onClick={refetch}
+              >
                 Try again
-              </button>
+              </Button>
             </div>
           )}
           {!isLoading && !error && venues.length === 0 && (

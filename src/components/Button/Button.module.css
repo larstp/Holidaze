@@ -87,6 +87,18 @@
   background: var(--surface-muted);
 }
 
+.danger {
+  border-color: #f2c3c3;
+  color: #a63d32;
+  background: var(--danger);
+}
+
+.danger:hover:not(:disabled),
+.danger:focus-visible {
+  color: var(--pure-white);
+  background: var(--logo-color);
+}
+
 .small {
   padding: 9px 20px;
   font-size: var(--button-text-small);
