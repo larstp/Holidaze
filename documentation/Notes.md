@@ -1,1 +1,2 @@
-Page loader from https://css-loaders.com
+- Page loader from https://css-loaders.com
+- All photos from Unsplash Free license

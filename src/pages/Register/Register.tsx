@@ -9,19 +9,19 @@ import { getRandomAboutQuote } from '../../lib/helpers/aboutQuotes';
 import styles from './Register.module.css';
 
 type RegisterForm = {
-  firstName: string;
-  lastName: string;
+  username: string;
   email: string;
   password: string;
+  repeatPassword: string;
   avatarUrl: string;
   venueManager: boolean;
 };
 
 const initialForm: RegisterForm = {
-  firstName: '',
-  lastName: '',
+  username: '',
   email: '',
   password: '',
+  repeatPassword: '',
   avatarUrl: '',
   venueManager: false,
 };
@@ -30,6 +30,7 @@ function Register() {
   const navigate = useNavigate();
   const [form, setForm] = useState(initialForm);
   const [showPassword, setShowPassword] = useState(false);
+  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [aboutQuote] = useState(getRandomAboutQuote);
@@ -45,10 +46,15 @@ function Register() {
   const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     const email = form.email.trim().toLowerCase();
-    const name = `${form.firstName.trim()} ${form.lastName.trim()}`.trim();
+    const name = form.username.trim();
 
-    if (!form.firstName.trim() || !form.lastName.trim()) {
-      setError('Enter your first and last name.');
+    if (!name) {
+      setError('Enter a username.');
+      return;
+    }
+
+    if (!/^[a-zA-Z0-9_]+$/.test(name)) {
+      setError('Username can only contain letters, numbers, and underscores.');
       return;
     }
 
@@ -59,6 +65,11 @@ function Register() {
 
     if (form.password.length < 8) {
       setError('Your password must be at least 8 characters.');
+      return;
+    }
+
+    if (form.password !== form.repeatPassword) {
+      setError('Passwords do not match.');
       return;
     }
 
@@ -102,34 +113,21 @@ function Register() {
           </div>
 
           <form className={styles.form} onSubmit={handleSubmit} noValidate>
-            <div className={styles.nameFields}>
-              <label>
-                <span>First name</span>
-                <input
-                  type="text"
-                  autoComplete="given-name"
-                  placeholder="Marius"
-                  value={form.firstName}
-                  onChange={(event) =>
-                    updateField('firstName', event.target.value)
-                  }
-                  required
-                />
-              </label>
-              <label>
-                <span>Last name</span>
-                <input
-                  type="text"
-                  autoComplete="family-name"
-                  placeholder="Genser"
-                  value={form.lastName}
-                  onChange={(event) =>
-                    updateField('lastName', event.target.value)
-                  }
-                  required
-                />
-              </label>
-            </div>
+            <label>
+              <span>
+                Username <small>Letters, numbers, and underscores only</small>
+              </span>
+              <input
+                type="text"
+                autoComplete="username"
+                placeholder="JulesVerne28"
+                value={form.username}
+                onChange={(event) =>
+                  updateField('username', event.target.value)
+                }
+                required
+              />
+            </label>
 
             <label>
               <span>
@@ -166,6 +164,40 @@ function Register() {
                   onClick={() => setShowPassword((isVisible) => !isVisible)}
                 >
                   {showPassword ? (
+                    <EyeOff aria-hidden="true" />
+                  ) : (
+                    <Eye aria-hidden="true" />
+                  )}
+                </button>
+              </span>
+            </label>
+
+            <label>
+              <span>Repeat password</span>
+              <span className={styles.passwordField}>
+                <input
+                  type={showRepeatPassword ? 'text' : 'password'}
+                  autoComplete="new-password"
+                  placeholder="Repeat your password"
+                  value={form.repeatPassword}
+                  onChange={(event) =>
+                    updateField('repeatPassword', event.target.value)
+                  }
+                  required
+                />
+                <button
+                  className={styles.passwordToggle}
+                  type="button"
+                  aria-label={
+                    showRepeatPassword
+                      ? 'Hide repeated password'
+                      : 'Show repeated password'
+                  }
+                  onClick={() =>
+                    setShowRepeatPassword((isVisible) => !isVisible)
+                  }
+                >
+                  {showRepeatPassword ? (
                     <EyeOff aria-hidden="true" />
                   ) : (
                     <Eye aria-hidden="true" />
