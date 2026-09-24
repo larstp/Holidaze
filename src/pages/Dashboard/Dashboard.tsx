@@ -20,6 +20,11 @@ function getBookingEndDate(dateValue: string): Date {
 }
 
 const isUpcoming = (booking: Booking) =>
+  new Date(booking.dateFrom).getTime() > Date.now() &&
+  getBookingEndDate(booking.dateTo).getTime() >= Date.now();
+
+const isOngoing = (booking: Booking) =>
+  new Date(booking.dateFrom).getTime() <= Date.now() &&
   getBookingEndDate(booking.dateTo).getTime() >= Date.now();
 
 function Dashboard() {
@@ -60,9 +65,11 @@ function Dashboard() {
     [bookings]
   );
   const pastBookings = useMemo(
-    () => bookings.filter((booking) => !isUpcoming(booking)),
+    () =>
+      bookings.filter((booking) => !isUpcoming(booking) && !isOngoing(booking)),
     [bookings]
   );
+  const ongoingBookings = useMemo(() => bookings.filter(isOngoing), [bookings]);
   const totalSpent = bookings.reduce((total, booking) => {
     if (!booking.venue) return total;
     const nights = Math.max(
@@ -109,6 +116,9 @@ function Dashboard() {
             </Button>
           </div>
         )}
+        {ongoingBookings.length > 0 && (
+          <BookingSection title="Ongoing trips" bookings={ongoingBookings} />
+        )}
         {upcomingBookings.length > 0 && (
           <BookingSection title="Upcoming" bookings={upcomingBookings} />
         )}
@@ -139,7 +149,13 @@ function BookingSection({
             key={booking.id}
             variant="bookedVenue"
             booking={booking}
-            status={title === 'Past trips' ? 'Completed' : 'Upcoming'}
+            status={
+              title === 'Past trips'
+                ? 'Completed'
+                : title === 'Ongoing trips'
+                  ? 'Ongoing'
+                  : 'Upcoming'
+            }
           />
         ))}
       </div>

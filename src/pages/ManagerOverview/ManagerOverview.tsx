@@ -14,10 +14,23 @@ import type { Booking, Venue } from '../../types/api';
 import styles from './ManagerOverview.module.css';
 
 const isUpcoming = (booking: Booking) => {
-  const date = /^\d{4}-\d{2}-\d{2}$/.test(booking.dateTo)
+  const endDate = /^\d{4}-\d{2}-\d{2}$/.test(booking.dateTo)
     ? new Date(`${booking.dateTo}T23:59:59`)
     : new Date(booking.dateTo);
-  return date.getTime() >= Date.now();
+  return (
+    new Date(booking.dateFrom).getTime() > Date.now() &&
+    endDate.getTime() >= Date.now()
+  );
+};
+
+const isOngoing = (booking: Booking) => {
+  const endDate = /^\d{4}-\d{2}-\d{2}$/.test(booking.dateTo)
+    ? new Date(`${booking.dateTo}T23:59:59`)
+    : new Date(booking.dateTo);
+  return (
+    new Date(booking.dateFrom).getTime() <= Date.now() &&
+    endDate.getTime() >= Date.now()
+  );
 };
 
 const bookingTotal = (booking: Booking) => {
@@ -76,6 +89,7 @@ function ManagerOverview() {
   }, [accessToken, profile]);
 
   const upcomingTrips = useMemo(() => bookings.filter(isUpcoming), [bookings]);
+  const ongoingTrips = useMemo(() => bookings.filter(isOngoing), [bookings]);
   const totalSpent = bookings.reduce(
     (total, booking) => total + bookingTotal(booking),
     0
@@ -133,6 +147,22 @@ function ManagerOverview() {
             label="Total earned"
           />
         </div>
+
+        {ongoingTrips.length > 0 && (
+          <section className={styles.section} aria-labelledby="ongoing-heading">
+            <h2 id="ongoing-heading">Ongoing trips</h2>
+            <div className={styles.bookingList}>
+              {ongoingTrips.map((booking) => (
+                <BookingCard
+                  key={booking.id}
+                  variant="bookedVenue"
+                  booking={booking}
+                  status="Ongoing"
+                />
+              ))}
+            </div>
+          </section>
+        )}
 
         <section className={styles.section} aria-labelledby="upcoming-heading">
           <h2 id="upcoming-heading">Upcoming trips</h2>
