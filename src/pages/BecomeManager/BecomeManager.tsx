@@ -1,7 +1,7 @@
 import { Headphones, LineChart, ShieldCheck, Globe2 } from 'lucide-react';
 import { useState } from 'react';
 import type { SyntheticEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import buttonStyles from '../../components/Button/Button.module.css';
 import { useAuth } from '../../context/useAuth';
@@ -50,13 +50,20 @@ const steps = [
   ],
 ];
 
-function BecomeManager() {
+type BecomeManagerProps = {
+  upgradeOnly?: boolean;
+};
+
+function BecomeManager({ upgradeOnly = false }: BecomeManagerProps) {
   const { accessToken, isAuthenticated, profile, setProfile } = useAuth();
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [hasAcceptedTerms, setHasAcceptedTerms] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  if (upgradeOnly && !isAuthenticated)
+    return <Navigate to="/register" replace />;
 
   const handleManagerUpgrade = async (
     event: SyntheticEvent<HTMLFormElement>
@@ -92,7 +99,7 @@ function BecomeManager() {
     }
   };
 
-  if (isAuthenticated) {
+  if (isAuthenticated && upgradeOnly) {
     return (
       <main className={styles.accountPage}>
         <section
@@ -194,7 +201,7 @@ function BecomeManager() {
           </p>
           <Link
             className={`${buttonStyles.button} ${buttonStyles.tertiary} ${buttonStyles.small} ${styles.heroButton}`}
-            to="/register"
+            to={isAuthenticated ? '/become-manager/upgrade' : '/register'}
           >
             Get started
           </Link>
@@ -251,13 +258,13 @@ function BecomeManager() {
           <div className={styles.ctaActions}>
             <Link
               className={`${buttonStyles.button} ${buttonStyles.tertiary} ${buttonStyles.small} ${styles.heroButton}`}
-              to="/register"
+              to={isAuthenticated ? '/become-manager/upgrade' : '/register'}
             >
               Register as Manager
             </Link>
             <Link
               className={`${buttonStyles.button} ${buttonStyles.secondaryDark} ${buttonStyles.small} ${styles.darkButton}`}
-              to="/login"
+              to={isAuthenticated ? '/become-manager/upgrade' : '/login'}
             >
               I already have an account
             </Link>

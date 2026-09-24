@@ -152,6 +152,10 @@ select {
   font: inherit;
 }
 
+input[type='date'] {
+  cursor: pointer;
+}
+
 select {
   appearance: none;
   padding-right: 1.25rem;
@@ -465,7 +469,7 @@ input::placeholder {
 .trustContent {
   display: grid;
   gap: 1.75rem;
-  width: 100%;
+  width: min(1126px, 100%);
   margin: 0 auto;
   justify-content: center;
 }

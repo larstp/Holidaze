@@ -128,7 +128,9 @@ function Header() {
             to={
               isAuthenticated && profile?.venueManager
                 ? '/venues/create'
-                : '/become-manager'
+                : isAuthenticated
+                  ? '/become-manager'
+                  : '/register'
             }
             onClick={closeMenu}
           >

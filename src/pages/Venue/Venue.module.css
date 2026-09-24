@@ -50,7 +50,7 @@
   object-fit: cover;
 }
 
-.galleryHero :global(span) {
+.galleryHero > :global(span) {
   display: flex;
   width: 100%;
   height: 100%;
@@ -77,8 +77,8 @@
   border-color: var(--primary);
 }
 
-.galleryThumb :global(img),
-.galleryThumb :global(span) {
+.galleryThumb > :global(img),
+.galleryThumb > :global(span) {
   display: block;
   width: 100%;
   height: 100%;
@@ -419,6 +419,7 @@
   display: block;
   appearance: none;
   -webkit-appearance: none;
+  cursor: pointer;
 }
 
 .availabilityButton {
@@ -479,6 +480,7 @@
   border-radius: var(--radius-sm);
   color: var(--dark-green);
   background: var(--surface);
+  cursor: pointer;
   pointer-events: auto;
 }
 
@@ -499,6 +501,12 @@
 .calendar:global(.rdp-root) :global(.rdp-day_button) {
   border: 0;
   background: transparent;
+  cursor: pointer;
+}
+
+.calendar:global(.rdp-root) :global(.rdp-day_button:hover),
+.calendar:global(.rdp-root) :global(.rdp-day_button:focus-visible) {
+  background: var(--accent-bg);
 }
 
 .calendar .bookedDay,
@@ -535,6 +543,10 @@
   opacity: 0.45;
 }
 
+.calendar:global(.rdp-root) :global(.rdp-disabled) :global(.rdp-day_button) {
+  cursor: not-allowed;
+}
+
 .calendarLegend {
   margin-top: 0.5rem;
   color: var(--text-muted);
@@ -552,7 +564,7 @@
   width: 0.55rem;
   height: 0.55rem;
   border-radius: 0.15rem;
-  background: #d3f0d9;
+  background: #d1d1d1;
 }
 
 .selectWrapper {

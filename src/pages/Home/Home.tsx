@@ -18,6 +18,7 @@ import ImageCarousel from '../../components/ImageCarousel/ImageCarousel';
 import ImageWithFallback from '../../components/ImageWithFallback/ImageWithFallback';
 import PageLoader from '../../components/PageLoader/PageLoader';
 import VenueCard from '../../components/VenueCard/VenueCard';
+import { useAuth } from '../../context/useAuth';
 import { useAllVenues } from '../../hooks/useAllVenues';
 import {
   getPopularDestinations,
@@ -63,6 +64,7 @@ const featuredReviews = [
 const getToday = () => new Date().toISOString().split('T')[0];
 
 function Home() {
+  const { isAuthenticated, profile } = useAuth();
   const { venues, isLoading, error, refetch } = useAllVenues();
   const featuredVenues = useMemo(() => selectRandomVenues(venues, 4), [venues]);
   const popularDestinations = getPopularDestinations(venues, 5);
@@ -376,7 +378,13 @@ function Home() {
             </Link>
             <Link
               className={`${buttonStyles.button} ${buttonStyles.secondaryDark} ${styles.ctaSecondary}`}
-              to="/become-manager"
+              to={
+                isAuthenticated && profile?.venueManager
+                  ? '/venues/create'
+                  : isAuthenticated
+                    ? '/become-manager'
+                    : '/register'
+              }
             >
               List your venue
             </Link>

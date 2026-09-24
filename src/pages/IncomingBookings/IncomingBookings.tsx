@@ -79,6 +79,7 @@ function IncomingBookings() {
               start: booking.dateFrom,
               end: booking.dateTo,
               allDay: true,
+              classNames: isUpcomingBooking(booking) ? [] : ['pastBooking'],
             }));
 
             return (
@@ -121,8 +122,17 @@ type VenueCalendarProps = {
     start: string;
     end: string;
     allDay: boolean;
+    classNames: string[];
   }>;
 };
+
+function isUpcomingBooking(booking: NonNullable<Venue['bookings']>[number]) {
+  const dateValue = booking.dateTo;
+  const date = /^\d{4}-\d{2}-\d{2}$/.test(dateValue)
+    ? new Date(`${dateValue}T23:59:59`)
+    : new Date(dateValue);
+  return date.getTime() >= Date.now();
+}
 
 function VenueCalendar({ events }: VenueCalendarProps) {
   const calendarElement = useRef<HTMLDivElement>(null);

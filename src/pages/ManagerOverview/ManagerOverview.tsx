@@ -169,18 +169,32 @@ function ManagerOverview() {
 }
 
 function VenueCalendar({ venue }: { venue: Venue }) {
-  const bookings = (venue.bookings ?? []).filter(isUpcoming);
+  const bookings = venue.bookings ?? [];
+  const upcomingBookings = bookings.filter(isUpcoming);
+  const pastBookings = bookings.filter((booking) => !isUpcoming(booking));
   const toCalendarDate = (value: string) => {
     const [year, month, day] = value.slice(0, 10).split('-').map(Number);
     return new Date(year, month - 1, day);
   };
-  const checkInDates = bookings.map((booking) =>
+  const checkInDates = upcomingBookings.map((booking) =>
     toCalendarDate(booking.dateFrom)
   );
-  const checkOutDates = bookings.map((booking) =>
+  const checkOutDates = upcomingBookings.map((booking) =>
     toCalendarDate(booking.dateTo)
   );
-  const bookedDates = bookings.flatMap((booking) => {
+  const bookedDates = upcomingBookings.flatMap((booking) => {
+    const dates: Date[] = [];
+    const currentDate = toCalendarDate(booking.dateFrom);
+    const endDate = toCalendarDate(booking.dateTo);
+
+    while (currentDate <= endDate) {
+      dates.push(new Date(currentDate));
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    return dates;
+  });
+  const pastBookedDates = pastBookings.flatMap((booking) => {
     const dates: Date[] = [];
     const currentDate = toCalendarDate(booking.dateFrom);
     const endDate = toCalendarDate(booking.dateTo);
@@ -197,9 +211,7 @@ function VenueCalendar({ venue }: { venue: Venue }) {
     return (
       <article className={styles.calendarCard}>
         <h3>{venue.name}</h3>
-        <p className={styles.calendarEmpty}>
-          No upcoming bookings for this venue yet.
-        </p>
+        <p className={styles.calendarEmpty}>No bookings for this venue yet.</p>
       </article>
     );
   }
@@ -213,11 +225,13 @@ function VenueCalendar({ venue }: { venue: Venue }) {
         defaultMonth={bookings[0] ? new Date(bookings[0].dateFrom) : new Date()}
         modifiers={{
           booked: bookedDates,
+          pastBooked: pastBookedDates,
           checkIn: checkInDates,
           checkOut: checkOutDates,
         }}
         modifiersClassNames={{
           booked: styles.bookedDay,
+          pastBooked: styles.pastBookedDay,
           checkIn: styles.checkInDay,
           checkOut: styles.checkOutDay,
         }}
@@ -233,6 +247,9 @@ function VenueCalendar({ venue }: { venue: Venue }) {
       <div className={styles.legend} aria-label="Calendar legend">
         <span>
           <i className={styles.bookedSwatch} /> Booked
+        </span>
+        <span>
+          <i className={styles.pastBookedSwatch} /> Past booking
         </span>
         <span>
           <i className={styles.checkInSwatch} /> Check-in

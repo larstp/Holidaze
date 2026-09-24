@@ -203,6 +203,7 @@ fieldset label {
   color: var(--text);
   background: var(--surface);
   font: inherit;
+  cursor: text;
 }
 
 .dateField {
@@ -227,6 +228,7 @@ fieldset label {
   color: var(--text);
   background: var(--surface);
   font: inherit;
+  cursor: pointer;
 }
 
 .dateError {
@@ -245,6 +247,7 @@ fieldset input[type='checkbox'] {
   width: 1rem;
   height: 1rem;
   margin: 0;
+  cursor: pointer;
 }
 
 .resultsHeader {
