@@ -7,7 +7,7 @@ function Navbar() {
   const { isAuthenticated, profile, logout } = useAuth();
   const dashboardPath = profile?.venueManager
     ? '/dashboard/manager/overview'
-    : '/dashboard';
+    : '/dashboard/overview';
 
   return (
     <nav

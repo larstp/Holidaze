@@ -79,7 +79,7 @@ function Login() {
         requestedDestination ??
         (loggedInProfile.venueManager
           ? '/dashboard/manager/overview'
-          : '/dashboard');
+          : '/dashboard/overview');
       navigate(destination, { replace: true });
     } catch (submissionError) {
       setAccessToken(null);

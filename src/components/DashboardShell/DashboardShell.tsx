@@ -46,15 +46,17 @@ function DashboardShell({
             </div>
           </div>
           <nav className={styles.sideNav} aria-label="Account sections">
-            {profile.venueManager && (
-              <NavLink
-                className={({ isActive }) => (isActive ? styles.active : '')}
-                to="/dashboard/manager/overview"
-                end
-              >
-                <Eye aria-hidden="true" /> Overview
-              </NavLink>
-            )}
+            <NavLink
+              className={({ isActive }) => (isActive ? styles.active : '')}
+              to={
+                profile.venueManager
+                  ? '/dashboard/manager/overview'
+                  : '/dashboard/overview'
+              }
+              end
+            >
+              <Eye aria-hidden="true" /> Overview
+            </NavLink>
             <NavLink
               className={({ isActive }) => (isActive ? styles.active : '')}
               to="/dashboard"

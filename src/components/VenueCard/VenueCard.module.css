@@ -95,7 +95,8 @@ h3 a:focus-visible {
 }
 
 .rating svg {
-  color: var(--text);
+  color: var(--logo-color);
+  fill: currentColor;
 }
 
 .ratingCount {

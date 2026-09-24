@@ -138,7 +138,7 @@
 
 .rating svg,
 .reviews p svg {
-  color: var(--primary);
+  color: var(--logo-color);
   fill: currentColor;
 }
 
@@ -289,7 +289,7 @@
 
 .reviewStars {
   margin-left: auto;
-  color: #e89b24;
+  color: var(--logo-color);
   font-size: 0.7rem;
   letter-spacing: 0.08em;
 }

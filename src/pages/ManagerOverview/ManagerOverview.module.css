@@ -1,5 +1,5 @@
 .heading {
-  margin: 0;
+  margin: 1rem 0 0 0;
   color: var(--text-h);
   font-size: var(--text-size-xl);
   font-weight: 900;

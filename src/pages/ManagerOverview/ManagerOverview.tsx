@@ -3,6 +3,7 @@ import { DayPicker } from 'react-day-picker';
 import { useEffect, useMemo, useState } from 'react';
 import BookingCard from '../../components/BookingCard/BookingCard';
 import DashboardShell from '../../components/DashboardShell/DashboardShell';
+import ProfileHero from '../../components/ProfileHero/ProfileHero';
 import StatCard from '../../components/StatCard/StatCard';
 import { useAuth } from '../../context/useAuth';
 import { ApiError } from '../../lib/services/apiClient';
@@ -112,6 +113,7 @@ function ManagerOverview() {
   return (
     <DashboardShell isLoading={isLoading} loadingLabel="Loading your overview">
       <section aria-labelledby="overview-heading">
+        <ProfileHero profile={profile!} headingId="profile-heading" />
         <h1 className={styles.heading} id="overview-heading">
           Overview
         </h1>
