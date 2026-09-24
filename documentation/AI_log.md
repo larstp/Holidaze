@@ -165,3 +165,8 @@ Outcome: guided through fix. i had misunderstood from documentation
 Model: Google Gemini Free
 Reason: needed help figuring out why searching and displaying results for city's and countries never worked
 Outcome: found out that its not a search parameter in the API, needed to add separate filtering options (got some help with that also, as i could not figure out how)
+
+23 Sep
+Model: Google Gemini Free
+Reason: Needed debugging help with published page's filter button on "search" page. closed overlay immediately only on published page
+Outcome: heped me debug and set up "event.target as Node" to stop the race condition

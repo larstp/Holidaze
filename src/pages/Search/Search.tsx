@@ -100,9 +100,15 @@ function Search() {
     closeButtonRef.current?.focus();
 
     const closeOnOutsideClick = (event: PointerEvent) => {
-      if (!filtersRef.current?.contains(event.target as Node)) {
-        closeFilters();
+      const target = event.target as Node;
+      if (
+        filtersRef.current?.contains(target) ||
+        filterTriggerRef.current?.contains(target)
+      ) {
+        return;
       }
+
+      closeFilters();
     };
 
     const closeOnEscape = (event: KeyboardEvent) => {

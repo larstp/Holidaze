@@ -86,40 +86,15 @@
 .heroButton,
 .darkButton,
 .primaryLink {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.8rem;
-  box-sizing: border-box;
-  padding: 0.7rem 1rem;
-  border-radius: var(--radius-md);
-  font-size: var(--button-text-small);
-  font-weight: 800;
   text-decoration: none;
 }
 
 .heroButton {
   margin-top: 1.4rem;
-  color: var(--dark-green);
-  background: var(--pure-white);
-}
-
-.heroButton:hover,
-.heroButton:focus-visible {
-  color: var(--pure-white);
-  background: var(--button-hover);
 }
 
 .darkButton {
   margin-top: 1.4rem;
-  border: 1px solid var(--pure-white);
-  color: var(--pure-white);
-  background: transparent;
-}
-
-.darkButton:hover,
-.darkButton:focus-visible {
-  background: var(--button-hover);
 }
 
 .benefitsSection {

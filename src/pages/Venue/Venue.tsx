@@ -9,9 +9,11 @@ import {
   Wifi,
   CalendarDays,
 } from 'lucide-react';
+import { DayPicker } from 'react-day-picker';
 import { useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Button from '../../components/Button/Button';
+import buttonStyles from '../../components/Button/Button.module.css';
 import ImageWithFallback from '../../components/ImageWithFallback/ImageWithFallback';
 import PageLoader from '../../components/PageLoader/PageLoader';
 import { VenueNotFoundPage } from '../../components/PageStates/PageStates';
@@ -41,6 +43,7 @@ function Venue() {
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
   const [guests, setGuests] = useState(1);
+  const [isAvailabilityOpen, setIsAvailabilityOpen] = useState(false);
   const [bookingError, setBookingError] = useState('');
   const [bookingSuccess, setBookingSuccess] = useState('');
   const [isBooking, setIsBooking] = useState(false);
@@ -72,6 +75,54 @@ function Venue() {
     profile?.venueManager &&
     profile.name === venue.owner?.name
   );
+  const toCalendarDate = (value: string) => {
+    const [year, month, day] = value.slice(0, 10).split('-').map(Number);
+    return new Date(year, month - 1, day);
+  };
+  const toInputDate = (date: Date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+  const bookedDates = (venue.bookings ?? []).flatMap((booking) => {
+    const dates: Date[] = [];
+    const currentDate = toCalendarDate(booking.dateFrom);
+    const endDate = toCalendarDate(booking.dateTo);
+    endDate.setDate(endDate.getDate() - 1);
+
+    while (currentDate <= endDate) {
+      dates.push(new Date(currentDate));
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    return dates;
+  });
+  const checkInDate = checkIn ? toCalendarDate(checkIn) : undefined;
+  const checkOutDate = checkOut ? toCalendarDate(checkOut) : undefined;
+  const selectedRangeDates: Date[] = [];
+
+  if (checkInDate && checkOutDate && checkOutDate > checkInDate) {
+    const currentDate = new Date(checkInDate);
+    currentDate.setDate(currentDate.getDate() + 1);
+
+    while (currentDate < checkOutDate) {
+      selectedRangeDates.push(new Date(currentDate));
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+  }
+  const handleCalendarSelect = (date: Date | undefined) => {
+    if (!date) return;
+    const selectedDate = toInputDate(date);
+
+    if (!checkIn || checkOut || selectedDate <= checkIn) {
+      setCheckIn(selectedDate);
+      setCheckOut('');
+    } else {
+      setCheckOut(selectedDate);
+    }
+    clearBookingFeedback();
+  };
 
   const clearBookingFeedback = () => {
     setBookingError('');
@@ -304,26 +355,84 @@ function Venue() {
                     }}
                   />
                 </label>
-                <label className={styles.guestsField}>
-                  Guests
-                  <span className={styles.selectWrapper}>
-                    <select
-                      value={guests}
-                      onChange={(event) => {
-                        setGuests(Number(event.target.value));
-                        clearBookingFeedback();
-                      }}
-                    >
-                      {Array.from({ length: venue.maxGuests }, (_, index) => (
-                        <option key={index + 1} value={index + 1}>
-                          {index + 1} {index === 0 ? 'guest' : 'guests'}
-                        </option>
-                      ))}
-                    </select>
-                    <ChevronDown aria-hidden="true" />
-                  </span>
-                </label>
               </div>
+              <Button
+                type="button"
+                variant="primary"
+                size="small"
+                className={styles.availabilityButton}
+                onClick={() => setIsAvailabilityOpen((isOpen) => !isOpen)}
+                aria-expanded={isAvailabilityOpen}
+                aria-controls="venue-availability-calendar"
+              >
+                {isAvailabilityOpen ? 'Hide availability' : 'View availability'}
+              </Button>
+              {isAvailabilityOpen && (
+                <div
+                  className={styles.availabilityCalendar}
+                  id="venue-availability-calendar"
+                >
+                  <DayPicker
+                    className={styles.calendar}
+                    mode="single"
+                    selected={
+                      checkOut
+                        ? toCalendarDate(checkOut)
+                        : checkIn
+                          ? toCalendarDate(checkIn)
+                          : undefined
+                    }
+                    onSelect={handleCalendarSelect}
+                    disabled={[
+                      { before: toCalendarDate(getToday()) },
+                      ...bookedDates,
+                    ]}
+                    modifiers={{
+                      booked: bookedDates,
+                      checkIn: checkInDate ?? [],
+                      selectedRange: selectedRangeDates,
+                      checkOut: checkOutDate ?? [],
+                    }}
+                    modifiersClassNames={{
+                      booked: styles.bookedDay,
+                      checkIn: styles.checkInDay,
+                      selectedRange: styles.selectedRangeDay,
+                      checkOut: styles.checkOutDay,
+                    }}
+                    fixedWeeks
+                    formatters={{
+                      formatWeekdayName: (date) =>
+                        date
+                          .toLocaleDateString('en-US', { weekday: 'short' })
+                          .slice(0, 2),
+                    }}
+                  />
+                  <div className={styles.calendarLegend}>
+                    <span>
+                      <i /> Booked dates are unavailable
+                    </span>
+                  </div>
+                </div>
+              )}
+              <label className={styles.guestsField}>
+                Guests
+                <span className={styles.selectWrapper}>
+                  <select
+                    value={guests}
+                    onChange={(event) => {
+                      setGuests(Number(event.target.value));
+                      clearBookingFeedback();
+                    }}
+                  >
+                    {Array.from({ length: venue.maxGuests }, (_, index) => (
+                      <option key={index + 1} value={index + 1}>
+                        {index + 1} {index === 0 ? 'guest' : 'guests'}
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronDown aria-hidden="true" />
+                </span>
+              </label>
               {bookingNights > 0 && (
                 <div className={styles.bookingSummary} aria-live="polite">
                   <div>
@@ -349,6 +458,7 @@ function Venue() {
                 <Button
                   type="button"
                   variant="primary"
+                  size="small"
                   disabled={
                     isBooking || !checkIn || !checkOut || checkOut <= checkIn
                   }
@@ -358,7 +468,7 @@ function Venue() {
                 </Button>
               ) : (
                 <Link
-                  className={styles.loginToBook}
+                  className={`${buttonStyles.button} ${buttonStyles.primary} ${buttonStyles.small} ${styles.loginToBook}`}
                   to="/login"
                   state={{ from: `/venues/${id}` }}
                 >

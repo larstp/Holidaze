@@ -153,7 +153,7 @@
   padding: 0.75rem 0;
   border: 0;
   border-top: 1px solid var(--border);
-  color: var(--text);
+  color: var(--logo-color);
   background: transparent;
   font: inherit;
   font-size: var(--text-size-s);

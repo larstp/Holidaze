@@ -32,12 +32,14 @@ export function NotFoundPage() {
     >
       <Button
         variant="secondary"
+        size="small"
         icon={<ArrowLeft aria-hidden="true" />}
         onClick={() => navigate(-1)}
       >
         Go back
       </Button>
       <Button
+        size="small"
         icon={<RotateCcw aria-hidden="true" />}
         onClick={() => window.location.reload()}
       >
@@ -45,6 +47,7 @@ export function NotFoundPage() {
       </Button>
       <Button
         variant="secondary"
+        size="small"
         icon={<House aria-hidden="true" />}
         onClick={() => navigate('/')}
       >
@@ -64,6 +67,7 @@ export function AccessDeniedPage() {
     >
       <Button
         variant="secondary"
+        size="small"
         icon={<ArrowLeft aria-hidden="true" />}
         onClick={() => navigate(-1)}
       >
@@ -87,6 +91,7 @@ export function VenueNotFoundPage({ onRetry }: VenueNotFoundPageProps) {
     >
       <Button
         variant="secondary"
+        size="small"
         icon={<RotateCcw aria-hidden="true" />}
         onClick={onRetry}
       >
@@ -94,6 +99,7 @@ export function VenueNotFoundPage({ onRetry }: VenueNotFoundPageProps) {
       </Button>
       <Button
         variant="secondary"
+        size="small"
         icon={<House aria-hidden="true" />}
         onClick={() => navigate('/')}
       >

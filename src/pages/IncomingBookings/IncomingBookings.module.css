@@ -136,6 +136,11 @@
   color: var(--pure-white);
   white-space: pre-line;
 }
+.calendar :global(.fc .pastBooking) {
+  border-color: #a8a8a8;
+  color: #4f4f4f;
+  background: #d1d1d1;
+}
 .calendar :global(.fc .fc-daygrid-day-number) {
   color: var(--text-muted);
 }

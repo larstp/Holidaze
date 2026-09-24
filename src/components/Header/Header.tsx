@@ -125,7 +125,13 @@ function Header() {
             className={({ isActive }) =>
               `${styles.listLink} ${isActive ? styles.navLinkActive : ''}`
             }
-            to={isAuthenticated ? '/venues/create' : '/become-manager'}
+            to={
+              isAuthenticated && profile?.venueManager
+                ? '/venues/create'
+                : isAuthenticated
+                  ? '/become-manager'
+                  : '/register'
+            }
             onClick={closeMenu}
           >
             List your venue

@@ -152,6 +152,10 @@ select {
   font: inherit;
 }
 
+input[type='date'] {
+  cursor: pointer;
+}
+
 select {
   appearance: none;
   padding-right: 1.25rem;
@@ -401,15 +405,8 @@ input::placeholder {
   color: var(--text-muted);
 }
 
-.status button {
+.statusButton {
   margin-top: 0.75rem;
-  padding: 0.6rem 0.9rem;
-  border: 1px solid var(--primary);
-  border-radius: var(--radius-md);
-  color: var(--primary);
-  background: transparent;
-  font: inherit;
-  cursor: pointer;
 }
 
 .ctaSection {
@@ -472,7 +469,7 @@ input::placeholder {
 .trustContent {
   display: grid;
   gap: 1.75rem;
-  width: 100%;
+  width: min(1126px, 100%);
   margin: 0 auto;
   justify-content: center;
 }

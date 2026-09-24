@@ -10,6 +10,7 @@ import {
 import type { ReactNode } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/useAuth';
+import buttonStyles from '../Button/Button.module.css';
 import PageLoader from '../PageLoader/PageLoader';
 import ProfileAvatar from '../ProfileAvatar/ProfileAvatar';
 import styles from './DashboardShell.module.css';
@@ -85,7 +86,10 @@ function DashboardShell({
             </NavLink>
           </nav>
           {!profile.venueManager && (
-            <Link className={styles.managerLink} to="/become-manager">
+            <Link
+              className={`${buttonStyles.button} ${buttonStyles.primary} ${buttonStyles.small} ${styles.managerLink}`}
+              to="/become-manager"
+            >
               <Store aria-hidden="true" /> Become a Manager
             </Link>
           )}

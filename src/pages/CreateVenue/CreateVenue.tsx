@@ -3,6 +3,7 @@ import { useState } from 'react';
 import type { SyntheticEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
+import buttonStyles from '../../components/Button/Button.module.css';
 import ImageWithFallback from '../../components/ImageWithFallback/ImageWithFallback';
 import { useAuth } from '../../context/useAuth';
 import { ApiError } from '../../lib/services/apiClient';
@@ -394,7 +395,10 @@ function CreateVenue({ venue }: CreateVenueProps) {
           </p>
         )}
         <div className={styles.actions}>
-          <Link className={styles.cancelButton} to="/dashboard/manager/venues">
+          <Link
+            className={`${buttonStyles.button} ${buttonStyles.secondary} ${buttonStyles.small} ${styles.cancelButton}`}
+            to="/dashboard/manager/venues"
+          >
             Cancel
           </Link>
           <Button type="submit" disabled={isSaving}>

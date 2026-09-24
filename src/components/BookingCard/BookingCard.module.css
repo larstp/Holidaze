@@ -106,13 +106,13 @@
   padding: 0.3rem 0.65rem;
   border-radius: var(--radius-pill);
   color: var(--dark-green);
-  background: #d3f0d9;
+  background: var(--accent-bg);
   font-size: 0.65rem;
   font-weight: 800;
 }
 .completed {
-  color: var(--primary);
-  background: var(--accent-bg);
+  color: #696767;
+  background: #e0e0e0;
 }
 .arrow {
   display: none;
@@ -127,26 +127,11 @@
   align-items: center;
   gap: 0.4rem;
 }
-.actions button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
+.actions .cardAction {
   min-height: 2rem;
   padding: 0.4rem 0.7rem;
-  border: 1px solid var(--dark-green);
   border-radius: var(--radius-sm);
-  color: var(--dark-green);
-  background: transparent;
-  font: inherit;
   font-size: var(--text-size-s);
-  font-weight: 700;
-  cursor: pointer;
-}
-.actions button:hover,
-.actions button:focus-visible {
-  color: var(--pure-white);
-  background: var(--dark-green);
 }
 .actions svg {
   width: 0.85rem;
@@ -154,15 +139,10 @@
 }
 .actions .deleteButton {
   width: 2rem;
+  height: 2rem;
+  min-height: 2rem;
+  box-sizing: border-box;
   padding: 0.4rem;
-  border-color: #f2c3c3;
-  color: #a63d32;
-  background: var(--danger);
-}
-.actions .deleteButton:hover,
-.actions .deleteButton:focus-visible {
-  color: var(--pure-white);
-  background: var(--logo-color);
 }
 
 @media (min-width: 701px) {

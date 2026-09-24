@@ -85,6 +85,10 @@ function App() {
             />
             <Route path="/become-manager" element={<BecomeManager />} />
             <Route
+              path="/become-manager/upgrade"
+              element={<BecomeManager upgradeOnly />}
+            />
+            <Route
               path="/venues/create"
               element={
                 <ProtectedRoute managerOnly>
