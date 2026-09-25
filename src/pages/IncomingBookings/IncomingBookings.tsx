@@ -3,6 +3,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import DashboardShell from '../../components/DashboardShell/DashboardShell';
+import ProfileAvatar from '../../components/ProfileAvatar/ProfileAvatar';
 import { useAuth } from '../../context/useAuth';
 import VenueSummary from '../../components/VenueSummary/VenueSummary';
 import { ApiError } from '../../lib/services/apiClient';
@@ -73,6 +74,9 @@ function IncomingBookings() {
         <div className={styles.venueList}>
           {venues.map((venue) => {
             const isExpanded = venue.id === expandedVenueId;
+            const upcomingBookings = (venue.bookings ?? []).filter(
+              isUpcomingBooking
+            );
             const events = (venue.bookings ?? []).map((booking) => ({
               id: booking.id,
               title: `${booking.customer?.name ?? 'Guest'}\n${booking.guests} ${booking.guests === 1 ? 'guest' : 'guests'}`,
@@ -97,6 +101,42 @@ function IncomingBookings() {
                 </button>
                 {isExpanded && (
                   <div className={styles.calendar}>
+                    {upcomingBookings.length > 0 && (
+                      <div
+                        className={styles.upcomingBookings}
+                        aria-label="Upcoming bookings"
+                      >
+                        {upcomingBookings.map((booking) => (
+                          <div
+                            className={styles.upcomingBooking}
+                            key={booking.id}
+                          >
+                            <ProfileAvatar
+                              className={styles.customerAvatar}
+                              profile={
+                                booking.customer ?? {
+                                  name: 'Guest',
+                                  email: '',
+                                }
+                              }
+                            />
+                            <div className={styles.bookingCustomer}>
+                              <strong>
+                                {booking.customer?.name ?? 'Guest'}
+                              </strong>
+                              <span>
+                                {booking.guests}{' '}
+                                {booking.guests === 1 ? 'guest' : 'guests'}
+                              </span>
+                            </div>
+                            <span className={styles.bookingDates}>
+                              {formatBookingDate(booking.dateFrom)} →{' '}
+                              {formatBookingDate(booking.dateTo)}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                     {events.length > 0 ? (
                       <VenueCalendar events={events} />
                     ) : (
@@ -132,6 +172,13 @@ function isUpcomingBooking(booking: NonNullable<Venue['bookings']>[number]) {
     ? new Date(`${dateValue}T23:59:59`)
     : new Date(dateValue);
   return date.getTime() >= Date.now();
+}
+
+function formatBookingDate(value: string) {
+  return new Intl.DateTimeFormat('en-GB', {
+    day: '2-digit',
+    month: '2-digit',
+  }).format(new Date(value));
 }
 
 function VenueCalendar({ events }: VenueCalendarProps) {

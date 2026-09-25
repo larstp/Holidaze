@@ -16,7 +16,7 @@ function ProfileSettings() {
       <section className={styles.panel} aria-labelledby="profile-heading">
         <div className={styles.headingRow}>
           <div>
-            <h1 id="profile-heading">Profile settings</h1>
+            <h1 id="profile-heading">Profile Settings</h1>
             <p>Review your public profile and account settings.</p>
           </div>
           <Link

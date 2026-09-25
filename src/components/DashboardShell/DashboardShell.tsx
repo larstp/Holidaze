@@ -84,7 +84,7 @@ function DashboardShell({
               className={({ isActive }) => (isActive ? styles.active : '')}
               to="/dashboard/profile"
             >
-              <Pencil aria-hidden="true" /> Profile settings
+              <Pencil aria-hidden="true" /> Profile Settings
             </NavLink>
           </nav>
           {!profile.venueManager && (
