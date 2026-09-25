@@ -7,6 +7,8 @@ type ConfirmDialogProps = {
   title: string;
   children: ReactNode;
   confirmLabel?: string;
+  cancelVariant?: 'secondary' | 'danger';
+  confirmVariant?: 'primary' | 'danger';
   isComplete?: boolean;
   error?: string;
   onConfirm: () => void;
@@ -18,6 +20,8 @@ function ConfirmDialog({
   title,
   children,
   confirmLabel = 'Confirm',
+  cancelVariant = 'secondary',
+  confirmVariant = 'danger',
   isComplete = false,
   error,
   onConfirm,
@@ -40,17 +44,27 @@ function ConfirmDialog({
             {error}
           </p>
         )}
-        <p>{children}</p>
+        <div className={styles.message}>{children}</div>
         <div className={styles.actions}>
           {!isComplete && (
-            <Button type="button" variant="secondary" onClick={onCancel}>
+            <Button
+              type="button"
+              variant={cancelVariant}
+              size="small"
+              onClick={onCancel}
+            >
               Cancel
             </Button>
           )}
           <Button
             type="button"
-            variant="primary"
-            className={isComplete ? undefined : styles.deleteButton}
+            variant={confirmVariant}
+            size="small"
+            className={
+              !isComplete && confirmVariant === 'danger'
+                ? styles.deleteButton
+                : undefined
+            }
             onClick={isComplete ? onCancel : onConfirm}
           >
             {isComplete ? 'Done' : confirmLabel}

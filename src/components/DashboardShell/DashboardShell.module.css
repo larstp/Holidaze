@@ -68,7 +68,7 @@
 .profileCard small {
   overflow: hidden;
   color: var(--primary);
-  font-size: 0.68rem;
+  font-size: var(--text-size-s);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -192,6 +192,15 @@
   min-height: 12rem;
 }
 
+.mobileOverviewHero {
+  display: block;
+}
+
+.desktopOverviewHero {
+  display: none;
+  margin-bottom: 1.5rem;
+}
+
 @media (min-width: 701px) {
   .page {
     min-height: calc(100svh - var(--header-height-desktop));
@@ -207,6 +216,14 @@
     position: sticky;
     top: calc(var(--header-height-desktop) + 1.5rem);
     align-self: start;
+  }
+
+  .mobileOverviewHero {
+    display: none;
+  }
+
+  .desktopOverviewHero {
+    display: block;
   }
 }
 

@@ -90,7 +90,7 @@
 .link,
 .listLink {
   color: var(--text);
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   font-weight: 600;
   text-decoration: none;
   padding: 0.85rem 0;

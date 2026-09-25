@@ -43,7 +43,7 @@
 
 .card small {
   color: var(--primary);
-  font-size: 0.68rem;
+  font-size: var(--text-size-s);
 }
 
 :global(:root[data-theme='dark']) .card small {

@@ -1,4 +1,5 @@
 import { CalendarDays, TrendingUp } from 'lucide-react';
+import { DayPicker } from 'react-day-picker';
 import { useEffect, useMemo, useState } from 'react';
 import BookingCard from '../../components/BookingCard/BookingCard';
 import DashboardShell from '../../components/DashboardShell/DashboardShell';
@@ -61,6 +62,10 @@ function DashboardOverview() {
     () => bookings.filter(isUpcoming),
     [bookings]
   );
+  const tripCalendarBookings = useMemo(
+    () => [...ongoingBookings, ...upcomingBookings],
+    [ongoingBookings, upcomingBookings]
+  );
   const totalSpent = bookings.reduce((total, booking) => {
     if (!booking.venue) return total;
     const nights = Math.max(
@@ -75,10 +80,15 @@ function DashboardOverview() {
   }, 0);
 
   return (
-    <DashboardShell isLoading={isLoading} loadingLabel="Loading your overview">
+    <DashboardShell
+      isLoading={isLoading}
+      loadingLabel="Loading your overview"
+      overviewHero={<ProfileHero profile={profile!} />}
+    >
       <section aria-labelledby="overview-heading">
-        <ProfileHero profile={profile!} headingId="overview-heading" />
-        <h2 className={styles.overviewHeading}>Overview</h2>
+        <h2 className={styles.overviewHeading} id="overview-heading">
+          Overview
+        </h2>
 
         {error && (
           <p className={styles.error} role="alert">
@@ -124,8 +134,67 @@ function DashboardOverview() {
             )}
           </div>
         </section>
+
+        <section className={styles.section} aria-labelledby="calendar-heading">
+          <h2 className={styles.sectionHeading} id="calendar-heading">
+            Trip calendars
+          </h2>
+          {tripCalendarBookings.length > 0 ? (
+            <div className={styles.calendarGrid}>
+              {tripCalendarBookings.map((booking) => (
+                <TripCalendar key={booking.id} booking={booking} />
+              ))}
+            </div>
+          ) : (
+            <p className={styles.muted}>Your booked dates will appear here.</p>
+          )}
+        </section>
       </section>
     </DashboardShell>
+  );
+}
+
+function TripCalendar({ booking }: { booking: Booking }) {
+  const toCalendarDate = (value: string) => {
+    const [year, month, day] = value.slice(0, 10).split('-').map(Number);
+    return new Date(year, month - 1, day);
+  };
+  const checkIn = toCalendarDate(booking.dateFrom);
+  const checkOut = toCalendarDate(booking.dateTo);
+  const bookedDates: Date[] = [];
+  const currentDate = new Date(checkIn);
+  const lastBookedDate = new Date(checkOut);
+  lastBookedDate.setDate(lastBookedDate.getDate() - 1);
+
+  while (currentDate <= lastBookedDate) {
+    bookedDates.push(new Date(currentDate));
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+
+  return (
+    <article className={styles.calendarCard}>
+      <h3>{booking.venue?.name ?? 'Booked stay'}</h3>
+      <DayPicker
+        className={styles.calendar}
+        defaultMonth={checkIn}
+        modifiers={{ booked: bookedDates, checkIn, checkOut }}
+        modifiersClassNames={{
+          booked: styles.bookedDay,
+          checkIn: styles.checkInDay,
+          checkOut: styles.checkOutDay,
+        }}
+        weekStartsOn={1}
+        showOutsideDays
+        fixedWeeks
+        formatters={{
+          formatWeekdayName: (date) =>
+            date.toLocaleDateString('en-US', { weekday: 'short' }).slice(0, 2),
+        }}
+      />
+      <p className={styles.calendarDates}>
+        {booking.dateFrom.slice(0, 10)} to {booking.dateTo.slice(0, 10)}
+      </p>
+    </article>
   );
 }
 

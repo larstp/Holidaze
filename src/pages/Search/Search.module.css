@@ -257,6 +257,10 @@ fieldset input[type='checkbox'] {
   gap: 1rem;
 }
 
+.results {
+  position: relative;
+}
+
 .resultCount {
   color: var(--text-muted);
   font-size: 0.9rem;

@@ -15,6 +15,9 @@ function ImageCarousel({
   const [activeImage, setActiveImage] = useState(() =>
     Math.floor(Math.random() * images.length)
   );
+  const [loadedImages, setLoadedImages] = useState(
+    () => new Set([activeImage])
+  );
 
   useEffect(() => {
     const activeImageSource = images[activeImage];
@@ -22,14 +25,29 @@ function ImageCarousel({
     activeImagePreload.fetchPriority = 'high';
     activeImagePreload.src = activeImageSource;
 
-    const deferredPreloadId = window.setTimeout(() => {
-      images.forEach((imageSource, index) => {
-        if (index === activeImage) return;
-        const image = new Image();
-        image.fetchPriority = 'low';
-        image.src = imageSource;
-      });
-    }, 1500);
+    let nextPreloadIndex = 0;
+    let isCurrentEffect = true;
+    const preloadNextImage = () => {
+      while (nextPreloadIndex === activeImage) nextPreloadIndex += 1;
+      if (nextPreloadIndex >= images.length) return;
+
+      const indexToLoad = nextPreloadIndex;
+      nextPreloadIndex += 1;
+      const image = new Image();
+      image.fetchPriority = 'low';
+      image.onload = () => {
+        if (!isCurrentEffect) return;
+        setLoadedImages((currentImages) => {
+          const nextImages = new Set(currentImages);
+          nextImages.add(indexToLoad);
+          return nextImages;
+        });
+        preloadNextImage();
+      };
+      image.src = images[indexToLoad];
+    };
+
+    const deferredPreloadId = window.setTimeout(preloadNextImage, 1500);
 
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (motionQuery.matches || images.length < 2) {
@@ -42,6 +60,7 @@ function ImageCarousel({
     }, interval);
 
     return () => {
+      isCurrentEffect = false;
       window.clearTimeout(timeoutId);
       window.clearTimeout(deferredPreloadId);
     };
@@ -51,11 +70,15 @@ function ImageCarousel({
 
   return (
     <div className={`${styles.carousel} ${className}`} aria-hidden="true">
-      <div
-        key={images[activeImage]}
-        className={styles.image}
-        style={{ backgroundImage: `url('${images[activeImage]}')` }}
-      />
+      {images.map((imageSource, index) =>
+        loadedImages.has(index) ? (
+          <div
+            className={`${styles.image} ${index === activeImage ? styles.active : ''}`}
+            key={imageSource}
+            style={{ backgroundImage: `url('${imageSource}')` }}
+          />
+        ) : null
+      )}
     </div>
   );
 }

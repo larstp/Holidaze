@@ -170,3 +170,13 @@ Outcome: found out that its not a search parameter in the API, needed to add sep
 Model: Google Gemini Free
 Reason: Needed debugging help with published page's filter button on "search" page. closed overlay immediately only on published page
 Outcome: heped me debug and set up "event.target as Node" to stop the race condition
+
+25 Sep
+Model: GitHub Copilot
+Reason: Wanted to take a full look comparing the codebase to the EPIS (user stories) or the project
+Outcome: We went through step by step, confirming implementation and all steps to test them.
+
+25 Sep
+Model: Gemini Free
+Reason: Wanted a nice looking README
+Outcome: I wrote all the text that i wanted to include and it helped me framework it to look nice on GitHub

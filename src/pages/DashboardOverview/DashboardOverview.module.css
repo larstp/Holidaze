@@ -32,6 +32,95 @@
   gap: 0.8rem;
 }
 
+.calendarGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.calendarCard {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.calendarCard h3 {
+  margin: 0 0 0.65rem;
+  color: var(--text-h);
+  font-size: var(--text-size-m);
+}
+
+.calendar {
+  width: 100%;
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  pointer-events: none;
+}
+
+.calendar:global(.rdp-root) :global(.rdp-months),
+.calendar:global(.rdp-root) :global(.rdp-month),
+.calendar:global(.rdp-root) :global(.rdp-month_grid) {
+  width: 100%;
+}
+
+.calendar:global(.rdp-root) :global(.rdp-months) {
+  position: relative;
+}
+
+.calendar:global(.rdp-root) :global(.rdp-month_caption) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  color: var(--text-h);
+  font-size: var(--text-size-m);
+}
+
+.calendar:global(.rdp-root) :global(.rdp-nav) {
+  display: none;
+}
+
+.calendar:global(.rdp-root) :global(.rdp-weekday) {
+  color: var(--text-muted);
+  font-size: 0.65rem;
+}
+
+.calendar:global(.rdp-root) :global(.rdp-day),
+.calendar:global(.rdp-root) :global(.rdp-day_button) {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.3rem;
+  color: var(--text);
+  font: inherit;
+}
+
+.calendar:global(.rdp-root) :global(.rdp-day_button) {
+  border: 0;
+  background: transparent;
+}
+
+.calendar .bookedDay,
+.calendar .bookedDay :global(.rdp-day_button) {
+  background: var(--accent-bg);
+}
+
+.calendar .checkInDay,
+.calendar .checkInDay :global(.rdp-day_button),
+.calendar .checkOutDay,
+.calendar .checkOutDay :global(.rdp-day_button) {
+  color: var(--pure-white) !important;
+  background: var(--dark-green) !important;
+}
+
+.calendarDates {
+  margin: 0.65rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+}
+
 .error,
 .muted {
   margin-top: 1rem;
@@ -46,5 +135,11 @@
 @media (max-width: 520px) {
   .stats {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 930px) {
+  .calendarGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

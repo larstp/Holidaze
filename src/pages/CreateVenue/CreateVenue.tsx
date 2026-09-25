@@ -1,4 +1,4 @@
-import { ArrowLeft, Trash2 } from 'lucide-react';
+import { ChevronLeft, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import type { SyntheticEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -190,7 +190,7 @@ function CreateVenue({ venue }: CreateVenueProps) {
     <main className={styles.page}>
       <form className={styles.form} onSubmit={handleSubmit}>
         <Link className={styles.backLink} to="/dashboard/manager/venues">
-          <ArrowLeft aria-hidden="true" /> Back to my venues
+          <ChevronLeft aria-hidden="true" /> Back to my venues
         </Link>
         <h1>{venue ? 'Edit venue' : 'Create venue'}</h1>
         <p className={styles.intro}>

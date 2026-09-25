@@ -17,6 +17,7 @@ import styles from './DashboardShell.module.css';
 
 type DashboardShellProps = {
   children: ReactNode;
+  overviewHero?: ReactNode;
   isLoading?: boolean;
   loadingLabel?: string;
   desktopAt800?: boolean;
@@ -24,6 +25,7 @@ type DashboardShellProps = {
 
 function DashboardShell({
   children,
+  overviewHero,
   isLoading = false,
   loadingLabel = 'Loading your dashboard',
   desktopAt800 = false,
@@ -45,6 +47,9 @@ function DashboardShell({
               <small>{profile.email}</small>
             </div>
           </div>
+          {overviewHero && (
+            <div className={styles.mobileOverviewHero}>{overviewHero}</div>
+          )}
           <nav className={styles.sideNav} aria-label="Account sections">
             <NavLink
               className={({ isActive }) => (isActive ? styles.active : '')}
@@ -104,7 +109,16 @@ function DashboardShell({
           </button>
         </aside>
         <section className={styles.content}>
-          {isLoading ? <PageLoader label={loadingLabel} /> : children}
+          {isLoading ? (
+            <PageLoader label={loadingLabel} />
+          ) : (
+            <>
+              {overviewHero && (
+                <div className={styles.desktopOverviewHero}>{overviewHero}</div>
+              )}
+              {children}
+            </>
+          )}
         </section>
       </div>
     </main>

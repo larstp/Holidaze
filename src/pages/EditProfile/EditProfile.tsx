@@ -1,4 +1,4 @@
-import { ArrowLeft } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
 import { useState } from 'react';
 import type { SyntheticEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -62,7 +62,7 @@ function EditProfile() {
     <main className={styles.page}>
       <form className={styles.form} onSubmit={handleSubmit}>
         <Link className={styles.backLink} to="/dashboard/profile">
-          <ArrowLeft aria-hidden="true" /> Back to profile settings
+          <ChevronLeft aria-hidden="true" /> Back to profile settings
         </Link>
         <h1>Edit profile</h1>
         <p className={styles.intro}>

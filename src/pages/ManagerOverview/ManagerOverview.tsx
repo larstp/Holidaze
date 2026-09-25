@@ -111,9 +111,12 @@ function ManagerOverview() {
   );
 
   return (
-    <DashboardShell isLoading={isLoading} loadingLabel="Loading your overview">
+    <DashboardShell
+      isLoading={isLoading}
+      loadingLabel="Loading your overview"
+      overviewHero={<ProfileHero profile={profile!} />}
+    >
       <section aria-labelledby="overview-heading">
-        <ProfileHero profile={profile!} headingId="profile-heading" />
         <h1 className={styles.heading} id="overview-heading">
           Overview
         </h1>

@@ -76,7 +76,27 @@
 .calendar {
   padding: 0 0.5rem 1rem;
   border-top: 1px solid var(--border);
+  animation: calendarReveal 180ms ease-out both;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .calendar {
+    animation: none;
+  }
+}
+
+@keyframes calendarReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-0.35rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .upcomingBookings {
   display: grid;
   gap: 0.65rem;

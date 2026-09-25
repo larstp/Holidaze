@@ -38,7 +38,7 @@
   gap: 0.6rem;
   margin-bottom: 1.25rem;
   color: #a7d7bb;
-  font-size: 0.65rem;
+  font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -226,7 +226,7 @@ input::placeholder {
 .sectionEyebrow {
   margin-bottom: 0.5rem;
   color: var(--primary);
-  font-size: 0.65rem;
+  font-size: 0.875rem;
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -569,7 +569,7 @@ input::placeholder {
   border-radius: var(--radius-circle);
   color: var(--pure-white);
   background: var(--dark-green);
-  font-size: 0.65rem;
+  font-size: 0.875rem;
   font-weight: 700;
 }
 

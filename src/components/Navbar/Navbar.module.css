@@ -1,14 +1,20 @@
 .navbar {
   position: fixed;
   z-index: 5;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  right: 1rem;
+  bottom: calc(1rem + env(safe-area-inset-bottom));
+  left: 1rem;
   display: grid;
+  width: min(100% - 2rem, 32rem);
+  box-sizing: border-box;
+  margin: 0 auto;
   grid-template-columns: repeat(3, 1fr);
   padding: 0.7rem 0.4rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
   color: var(--text);
   background: var(--surface);
+  box-shadow: var(--shadow);
 }
 
 .authenticated {
@@ -20,7 +26,10 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  justify-content: center;
   gap: 0.2rem;
+  width: 100%;
+  min-width: 0;
   padding: 0;
   border: 0;
   color: var(--dark-green);
@@ -33,6 +42,9 @@
 }
 
 .navbar a.active {
+  width: calc(100% - 0.5rem);
+  box-sizing: border-box;
+  justify-self: center;
   padding: 0.35rem 0.7rem;
   border-radius: var(--radius-md);
   color: var(--dark-green);
@@ -52,6 +64,20 @@
 .logoutButton:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 3px;
+}
+
+:global(:root[data-theme='dark']) .navbar a,
+:global(:root[data-theme='dark']) .logoutButton,
+:global(:root[data-theme='dark']) .navbar a.active {
+  color: var(--pure-white);
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme='light'])) .navbar a,
+  :global(:root:not([data-theme='light'])) .logoutButton,
+  :global(:root:not([data-theme='light'])) .navbar a.active {
+    color: var(--pure-white);
+  }
 }
 
 @media (min-width: 701px) {

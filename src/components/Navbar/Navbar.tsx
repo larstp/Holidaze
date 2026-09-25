@@ -14,15 +14,26 @@ function Navbar() {
       className={`${styles.navbar} ${isAuthenticated ? styles.authenticated : ''}`}
       aria-label="Mobile navigation"
     >
-      <NavLink to="/" end>
+      <NavLink
+        className={({ isActive }) => (isActive ? styles.active : '')}
+        to="/"
+        end
+      >
         <House aria-hidden="true" />
         <span>Home</span>
       </NavLink>
-      <NavLink to={isAuthenticated ? dashboardPath : '/login'}>
+      <NavLink
+        className={({ isActive }) => (isActive ? styles.active : '')}
+        to={isAuthenticated ? dashboardPath : '/login'}
+      >
         <UserRound aria-hidden="true" />
         <span>Profile</span>
       </NavLink>
-      <NavLink to="/search" end>
+      <NavLink
+        className={({ isActive }) => (isActive ? styles.active : '')}
+        to="/search"
+        end
+      >
         <Search aria-hidden="true" />
         <span>Search</span>
       </NavLink>

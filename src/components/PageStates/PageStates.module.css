@@ -41,6 +41,7 @@
 }
 
 .actions svg {
+  flex: 0 0 auto;
   width: 1rem;
   height: 1rem;
 }

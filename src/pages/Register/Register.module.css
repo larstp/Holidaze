@@ -72,7 +72,7 @@
 .form label small {
   margin-left: 0.4rem;
   color: var(--primary);
-  font-size: 0.65rem;
+  font-size: var(--text-size-s);
   font-weight: 500;
 }
 
@@ -163,7 +163,7 @@
   max-width: 14rem;
   margin: 0 !important;
   color: var(--text-muted) !important;
-  font-size: 0.68rem !important;
+  font-size: var(--text-size-s) !important;
   line-height: 1.4;
 }
 
@@ -297,7 +297,7 @@
   }
 
   .form label small {
-    font-size: 0.65rem;
+    font-size: var(--text-size-s);
   }
 
   .form input:not([type='checkbox']) {
