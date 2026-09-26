@@ -41,6 +41,8 @@ The application uses the official NOROFF Holidaze API and provides separate cust
 - GitHub project board: [Holidaze](https://github.com/users/larstp/projects/10)
 - Figma boards, prototypes, and stylesheet: [View Figma resources](#7-figma-and-screenshots)
 
+- AI development log: [AI_log.md](documentation/AI_log.md)
+
 ---
 
 ## 2. Setup and Installation
