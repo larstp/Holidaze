@@ -230,11 +230,9 @@ Accessibility is manually checked with keyboard navigation, Lighthouse, and WAVE
 
 - [Desktop prototype](https://www.figma.com/proto/q6BrHjloIq7GeEVPmDsqpT/Holidaze?node-id=2765-14630&viewport=521%2C662%2C0.06&t=07lJ8MJXFFsgjOo4-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A2)
 
-- [Desktop Board](https://www.figma.com/design/q6BrHjloIq7GeEVPmDsqpT/Holidaze?node-id=1-2&t=FspB3cPysVhVZuUr-1)
-
 - [Mobile prototype](https://www.figma.com/proto/q6BrHjloIq7GeEVPmDsqpT/Holidaze?node-id=2726-535&p=f&viewport=-1813%2C3963%2C0.46&t=BlgZVken5F5vm2K1-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=2726%3A535&page-id=0%3A1)
 
-- [Mobile Board](https://www.figma.com/design/q6BrHjloIq7GeEVPmDsqpT/Holidaze?node-id=0-1&t=FspB3cPysVhVZuUr-1)
+- [Figma Boards](https://www.figma.com/design/q6BrHjloIq7GeEVPmDsqpT/Holidaze?node-id=1-2&t=FspB3cPysVhVZuUr-1)
 
 - [Stylesheet](https://www.figma.com/proto/q6BrHjloIq7GeEVPmDsqpT/Holidaze?node-id=2956-27058&p=f&viewport=1304%2C410%2C0.21&t=mcHeYnIugamBHTIf-1&scaling=min-zoom&content-scaling=fixed&page-id=2726%3A606)
 
