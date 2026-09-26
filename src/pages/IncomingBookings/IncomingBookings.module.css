@@ -76,6 +76,65 @@
 .calendar {
   padding: 0 0.5rem 1rem;
   border-top: 1px solid var(--border);
+  animation: calendarReveal 180ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .calendar {
+    animation: none;
+  }
+}
+
+@keyframes calendarReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-0.35rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.upcomingBookings {
+  display: grid;
+  gap: 0.65rem;
+  padding: 1rem 0.5rem 0;
+}
+.upcomingBooking {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.6rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+.customerAvatar {
+  width: 2rem;
+  height: 2rem;
+  font-size: 0.7rem;
+}
+.bookingCustomer {
+  display: grid;
+  min-width: 0;
+  text-align: left;
+}
+.bookingCustomer strong,
+.bookingCustomer span,
+.bookingDates {
+  overflow: hidden;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bookingCustomer strong {
+  color: var(--text);
+  font-size: 0.75rem;
+}
+.bookingDates {
+  text-align: right;
 }
 .calendarEmpty {
   margin: 1rem 0 0;
@@ -137,9 +196,10 @@
   white-space: pre-line;
 }
 .calendar :global(.fc .pastBooking) {
-  border-color: #a8a8a8;
-  color: #4f4f4f;
-  background: #d1d1d1;
+  border-color: #4d4d4d !important;
+  color: #1d1d1d !important;
+  background: #535353 !important;
+  opacity: 0.85;
 }
 .calendar :global(.fc .fc-daygrid-day-number) {
   color: var(--text-muted);

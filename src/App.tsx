@@ -4,6 +4,7 @@ import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import BecomeManager from './pages/BecomeManager/BecomeManager';
 import Dashboard from './pages/Dashboard/Dashboard';
+import DashboardOverview from './pages/DashboardOverview/DashboardOverview';
 import CreateVenue from './pages/CreateVenue/CreateVenue';
 import EditProfile from './pages/EditProfile/EditProfile';
 import EditVenue from './pages/EditVenue/EditVenue';
@@ -40,6 +41,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard/overview"
+              element={
+                <ProtectedRoute>
+                  <DashboardOverview />
                 </ProtectedRoute>
               }
             />

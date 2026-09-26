@@ -12,7 +12,7 @@ type BookingCardProps =
   | {
       variant: 'bookedVenue';
       booking: Booking;
-      status: 'Upcoming' | 'Completed';
+      status: 'Upcoming' | 'Ongoing' | 'Completed';
     }
   | {
       variant: 'rentedVenue';
@@ -109,7 +109,7 @@ function BookingCard(props: BookingCardProps) {
         </small>
       </div>
       <span
-        className={`${styles.status} ${props.status === 'Completed' ? styles.completed : ''}`}
+        className={`${styles.status} ${props.status === 'Completed' ? styles.completed : ''} ${props.status === 'Ongoing' ? styles.ongoing : ''}`}
       >
         {props.status}
       </span>

@@ -114,6 +114,10 @@
   color: #696767;
   background: #e0e0e0;
 }
+.ongoing {
+  color: var(--pure-white);
+  background: var(--dark-green);
+}
 .arrow {
   display: none;
   width: 1rem;

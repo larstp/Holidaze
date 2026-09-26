@@ -17,6 +17,7 @@ import styles from './DashboardShell.module.css';
 
 type DashboardShellProps = {
   children: ReactNode;
+  overviewHero?: ReactNode;
   isLoading?: boolean;
   loadingLabel?: string;
   desktopAt800?: boolean;
@@ -24,6 +25,7 @@ type DashboardShellProps = {
 
 function DashboardShell({
   children,
+  overviewHero,
   isLoading = false,
   loadingLabel = 'Loading your dashboard',
   desktopAt800 = false,
@@ -45,16 +47,21 @@ function DashboardShell({
               <small>{profile.email}</small>
             </div>
           </div>
+          {overviewHero && (
+            <div className={styles.mobileOverviewHero}>{overviewHero}</div>
+          )}
           <nav className={styles.sideNav} aria-label="Account sections">
-            {profile.venueManager && (
-              <NavLink
-                className={({ isActive }) => (isActive ? styles.active : '')}
-                to="/dashboard/manager/overview"
-                end
-              >
-                <Eye aria-hidden="true" /> Overview
-              </NavLink>
-            )}
+            <NavLink
+              className={({ isActive }) => (isActive ? styles.active : '')}
+              to={
+                profile.venueManager
+                  ? '/dashboard/manager/overview'
+                  : '/dashboard/overview'
+              }
+              end
+            >
+              <Eye aria-hidden="true" /> Overview
+            </NavLink>
             <NavLink
               className={({ isActive }) => (isActive ? styles.active : '')}
               to="/dashboard"
@@ -82,7 +89,7 @@ function DashboardShell({
               className={({ isActive }) => (isActive ? styles.active : '')}
               to="/dashboard/profile"
             >
-              <Pencil aria-hidden="true" /> Profile settings
+              <Pencil aria-hidden="true" /> Profile Settings
             </NavLink>
           </nav>
           {!profile.venueManager && (
@@ -102,7 +109,16 @@ function DashboardShell({
           </button>
         </aside>
         <section className={styles.content}>
-          {isLoading ? <PageLoader label={loadingLabel} /> : children}
+          {isLoading ? (
+            <PageLoader label={loadingLabel} />
+          ) : (
+            <>
+              {overviewHero && (
+                <div className={styles.desktopOverviewHero}>{overviewHero}</div>
+              )}
+              {children}
+            </>
+          )}
         </section>
       </div>
     </main>

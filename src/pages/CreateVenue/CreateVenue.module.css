@@ -64,7 +64,7 @@
 
 .section small {
   color: var(--primary);
-  font-size: 0.68rem;
+  font-size: var(--text-size-s);
   font-weight: 500;
 }
 

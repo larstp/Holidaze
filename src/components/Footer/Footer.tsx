@@ -32,11 +32,17 @@ function Footer() {
           {footerGroups.map((group) => (
             <div className={styles.linkGroup} key={group.title}>
               <h2>{group.title}</h2>
-              {group.links.map((link) => (
-                <Link to="/search" key={link}>
-                  {link}
-                </Link>
-              ))}
+              {group.links.map((link) =>
+                group.title === 'Discover' ? (
+                  <Link to="/search" key={link}>
+                    {link}
+                  </Link>
+                ) : (
+                  <span className={styles.placeholderLink} key={link}>
+                    {link}
+                  </span>
+                )
+              )}
             </div>
           ))}
         </div>

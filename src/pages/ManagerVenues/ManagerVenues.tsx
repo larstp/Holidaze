@@ -1,10 +1,11 @@
-import { Plus } from 'lucide-react';
+import { Plus, Store, TrendingUp, Users } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import BookingCard from '../../components/BookingCard/BookingCard';
 import ConfirmDialog from '../../components/ConfirmDialog/ConfirmDialog';
 import DashboardShell from '../../components/DashboardShell/DashboardShell';
+import StatCard from '../../components/StatCard/StatCard';
 import { useAuth } from '../../context/useAuth';
 import { ApiError } from '../../lib/services/apiClient';
 import { getProfileVenues } from '../../lib/services/profileService';
@@ -25,7 +26,7 @@ function ManagerVenues() {
     if (!accessToken || !profile) return;
 
     let isCurrentRequest = true;
-    getProfileVenues(profile.name, '', accessToken)
+    getProfileVenues(profile.name, '?_bookings=true', accessToken)
       .then((response) => {
         if (isCurrentRequest) setVenues(response?.data ?? []);
       })
@@ -46,6 +47,27 @@ function ManagerVenues() {
       isCurrentRequest = false;
     };
   }, [accessToken, profile]);
+
+  const confirmedBookings = venues.reduce(
+    (total, venue) => total + (venue.bookings?.length ?? 0),
+    0
+  );
+  const totalEarned = venues.reduce(
+    (total, venue) =>
+      total +
+      (venue.bookings ?? []).reduce((venueTotal, booking) => {
+        const nights = Math.max(
+          1,
+          Math.round(
+            (new Date(booking.dateTo).getTime() -
+              new Date(booking.dateFrom).getTime()) /
+              86400000
+          )
+        );
+        return venueTotal + venue.price * nights;
+      }, 0),
+    0
+  );
 
   const requestDelete = (venue: Venue) => {
     setError('');
@@ -96,6 +118,23 @@ function ManagerVenues() {
           >
             Add venue
           </Button>
+        </div>
+        <div className={styles.stats}>
+          <StatCard
+            icon={Store}
+            value={venues.length}
+            label="Registered venues"
+          />
+          <StatCard
+            icon={Users}
+            value={confirmedBookings}
+            label="Confirmed bookings"
+          />
+          <StatCard
+            icon={TrendingUp}
+            value={`€${totalEarned.toLocaleString('en-GB')}`}
+            label="Total earned"
+          />
         </div>
         {error && (
           <p className={styles.error} role="alert">

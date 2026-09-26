@@ -50,7 +50,7 @@
   border-radius: var(--radius-circle);
   color: var(--pure-white);
   background: var(--dark-green);
-  font-weight: 800;
+  font-weight: var(--font-weight-heavy);
   object-fit: cover;
 }
 
@@ -68,7 +68,7 @@
 .profileCard small {
   overflow: hidden;
   color: var(--primary);
-  font-size: 0.68rem;
+  font-size: var(--text-size-s);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -103,7 +103,7 @@
   border-radius: var(--radius-md);
   color: var(--text-muted);
   font-size: var(--text-size-s);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   text-decoration: none;
 }
 
@@ -192,6 +192,15 @@
   min-height: 12rem;
 }
 
+.mobileOverviewHero {
+  display: block;
+}
+
+.desktopOverviewHero {
+  display: none;
+  margin-bottom: 1.5rem;
+}
+
 @media (min-width: 701px) {
   .page {
     min-height: calc(100svh - var(--header-height-desktop));
@@ -207,6 +216,14 @@
     position: sticky;
     top: calc(var(--header-height-desktop) + 1.5rem);
     align-self: start;
+  }
+
+  .mobileOverviewHero {
+    display: none;
+  }
+
+  .desktopOverviewHero {
+    display: block;
   }
 }
 

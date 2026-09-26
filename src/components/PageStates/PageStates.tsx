@@ -1,4 +1,4 @@
-import { ArrowLeft, House, RotateCcw } from 'lucide-react';
+import { ChevronLeft, House, RotateCcw } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Button/Button';
@@ -33,7 +33,7 @@ export function NotFoundPage() {
       <Button
         variant="secondary"
         size="small"
-        icon={<ArrowLeft aria-hidden="true" />}
+        icon={<ChevronLeft aria-hidden="true" />}
         onClick={() => navigate(-1)}
       >
         Go back
@@ -68,7 +68,7 @@ export function AccessDeniedPage() {
       <Button
         variant="secondary"
         size="small"
-        icon={<ArrowLeft aria-hidden="true" />}
+        icon={<ChevronLeft aria-hidden="true" />}
         onClick={() => navigate(-1)}
       >
         Go back

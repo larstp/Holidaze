@@ -307,7 +307,9 @@ function Search() {
             </Button>
           </div>
 
-          {isLoading && <PageLoader label="Finding your next destination" />}
+          {isLoading && (
+            <PageLoader label="Finding your next destination" overlay />
+          )}
           {error && (
             <div className={styles.status} role="alert">
               <p>We could not load these stays.</p>

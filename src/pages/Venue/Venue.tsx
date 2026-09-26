@@ -1,5 +1,6 @@
 import {
   Car,
+  ChevronLeft,
   ChevronDown,
   Coffee,
   MapPin,
@@ -14,6 +15,7 @@ import { useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import buttonStyles from '../../components/Button/Button.module.css';
+import ConfirmDialog from '../../components/ConfirmDialog/ConfirmDialog';
 import ImageWithFallback from '../../components/ImageWithFallback/ImageWithFallback';
 import PageLoader from '../../components/PageLoader/PageLoader';
 import { VenueNotFoundPage } from '../../components/PageStates/PageStates';
@@ -47,6 +49,8 @@ function Venue() {
   const [bookingError, setBookingError] = useState('');
   const [bookingSuccess, setBookingSuccess] = useState('');
   const [isBooking, setIsBooking] = useState(false);
+  const [isBookingConfirmationOpen, setIsBookingConfirmationOpen] =
+    useState(false);
 
   if (isLoading) return <PageLoader />;
 
@@ -129,7 +133,7 @@ function Venue() {
     setBookingSuccess('');
   };
 
-  const handleBooking = async () => {
+  const requestBooking = () => {
     if (!accessToken || !id || !checkIn || !checkOut) return;
 
     if (checkOut <= checkIn) {
@@ -142,8 +146,16 @@ function Venue() {
       return;
     }
 
+    setBookingError('');
+    setIsBookingConfirmationOpen(true);
+  };
+
+  const handleBooking = async () => {
+    if (!accessToken || !id || !checkIn || !checkOut) return;
+
     setIsBooking(true);
     clearBookingFeedback();
+    setIsBookingConfirmationOpen(false);
 
     try {
       await createBooking(
@@ -152,10 +164,21 @@ function Venue() {
       );
       setBookingSuccess('Your stay has been reserved.');
     } catch (bookingRequestError) {
-      setBookingError(
+      const apiMessage =
         bookingRequestError instanceof ApiError
           ? bookingRequestError.message
-          : 'We could not complete your booking. Please try again.'
+          : '';
+      const isConflict = /booked|overlap|available|conflict/i.test(apiMessage);
+
+      if (isConflict) {
+        refetch();
+      }
+
+      setBookingError(
+        isConflict
+          ? 'Your selected dates overlap an existing booking. Please choose another date range.'
+          : apiMessage ||
+              'We could not complete your booking. Please try again.'
       );
     } finally {
       setIsBooking(false);
@@ -170,7 +193,7 @@ function Venue() {
           type="button"
           onClick={() => navigate(-1)}
         >
-          &lt; Back
+          <ChevronLeft aria-hidden="true" /> Back
         </button>
 
         <div className={styles.gallery}>
@@ -462,7 +485,7 @@ function Venue() {
                   disabled={
                     isBooking || !checkIn || !checkOut || checkOut <= checkIn
                   }
-                  onClick={handleBooking}
+                  onClick={requestBooking}
                 >
                   {isBooking ? 'Reserving...' : 'Reserve'}
                 </Button>
@@ -489,6 +512,27 @@ function Venue() {
             </aside>
           )}
         </div>
+        <ConfirmDialog
+          open={isBookingConfirmationOpen}
+          title="Are you sure?"
+          confirmLabel="Confirm booking"
+          cancelVariant="danger"
+          confirmVariant="primary"
+          onCancel={() => setIsBookingConfirmationOpen(false)}
+          onConfirm={handleBooking}
+        >
+          <div className={styles.bookingConfirmationSummary}>
+            <strong>{venue.name}</strong>
+            <span>
+              {checkIn} to {checkOut}
+            </span>
+            <span>
+              {bookingNights} {bookingNights === 1 ? 'night' : 'nights'} ·{' '}
+              {guests} {guests === 1 ? 'guest' : 'guests'}
+            </span>
+            <strong>Total: €{bookingTotal}</strong>
+          </div>
+        </ConfirmDialog>
       </div>
     </main>
   );

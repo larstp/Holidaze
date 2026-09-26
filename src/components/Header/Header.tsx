@@ -15,7 +15,7 @@ function Header() {
   const { isAuthenticated, profile, logout } = useAuth();
   const dashboardPath = profile?.venueManager
     ? '/dashboard/manager/overview'
-    : '/dashboard';
+    : '/dashboard/overview';
   const navigationRef = useRef<HTMLElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -117,9 +117,6 @@ function Header() {
             onClick={closeMenu}
           >
             Search
-          </NavLink>
-          <NavLink className={styles.link} to="/search" end onClick={closeMenu}>
-            All venues
           </NavLink>
           <NavLink
             className={({ isActive }) =>

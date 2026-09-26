@@ -11,7 +11,9 @@
 }
 
 .backLink {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
   width: fit-content;
   margin-bottom: 1rem;
   padding: 0;
@@ -23,6 +25,11 @@
   text-decoration: none;
   text-align: left;
   cursor: pointer;
+}
+
+.backLink svg {
+  width: 1rem;
+  height: 1rem;
 }
 
 .backLink:hover,
@@ -138,7 +145,7 @@
 
 .rating svg,
 .reviews p svg {
-  color: var(--primary);
+  color: var(--logo-color);
   fill: currentColor;
 }
 
@@ -289,7 +296,7 @@
 
 .reviewStars {
   margin-left: auto;
-  color: #e89b24;
+  color: var(--logo-color);
   font-size: 0.7rem;
   letter-spacing: 0.08em;
 }
@@ -653,6 +660,28 @@
 
 .bookingFeedbackSuccess {
   color: var(--dark-green);
+}
+
+.bookingConfirmationSummary {
+  display: grid;
+  gap: 0.45rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  text-align: left;
+}
+
+.bookingConfirmationSummary span {
+  color: var(--text-muted);
+}
+
+.bookingConfirmationSummary strong:last-child {
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--border);
+  color: var(--text);
+  font-weight: 700;
+  font-size: 0.85rem;
 }
 
 .loginToBook {
