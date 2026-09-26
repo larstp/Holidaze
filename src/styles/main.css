@@ -21,6 +21,12 @@
   --social-bg: rgba(203, 212, 194, 0.5);
   --button-text-small: 0.875rem;
   --button-text-large: 1rem;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-heavy: 800;
+  --font-weight-black: 900;
   --text-size-s: 0.75rem;
   --text-size-m: 0.9rem;
   --text-size-l: 1rem;

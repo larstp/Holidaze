@@ -35,7 +35,7 @@
   color: var(--dark-green);
   background: transparent;
   font-size: var(--text-size-s);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   text-decoration: none;
   font-family: inherit;
   cursor: pointer;

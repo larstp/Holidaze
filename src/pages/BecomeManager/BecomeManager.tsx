@@ -188,7 +188,7 @@ function BecomeManager({ upgradeOnly = false }: BecomeManagerProps) {
     <main className={styles.publicPage}>
       <section className={styles.publicHero}>
         <img
-          src="/images/drif-riadh-YpkuRn54y4w-unsplash.jpg"
+          src="/images/drif-riadh-YpkuRn54y4w-unsplash.webp"
           alt="The Grand Canyon with a river running through it"
         />
         <div className={styles.heroOverlay} />
@@ -248,7 +248,7 @@ function BecomeManager({ upgradeOnly = false }: BecomeManagerProps) {
 
       <section className={styles.publicCta}>
         <img
-          src="/images/anete-lusina-GOZxrAlNIt4-unsplash.jpg"
+          src="/images/anete-lusina-GOZxrAlNIt4-unsplash.webp"
           alt="Travel gear and a photograph on a wooden table"
         />
         <div className={styles.heroOverlay} />

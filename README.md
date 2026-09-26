@@ -224,24 +224,40 @@ Accessibility is manually checked with keyboard navigation, Lighthouse, and WAVE
 
 ### Figma
 
-- Style guide
-- Desktop Board
 - [Desktop prototype](https://www.figma.com/proto/q6BrHjloIq7GeEVPmDsqpT/Holidaze?node-id=2765-14630&viewport=521%2C662%2C0.06&t=07lJ8MJXFFsgjOo4-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A2)
-- Mobile Board
 - [Mobile prototype](https://www.figma.com/proto/q6BrHjloIq7GeEVPmDsqpT/Holidaze?node-id=2726-535&p=f&viewport=-1813%2C3963%2C0.46&t=BlgZVken5F5vm2K1-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=2726%3A535&page-id=0%3A1)
+
+<details>
+   <summary>View Figma boards</summary>
+
+### Components and style guide
+
+![Figma components and style guide](documentation/screenshots/figma-components.webp)
+
+### Desktop board
+
+![Holidaze desktop Figma board](documentation/screenshots/figma-desktop.webp)
+
+### Mobile board
+
+![Holidaze mobile Figma board](documentation/screenshots/figma-mobile.webp)
+
+</details>
 
 ### Screenshots
 
-Add final screenshots here before submission:
+<details>
+   <summary>View webpage screenshots</summary>
 
-```text
-documentation/screenshots/home-desktop.png
-documentation/screenshots/home-mobile.png
-documentation/screenshots/search.png
-documentation/screenshots/venue.png
-documentation/screenshots/customer-overview.png
-documentation/screenshots/manager-overview.png
-```
+### Home desktop
+
+![Holidaze Home page on desktop](documentation/screenshots/home-desktop.webp)
+
+### Home mobile
+
+![Holidaze Home page on mobile](documentation/screenshots/home-mobile.webp)
+
+</details>
 
 ### Project Notes
 

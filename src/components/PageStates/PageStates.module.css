@@ -19,7 +19,7 @@
   margin: 0;
   color: var(--text-h);
   font-size: var(--text-size-xl);
-  font-weight: 900;
+  font-weight: var(--font-weight-black);
 }
 
 .content p {

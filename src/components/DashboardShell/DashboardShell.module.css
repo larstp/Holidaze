@@ -50,7 +50,7 @@
   border-radius: var(--radius-circle);
   color: var(--pure-white);
   background: var(--dark-green);
-  font-weight: 800;
+  font-weight: var(--font-weight-heavy);
   object-fit: cover;
 }
 
@@ -103,7 +103,7 @@
   border-radius: var(--radius-md);
   color: var(--text-muted);
   font-size: var(--text-size-s);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   text-decoration: none;
 }
 

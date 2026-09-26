@@ -22,6 +22,14 @@ const initialForm: LoginForm = {
   rememberMe: false,
 };
 
+function isManagerDestination(destination: string) {
+  return (
+    destination.startsWith('/dashboard/manager/') ||
+    destination === '/venues/create' ||
+    (destination.startsWith('/venues/') && destination.endsWith('/edit'))
+  );
+}
+
 function Login() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -75,11 +83,16 @@ function Login() {
       setProfile(loggedInProfile, form.rememberMe);
       const requestedDestination = (location.state as { from?: string } | null)
         ?.from;
+      const canUseRequestedDestination =
+        Boolean(requestedDestination) &&
+        (loggedInProfile.venueManager ||
+          !isManagerDestination(requestedDestination ?? ''));
       const destination =
-        requestedDestination ??
-        (loggedInProfile.venueManager
-          ? '/dashboard/manager/overview'
-          : '/dashboard/overview');
+        canUseRequestedDestination && requestedDestination
+          ? requestedDestination
+          : loggedInProfile.venueManager
+            ? '/dashboard/manager/overview'
+            : '/dashboard/overview';
       navigate(destination, { replace: true });
     } catch (submissionError) {
       setAccessToken(null);
@@ -98,7 +111,7 @@ function Login() {
     <main className={styles.page}>
       <aside className={styles.imagePanel} aria-label="Holidaze inspiration">
         <img
-          src="/images/karsten-winegeart-fd1cQ3mmBTE-unsplash.jpg"
+          src="/images/karsten-winegeart-fd1cQ3mmBTE-unsplash.webp"
           alt="A peaceful nature resort in Hawaii"
         />
         <div className={styles.quote}>

@@ -27,21 +27,21 @@ import {
 import styles from './Home.module.css';
 
 const heroImages = [
-  '/images/alexandre-chambon-aapSemzfsOk-unsplash.jpg',
-  '/images/anete-lusina-GOZxrAlNIt4-unsplash.jpg',
-  '/images/david-vives-ELf8M_YWRTY-unsplash.jpg',
-  '/images/drif-riadh-YpkuRn54y4w-unsplash.jpg',
-  '/images/ethan-robertson-SYx3UCHZJlo-unsplash.jpg',
-  '/images/geojango-maps-CWbbJW_7Fsw-unsplash.jpg',
-  '/images/hugh-whyte-SBOHLtENzEY-unsplash.jpg',
-  '/images/ishan-seefromthesky-qE1Y8GQKhEk-unsplash.jpg',
-  '/images/julian-timmerman-Fn27DlI8bZ8-unsplash.jpg',
-  '/images/karsten-winegeart-fd1cQ3mmBTE-unsplash.jpg',
-  '/images/la-so-vk4vjTNVrTg-unsplash.jpg',
-  '/images/lance-asper-mNDVSSmMt0Y-unsplash.jpg',
-  '/images/robson-hatsukami-morgan-r8hw4Zs38zo-unsplash.jpg',
-  '/images/tron-le-JsuBKjHGDMM-unsplash.jpg',
-  '/images/upgraded-points-KVym2PAn1gA-unsplash.jpg',
+  '/images/alexandre-chambon-aapSemzfsOk-unsplash.webp',
+  '/images/anete-lusina-GOZxrAlNIt4-unsplash.webp',
+  '/images/david-vives-ELf8M_YWRTY-unsplash.webp',
+  '/images/drif-riadh-YpkuRn54y4w-unsplash.webp',
+  '/images/ethan-robertson-SYx3UCHZJlo-unsplash.webp',
+  '/images/geojango-maps-CWbbJW_7Fsw-unsplash.webp',
+  '/images/hugh-whyte-SBOHLtENzEY-unsplash.webp',
+  '/images/ishan-seefromthesky-qE1Y8GQKhEk-unsplash.webp',
+  '/images/julian-timmerman-Fn27DlI8bZ8-unsplash.webp',
+  '/images/karsten-winegeart-fd1cQ3mmBTE-unsplash.webp',
+  '/images/la-so-vk4vjTNVrTg-unsplash.webp',
+  '/images/lance-asper-mNDVSSmMt0Y-unsplash.webp',
+  '/images/robson-hatsukami-morgan-r8hw4Zs38zo-unsplash.webp',
+  '/images/tron-le-JsuBKjHGDMM-unsplash.webp',
+  '/images/upgraded-points-KVym2PAn1gA-unsplash.webp',
 ];
 
 const featuredReviews = [

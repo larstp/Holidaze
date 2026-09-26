@@ -37,7 +37,7 @@
 
 .dialog .error {
   color: #9b3f32;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 .actions {
