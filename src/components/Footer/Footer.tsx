@@ -22,7 +22,12 @@ function Footer() {
       <div className={styles.content}>
         <div className={styles.brandColumn}>
           <Link className={styles.brand} to="/" aria-label="Holidaze home">
-            <img src="/images/logos/Logo-header+footerL-white.svg" alt="" />
+            <img
+              src="/images/logos/Logo-header+footerL-white.svg"
+              alt=""
+              width="250"
+              height="250"
+            />
             <strong>Holidaze</strong>
           </Link>
           <p>Curated stays for curious travellers.</p>

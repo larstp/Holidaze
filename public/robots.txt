@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /venues/create
+Disallow: /venues/*/edit
+Disallow: /login
+Disallow: /register
+Disallow: /become-manager/upgrade

@@ -29,12 +29,16 @@ function ImageWithFallback({
           className={`${styles.logo} ${styles.logoLight}`}
           src="/images/logos/Logo-Black.svg"
           alt=""
+          width="354"
+          height="354"
           aria-hidden="true"
         />
         <img
           className={`${styles.logo} ${styles.logoDark}`}
           src="/images/logos/Logo-white.svg"
           alt=""
+          width="354"
+          height="354"
           aria-hidden="true"
         />
         <span>

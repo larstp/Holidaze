@@ -3,7 +3,6 @@
 ## Closes
 
 Closes #<!-- issue number -->
-Project: #<!-- project number, if applicable -->
 
 ## Summary
 
