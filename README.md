@@ -259,10 +259,6 @@ Accessibility is manually checked with keyboard navigation, Lighthouse, and WAVE
 
 </details>
 
-### Project Notes
-
-Additional planning and implementation notes are available in `documentation/`, including the brief, plan, Kanban list, CSS notes, and development log.
-
 ---
 
 ## 8. Testing and Validation

@@ -69,12 +69,16 @@ function Header() {
               className={`${styles.logo} ${styles.logoLight}`}
               src="/images/logos/Logo-header+footerL-Black.svg"
               alt=""
+              width="250"
+              height="250"
               aria-hidden="true"
             />
             <img
               className={`${styles.logo} ${styles.logoDark}`}
               src="/images/logos/Logo-header+footerL-white.svg"
               alt=""
+              width="250"
+              height="250"
               aria-hidden="true"
             />
             <span className={styles.wordmark}>Holidaze</span>
