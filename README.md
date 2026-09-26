@@ -18,7 +18,7 @@
 - [4. Technologies Used](#4-technologies-used)
 - [5. Features](#5-features)
 - [6. Accessibility and Responsive Design](#6-accessibility-and-responsive-design)
-- [7. Figma and Project Documentation](#7-figma-and-project-documentation)
+- [7. Figma and Screenshots](#7-figma-and-screenshots)
 - [8. Testing and Validation](#8-testing-and-validation)
 - [9. Known Limitations](#9-known-limitations)
 - [10. Credits](#10-credits)
@@ -38,6 +38,8 @@ The application uses the official NOROFF Holidaze API and provides separate cust
 
 - GitHub repository: [https://github.com/larstp/Holidaze](https://github.com/larstp/Holidaze)
 - Live site: [holidaze.larstp.com](https://holidaze.larstp.com)
+- GitHub project board: [Holidaze](https://github.com/users/larstp/projects/10)
+- Figma boards, prototypes, and stylesheet: [View Figma resources](#7-figma-and-screenshots)
 
 ---
 
@@ -220,12 +222,19 @@ Accessibility is manually checked with keyboard navigation, Lighthouse, and WAVE
 
 ---
 
-## 7. Figma and Project Documentation
+## 7. Figma and Screenshots
 
 ### Figma
 
 - [Desktop prototype](https://www.figma.com/proto/q6BrHjloIq7GeEVPmDsqpT/Holidaze?node-id=2765-14630&viewport=521%2C662%2C0.06&t=07lJ8MJXFFsgjOo4-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A2)
+
+- [Desktop Board](https://www.figma.com/design/q6BrHjloIq7GeEVPmDsqpT/Holidaze?node-id=1-2&t=FspB3cPysVhVZuUr-1)
+
 - [Mobile prototype](https://www.figma.com/proto/q6BrHjloIq7GeEVPmDsqpT/Holidaze?node-id=2726-535&p=f&viewport=-1813%2C3963%2C0.46&t=BlgZVken5F5vm2K1-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=2726%3A535&page-id=0%3A1)
+
+- [Mobile Board](https://www.figma.com/design/q6BrHjloIq7GeEVPmDsqpT/Holidaze?node-id=0-1&t=FspB3cPysVhVZuUr-1)
+
+- [Stylesheet](https://www.figma.com/proto/q6BrHjloIq7GeEVPmDsqpT/Holidaze?node-id=2956-27058&p=f&viewport=1304%2C410%2C0.21&t=mcHeYnIugamBHTIf-1&scaling=min-zoom&content-scaling=fixed&page-id=2726%3A606)
 
 <details>
    <summary>View Figma boards</summary>
@@ -258,6 +267,10 @@ Accessibility is manually checked with keyboard navigation, Lighthouse, and WAVE
 ![Holidaze Home page on mobile](documentation/screenshots/home-mobile.webp)
 
 </details>
+
+### Project Notes
+
+- [Third-party sources and license notes](documentation/Notes.md)
 
 ---
 
@@ -336,7 +349,9 @@ These elements do not make API requests and do not affect authentication, venue 
 ### Tools and Resources
 
 - [Noroff API documentation](https://docs.noroff.dev/)
-- [CSS Loaders](https://css-loaders.com/) - Loader inspiration
+- [CSS Loaders](https://css-loaders.com/) by [Afif13](https://github.com/Afif13/) - Loader source and inspiration
+- [React DayPicker](https://daypicker.dev/) - MIT-licensed availability calendar
+- [FullCalendar](https://fullcalendar.io/) - MIT-licensed incoming bookings calendar
 - [React](https://react.dev/)
 - [Vite](https://vite.dev/)
 
