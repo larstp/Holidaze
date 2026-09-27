@@ -34,6 +34,13 @@ Holidaze is an accommodation booking platform built for the NOROFF FED2 exam pro
 
 The application uses the official NOROFF Holidaze API and provides separate customer and venue-manager dashboard experiences while keeping one account and one login flow.
 
+<details>
+   <summary>View project structure diagram</summary>
+
+![Holidaze project structure diagram](documentation/screenshots/diagram.webp)
+
+</details>
+
 ### Project Links
 
 - GitHub repository: [https://github.com/larstp/Holidaze](https://github.com/larstp/Holidaze)
